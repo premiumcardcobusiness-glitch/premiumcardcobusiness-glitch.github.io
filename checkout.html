@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Checkout — Cardboard Factory</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Cardboard<span>Factory</span></a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="refund.html">Refunds</a>
+    <a href="terms.html">Terms</a>
+    <a href="privacy.html">Privacy</a>
+  </nav>
+</div></header>
+
+<main><div class="wrap" style="text-align:center">
+  <h1>Get your Cardboard Factory license</h1>
+  <p class="lead">$1 · 30-day Pro license · secure checkout by Paddle</p>
+  <button id="buy" class="btn">Pay $1 with Paddle</button>
+  <p id="status" class="small" style="margin-top:18px"></p>
+  <p class="small">By continuing you agree to our <a href="terms.html">Terms</a> and
+  <a href="refund.html">Refund Policy</a>.</p>
+</div></main>
+
+<footer class="site"><div class="wrap">
+  <div>
+    <a href="pricing.html">Pricing</a>
+    <a href="refund.html">Refund Policy</a>
+    <a href="terms.html">Terms of Service</a>
+    <a href="privacy.html">Privacy Policy</a>
+  </div>
+  <p class="small">© 2026 Cardboard Factory · Aubrey, TX, USA · Contact:
+  <a href="mailto:soliskenny2@gmail.com">soliskenny2@gmail.com</a><br>
+  Payments and order fulfilment inquiries are handled by our Merchant of Record, Paddle.com.</p>
+</div></footer>
+
+<!-- Paddle config: FILL THESE AT DEPLOY.
+     For the live launch use PRODUCTION values (client token pri_/pro_ from the live account).
+     ENV: "sandbox" or "production". SUCCESS_URL: your license server /purchase/success. -->
+<script>
+  var PADDLE_ENV       = "__PADDLE_ENV__";        // sandbox | production
+  var PADDLE_TOKEN     = "__PADDLE_CLIENT_TOKEN__";
+  var PADDLE_PRICE_ID  = "__PADDLE_PRICE_ID__";
+  var SUCCESS_URL      = "__SUCCESS_URL__";
+  function openCheckout(){
+    Paddle.Checkout.open({items:[{priceId:PADDLE_PRICE_ID,quantity:1}],
+      settings:{displayMode:"overlay",theme:"light",successUrl:SUCCESS_URL}});
+  }
+  try{
+    if(PADDLE_TOKEN.indexOf("__")===0){
+      document.getElementById("status").textContent="Checkout is being configured. Please check back soon.";
+    }else{
+      Paddle.Environment.set(PADDLE_ENV);
+      Paddle.Initialize({token:PADDLE_TOKEN});
+      document.getElementById("buy").addEventListener("click",openCheckout);
+      if(!new URLSearchParams(location.search).has("_ptxn")){/* button-driven */}
+    }
+  }catch(e){document.getElementById("status").textContent="Checkout failed to load: "+e;}
+</script>
+</body>
+</html>
