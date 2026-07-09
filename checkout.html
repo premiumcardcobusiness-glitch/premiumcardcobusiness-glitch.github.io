@@ -20,14 +20,16 @@
 </div></header>
 
 <main><div class="wrap" style="text-align:center">
-  <h1>Get your Beltstra Co license</h1>
-  <p class="lead">$1.00 USD · one-time payment · 30-day Pro License</p>
-  <p class="small">One-time charge, not a subscription — it does not auto-renew.
-  Taxes may apply and will be calculated at checkout.</p>
-  <button id="buy" class="btn">Pay $1.00 with Paddle</button>
+  <h1 id="title">Subscribe to Beltstra Co</h1>
+  <p class="lead" id="plan-line">Loading plan…</p>
+  <p class="small" id="renew-line"></p>
+  <button id="buy" class="btn">Continue to secure checkout</button>
   <p id="status" class="small" style="margin-top:18px"></p>
+  <p class="small">Auto-renewing subscription — cancel anytime and keep access for what
+  you've paid. Taxes may apply and will be calculated at checkout.</p>
   <p class="small">By continuing you agree to our <a href="terms.html">Terms</a> and
-  <a href="refund.html">Refund Policy</a>.</p>
+  <a href="refund.html">Refund Policy</a>. Checkout is securely handled by Paddle, our
+  authorized reseller and Merchant of Record.</p>
 </div></main>
 
 <footer class="site"><div class="wrap">
@@ -42,26 +44,41 @@
   Payments and order fulfilment inquiries are handled by our Merchant of Record, Paddle.com.</p>
 </div></footer>
 
-<!-- Paddle config: FILL THESE AT DEPLOY.
-     For the live launch use PRODUCTION values (client token pri_/pro_ from the live account).
-     ENV: "sandbox" or "production". SUCCESS_URL: your license server /purchase/success. -->
+<!-- Paddle config: FILLED AT DEPLOY by paddle_cutover.py (production client token + 6 live price IDs). -->
 <script>
-  var PADDLE_ENV       = "__PADDLE_ENV__";        // sandbox | production
-  var PADDLE_TOKEN     = "__PADDLE_CLIENT_TOKEN__";
-  var PADDLE_PRICE_ID  = "__PADDLE_PRICE_ID__";
-  var SUCCESS_URL      = "__SUCCESS_URL__";
+  var PADDLE_ENV   = "__PADDLE_ENV__";          // sandbox | production
+  var PADDLE_TOKEN = "__PADDLE_CLIENT_TOKEN__";
+  var SUCCESS_URL  = "__SUCCESS_URL__";
+  var PRICES = {
+    "hobbyist-monthly": {id:"__PRICE_HOBBYIST_MONTHLY__", label:"Hobbyist — $9.00 USD / month"},
+    "hobbyist-annual":  {id:"__PRICE_HOBBYIST_ANNUAL__",  label:"Hobbyist — $90.00 USD / year"},
+    "seller-monthly":   {id:"__PRICE_SELLER_MONTHLY__",   label:"Seller — $19.00 USD / month"},
+    "seller-annual":    {id:"__PRICE_SELLER_ANNUAL__",    label:"Seller — $190.00 USD / year"},
+    "dealer-monthly":   {id:"__PRICE_DEALER_MONTHLY__",   label:"Dealer — $39.00 USD / month"},
+    "dealer-annual":    {id:"__PRICE_DEALER_ANNUAL__",    label:"Dealer — $390.00 USD / year"}
+  };
+  var q = new URLSearchParams(location.search);
+  var plan = (q.get("plan")||"seller").toLowerCase();
+  var billing = (q.get("billing")||"monthly").toLowerCase();
+  var key = plan + "-" + billing;
+  var sel = PRICES[key] || PRICES["seller-monthly"];
+  document.getElementById("plan-line").textContent = sel.label;
+  document.getElementById("renew-line").textContent =
+    billing === "annual"
+      ? "Renews automatically every 12 months at the price shown until you cancel."
+      : "Renews automatically every month at the price shown until you cancel.";
   function openCheckout(){
-    Paddle.Checkout.open({items:[{priceId:PADDLE_PRICE_ID,quantity:1}],
+    Paddle.Checkout.open({items:[{priceId:sel.id,quantity:1}],
       settings:{displayMode:"overlay",theme:"light",successUrl:SUCCESS_URL}});
   }
   try{
     if(PADDLE_TOKEN.indexOf("__")===0){
       document.getElementById("status").textContent="Checkout is being configured. Please check back soon.";
+      document.getElementById("buy").disabled = true;
     }else{
       Paddle.Environment.set(PADDLE_ENV);
       Paddle.Initialize({token:PADDLE_TOKEN});
       document.getElementById("buy").addEventListener("click",openCheckout);
-      if(!new URLSearchParams(location.search).has("_ptxn")){/* button-driven */}
     }
   }catch(e){document.getElementById("status").textContent="Checkout failed to load: "+e;}
 </script>

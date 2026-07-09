@@ -32,4 +32,17 @@ footer.site{border-top:1px solid var(--line);margin-top:60px;padding:28px 0;colo
 footer.site a{color:var(--muted);text-decoration:none;margin-right:16px}
 footer.site a:hover{color:var(--ink)}
 hr{border:0;border-top:1px solid var(--line);margin:28px 0}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0}
+.tier{border:1px solid var(--line);border-radius:14px;padding:20px;background:var(--soft);display:flex;flex-direction:column}
+.tier.star{border:2px solid var(--accent);position:relative}
+.tier.star .flag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--accent);
+  color:#fff;font-size:12px;font-weight:700;padding:2px 12px;border-radius:99px;white-space:nowrap}
+.tier h3{margin:4px 0 2px}
+.tier .price{font-size:30px}
+.tier .feat{flex:1}
+.tier .btn{text-align:center;margin-top:8px}
+.toggle{display:inline-flex;border:1px solid var(--line);border-radius:99px;overflow:hidden;margin:6px 0 2px}
+.toggle button{border:0;background:#fff;padding:8px 18px;font-size:14px;font-weight:600;cursor:pointer;color:var(--muted)}
+.toggle button.on{background:var(--ink);color:#fff}
+@media(max-width:720px){.tiers{grid-template-columns:1fr}}
 code{background:var(--soft);padding:2px 6px;border-radius:5px;font-size:.9em}
