@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Pricing — Beltstra Co</title>
-<meta name="description" content="Beltstra Co subscription pricing — Hobbyist, Seller, and Dealer plans.">
+<meta name="description" content="Beltstra Co subscription pricing — free trial, Pro, and Studio plans. Scan trading cards from your phone; nothing to install.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -20,10 +20,11 @@
 </div></header>
 
 <main><div class="wrap">
-  <h1>Pricing</h1>
-  <p class="lead">Scan a card, get its price, list it — pick the plan that matches how much
-  you sell. <b>Try it free first:</b> your first 25 card scans in the app are free, no
-  payment details required.</p>
+  <h1>Scan from your phone. Nothing to install.</h1>
+  <p class="lead">Beltstra runs entirely in your browser — point your phone camera at a card
+  and get its identity, live market price, and a ready-to-post listing draft in seconds.
+  Sign in with your license and scan from any device. <b>Try it free first:</b> your trial
+  includes 50 card scans, no payment details required.</p>
 
   <div class="toggle" role="tablist" aria-label="Billing period">
     <button id="bill-monthly" class="on" onclick="setBilling('monthly')">Monthly</button>
@@ -32,63 +33,68 @@
 
   <div class="tiers">
     <div class="tier">
-      <h3>Hobbyist</h3>
-      <div class="price" data-monthly="$9" data-annual="$90">$9<small id="per-1"> /month</small></div>
+      <h3>Trial</h3>
+      <div class="price" data-monthly="Free" data-annual="Free">Free<small></small></div>
       <ul class="feat">
-        <li>Full scanner — card recognition + live market pricing</li>
-        <li><b>50</b> marketplace listing drafts per month</li>
-        <li>Collection tracking</li>
-        <li>Email support</li>
+        <li><b>50 card scans</b> over 7 days</li>
+        <li>Full scanner — recognition, live pricing, listing drafts</li>
+        <li>Works on your phone or any browser</li>
+        <li>No payment details required</li>
       </ul>
-      <a class="btn" data-plan="hobbyist" href="checkout.html?plan=hobbyist&billing=monthly">Start with Hobbyist</a>
+      <a class="btn" href="mailto:soliskenny2@gmail.com?subject=Beltstra%20free%20trial&body=Please%20send%20me%20a%20Beltstra%20trial%20key.">Get a free trial key</a>
     </div>
 
     <div class="tier star">
       <span class="flag">MOST POPULAR</span>
-      <h3>Seller</h3>
-      <div class="price" data-monthly="$19" data-annual="$190">$19<small id="per-2"> /month</small></div>
+      <h3>Pro</h3>
+      <div class="price" data-monthly="$29" data-annual="$290">$29<small id="per-2"> /month</small></div>
       <ul class="feat">
-        <li>Everything in Hobbyist</li>
-        <li><b>300</b> listing drafts per month</li>
-        <li>Bulk scanning &amp; batch listing</li>
-        <li>eBay listing export</li>
-        <li>Priority email support</li>
+        <li>Everything in Trial, ongoing</li>
+        <li><b>800 card scans per month</b> (up to 100/day)</li>
+        <li>Live market pricing on every scan</li>
+        <li>Ready-to-post listing drafts</li>
+        <li>Email support</li>
       </ul>
-      <a class="btn alt" data-plan="seller" href="checkout.html?plan=seller&billing=monthly">Start with Seller</a>
+      <a class="btn alt" data-plan="pro" href="checkout.html?plan=pro&billing=monthly">Start with Pro</a>
     </div>
 
     <div class="tier">
-      <h3>Dealer</h3>
-      <div class="price" data-monthly="$39" data-annual="$390">$39<small id="per-3"> /month</small></div>
+      <h3>Studio</h3>
+      <div class="price" data-monthly="$79" data-annual="$790">$79<small id="per-3"> /month</small></div>
       <ul class="feat">
-        <li>Everything in Seller</li>
-        <li><b>Unlimited</b> listing drafts</li>
-        <li>Multi-device use</li>
-        <li>Priority support with fast-track responses</li>
+        <li>Everything in Pro</li>
+        <li><b>3,000 card scans per month</b> (up to 400/day)</li>
+        <li>Built for bulk sellers and stores</li>
+        <li>Priority email support</li>
       </ul>
-      <a class="btn" data-plan="dealer" href="checkout.html?plan=dealer&billing=monthly">Start with Dealer</a>
+      <a class="btn" data-plan="studio" href="checkout.html?plan=studio&billing=monthly">Start with Studio</a>
     </div>
   </div>
 
   <div class="card">
     <h3 style="margin-top:0">Plan details — please read before you buy</h3>
-    <p class="muted">All plans are <b>auto-renewing subscriptions</b>: monthly plans renew
+    <p class="muted">All paid plans are <b>auto-renewing subscriptions</b>: monthly plans renew
     every month, annual plans renew every 12 months, at the prices shown above, until you
     cancel. You can <b>cancel anytime</b> from your account or by emailing us — you keep
     access for the period you already paid for. Annual billing equals ten months' price for
     twelve months of access (two months free).</p>
-    <p class="muted">The <b>free trial is 25 card scans inside the app</b> — it requires no
-    payment details, never converts into a paid plan automatically, and simply stops at 25
-    scans until you choose a plan. There is no other introductory pricing.</p>
-    <p class="small"><b>Taxes may apply and will be calculated at checkout.</b> All prices
-    shown in USD. Checkout is securely handled by Paddle, our authorized reseller and
-    Merchant of Record.</p>
+    <p class="muted"><b>Scan allowances</b> are rolling windows, not calendar months: Pro
+    includes 800 scans per rolling 30 days with a burst limit of 100 per rolling 24 hours;
+    Studio includes 3,000 per 30 days and 400 per 24 hours. One scan = one card identified
+    and priced. Your live usage is always visible inside the app. Unused scans don't roll
+    over.</p>
+    <p class="muted">The <b>free trial is 50 card scans over 7 days</b> — it requires no
+    payment details and does not convert into a paid plan automatically. When it ends, you
+    simply choose a plan if you'd like to continue.</p>
+    <p class="small"><b>Taxes may apply and will be calculated at checkout.</b> All prices in
+    USD. Checkout is securely handled by Paddle, our authorized reseller and Merchant of
+    Record.</p>
   </div>
 
   <h2>What you need to run it</h2>
-  <p>Beltstra Co is software. To use it you run our desktop application on your own
-  computer with a camera. A companion physical scanning rig (3D-printed parts + a Raspberry Pi)
-  is optional and built by you separately — it is not sold here.</p>
+  <p>A phone or computer with a camera and a web browser. That's it — there is no app to
+  download and no software to install. Card recognition runs on our servers; you sign in
+  with your license token and scan.</p>
 
   <p class="small">Questions about pricing? Email
   <a href="mailto:soliskenny2@gmail.com">soliskenny2@gmail.com</a>.</p>
@@ -114,9 +120,10 @@ function setBilling(mode){
     var v = mode==='monthly' ? p.getAttribute('data-monthly') : p.getAttribute('data-annual');
     var unit = mode==='monthly' ? ' /month' : ' /year';
     p.childNodes[0].textContent = v;
-    p.querySelector('small').textContent = unit;
+    var s = p.querySelector('small');
+    if (s && s.id) s.textContent = unit;
   });
-  document.querySelectorAll('.tier .btn').forEach(function(a){
+  document.querySelectorAll('.tier .btn[data-plan]').forEach(function(a){
     a.href = 'checkout.html?plan=' + a.getAttribute('data-plan') + '&billing=' + mode;
   });
 }

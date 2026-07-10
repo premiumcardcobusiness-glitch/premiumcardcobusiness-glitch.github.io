@@ -50,18 +50,16 @@
   var PADDLE_TOKEN = "__PADDLE_CLIENT_TOKEN__";
   var SUCCESS_URL  = "__SUCCESS_URL__";
   var PRICES = {
-    "hobbyist-monthly": {id:"__PRICE_HOBBYIST_MONTHLY__", label:"Hobbyist — $9.00 USD / month"},
-    "hobbyist-annual":  {id:"__PRICE_HOBBYIST_ANNUAL__",  label:"Hobbyist — $90.00 USD / year"},
-    "seller-monthly":   {id:"__PRICE_SELLER_MONTHLY__",   label:"Seller — $19.00 USD / month"},
-    "seller-annual":    {id:"__PRICE_SELLER_ANNUAL__",    label:"Seller — $190.00 USD / year"},
-    "dealer-monthly":   {id:"__PRICE_DEALER_MONTHLY__",   label:"Dealer — $39.00 USD / month"},
-    "dealer-annual":    {id:"__PRICE_DEALER_ANNUAL__",    label:"Dealer — $390.00 USD / year"}
+    "pro-monthly":    {id:"__PRICE_PRO_MONTHLY__",    label:"Pro — $29.00 USD / month · 800 scans/month (100/day)"},
+    "pro-annual":     {id:"__PRICE_PRO_ANNUAL__",     label:"Pro — $290.00 USD / year · 800 scans/month (100/day)"},
+    "studio-monthly": {id:"__PRICE_STUDIO_MONTHLY__", label:"Studio — $79.00 USD / month · 3,000 scans/month (400/day)"},
+    "studio-annual":  {id:"__PRICE_STUDIO_ANNUAL__",  label:"Studio — $790.00 USD / year · 3,000 scans/month (400/day)"}
   };
   var q = new URLSearchParams(location.search);
-  var plan = (q.get("plan")||"seller").toLowerCase();
+  var plan = (q.get("plan")||"pro").toLowerCase();
   var billing = (q.get("billing")||"monthly").toLowerCase();
   var key = plan + "-" + billing;
-  var sel = PRICES[key] || PRICES["seller-monthly"];
+  var sel = PRICES[key] || PRICES["pro-monthly"];
   document.getElementById("plan-line").textContent = sel.label;
   document.getElementById("renew-line").textContent =
     billing === "annual"
