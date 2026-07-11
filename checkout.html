@@ -46,14 +46,14 @@
 
 <!-- Paddle config: FILLED AT DEPLOY by paddle_cutover.py (production client token + 6 live price IDs). -->
 <script>
-  var PADDLE_ENV   = "__PADDLE_ENV__";          // sandbox | production
-  var PADDLE_TOKEN = "__PADDLE_CLIENT_TOKEN__";
-  var SUCCESS_URL  = "__SUCCESS_URL__";
+  var PADDLE_ENV   = "production";          // sandbox | production
+  var PADDLE_TOKEN = "live_ff70306568f8eb8f868ceb86263";
+  var SUCCESS_URL  = "https://big-daddys-computer.tail665f8d.ts.net:10000/purchase/success";
   var PRICES = {
-    "pro-monthly":    {id:"__PRICE_PRO_MONTHLY__",    label:"Pro — $29.00 USD / month · 800 scans/month (100/day)"},
-    "pro-annual":     {id:"__PRICE_PRO_ANNUAL__",     label:"Pro — $290.00 USD / year · 800 scans/month (100/day)"},
-    "studio-monthly": {id:"__PRICE_STUDIO_MONTHLY__", label:"Studio — $79.00 USD / month · 3,000 scans/month (400/day)"},
-    "studio-annual":  {id:"__PRICE_STUDIO_ANNUAL__",  label:"Studio — $790.00 USD / year · 3,000 scans/month (400/day)"}
+    "pro-monthly":    {id:"pri_01kx78c9cz8vgq36hqan990pwy",    label:"Pro — $29.00 USD / month · 800 scans/month (100/day)"},
+    "pro-annual":     {id:"pri_01kx78c9mzdh2zcn7rxcr9z4a3",     label:"Pro — $290.00 USD / year · 800 scans/month (100/day)"},
+    "studio-monthly": {id:"pri_01kx78c9wm5wt1y7fa654ncd8d", label:"Studio — $79.00 USD / month · 3,000 scans/month (400/day)"},
+    "studio-annual":  {id:"pri_01kx78ca3qa8zctwkfx4dekrt2",  label:"Studio — $790.00 USD / year · 3,000 scans/month (400/day)"}
   };
   var q = new URLSearchParams(location.search);
   var plan = (q.get("plan")||"pro").toLowerCase();
