@@ -6,59 +6,92 @@
 <title>Premium Card Co — links</title>
 <meta name="description" content="Premium Card Co in one place: the eBay store, Instagram, X, and the Beltstra card scanner behind the table.">
 <link rel="canonical" href="https://beltstra.com/links">
-<link rel="stylesheet" href="style.css">
+<link rel="icon" href="pcc-icon.png">
+<meta name="theme-color" content="#0f1115">
 <style>
-  /* Landing page for the printed QR code on the show table and in packages.
-     People open it on a phone, so: one narrow column, big full-width buttons. */
-  .hub-wrap{max-width:480px;margin:0 auto;padding:0 20px}
-  main{padding:36px 0 48px}
-  h1{font-size:30px}
-  .hub{display:block;width:100%;padding:18px 20px;margin:12px 0;border-radius:14px;
-       text-decoration:none;font-weight:700;font-size:19px;line-height:1.3;
-       background:var(--ink);color:#fff}
-  .hub small{display:block;font-weight:500;font-size:14px;opacity:.85;margin-top:3px}
-  .hub.alt{background:var(--accent)}
-  .hub.line{background:#fff;color:var(--ink);border:2px solid var(--line)}
-  .hub:active{transform:scale(.98)}
+  /* Standalone styles: this page wears the Premium Card Co table colours
+     (black + gold, sampled from the crest), NOT the Beltstra site theme.
+     Someone scans the code at the table and the page has to look like the
+     tablecloth they are standing in front of. The one blue button is the
+     deliberate exception: blue is Beltstra, and it explains why the address
+     bar says beltstra.com. */
+  :root{
+    --ink:#0f1115;        /* crest black */
+    --gold:#c9a24a;       /* crest gold  */
+    --gold-soft:#e0c07d;
+    --paper:#f5f1e8;
+    --muted:#a9a396;
+    --line:#2a2d33;
+    --beltstra:#0b6bcb;   /* Beltstra blue, used once, on purpose */
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ink);color:var(--paper);line-height:1.55;
+       font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+  .wrap{max-width:480px;margin:0 auto;padding:0 20px}
+  header{padding-block:40px 8px;text-align:center}
+  .crest{width:104px;height:104px;border-radius:50%;display:block;margin:0 auto 18px}
+  .name{font-size:27px;font-weight:800;letter-spacing:-.01em;margin:0}
+  .name span{color:var(--gold)}
+  .rule{width:64px;height:3px;background:var(--gold);border-radius:2px;margin:14px auto 0}
+  .lead{color:var(--muted);font-size:16px;margin:16px 0 26px;text-align:center}
+  main{padding-bottom:44px}
+
+  /* HOW TO EDIT: copy one <a class="hub"> block, change the href and the text,
+     then commit and push. The printed QR code points here and never changes. */
+  .hub{display:block;width:100%;padding:17px 20px;margin:12px 0;border-radius:14px;
+       text-decoration:none;font-weight:700;font-size:18px;line-height:1.3;
+       border:2px solid var(--gold);background:var(--gold);color:var(--ink)}
+  .hub small{display:block;font-weight:500;font-size:13.5px;opacity:.82;margin-top:4px}
+  .hub.line{background:transparent;color:var(--gold-soft);border-color:var(--line)}
+  .hub.line small{color:var(--muted);opacity:1}
+  .hub.blue{background:var(--beltstra);border-color:var(--beltstra);color:#fff}
+  .hub:active{transform:scale(.985)}
+
+  .note{color:var(--muted);font-size:13px;margin-top:26px}
+  .note b{color:var(--gold-soft);font-weight:600}
+  footer{border-top:1px solid var(--line);margin-top:34px;padding-block:22px 40px;
+         color:var(--muted);font-size:12.5px;text-align:center}
+  footer a{color:var(--muted);text-decoration:none;margin:0 8px}
+  footer a:hover{color:var(--gold-soft)}
 </style>
 </head>
 <body>
-<header class="site"><div class="wrap">
-  <span class="brand">Premium <span>Card Co</span></span>
-</div></header>
+<div class="wrap">
+  <header>
+    <img class="crest" src="pcc-icon.png" alt="Premium Card Co">
+    <h1 class="name">Premium <span>Card Co</span></h1>
+    <div class="rule"></div>
+  </header>
 
-<main><div class="hub-wrap">
-  <h1>Thanks for stopping by.</h1>
-  <p class="lead">Premium Card Co, all in one place.</p>
+  <main>
+    <p class="lead">Thanks for stopping by. Everything in one place.</p>
 
-  <!-- HOW TO EDIT: copy one <a class="hub"> block, change the href and the text,
-       commit and push. The printed QR code points at this page and never changes. -->
+    <a class="hub" href="https://www.ebay.com/str/premiumcardco">Shop my eBay store
+      <small>premiumcardco. Singles, graded slabs and sealed product.</small></a>
 
-  <a class="hub" href="https://www.ebay.com/str/premiumcardco">Shop my eBay store
-    <small>premiumcardco. Singles, graded slabs and sealed product.</small></a>
+    <a class="hub line" href="https://www.instagram.com/premiumcardco_/">Follow on Instagram
+      <small>@premiumcardco_. Show dates and new pickups.</small></a>
 
-  <a class="hub line" href="https://www.instagram.com/premiumcardco_/">Follow on Instagram
-    <small>@premiumcardco_. Show dates and new pickups.</small></a>
+    <a class="hub line" href="https://x.com/beltstra">Follow on X
+      <small>@beltstra. Our company account.</small></a>
 
-  <a class="hub line" href="https://x.com/beltstra">Follow on X
-    <small>@beltstra. Our company account.</small></a>
+    <a class="hub blue" href="https://api.beltstra.com/trial">Try Beltstra free
+      <small>The card scanner we built to run this table. Point your phone at a card, get its
+      price, list it on eBay. 50 free scans.</small></a>
 
-  <a class="hub alt" href="https://api.beltstra.com/trial">Try Beltstra free
-    <small>The card scanner we built to run our own table. Scan a card with your phone, get its price, list it on eBay. 50 free scans.</small></a>
+    <p class="note"><b>Why beltstra.com?</b> Premium Card Co is the card table.
+    Beltstra Co is our company, and the scanner in the blue button is ours too.
+    Questions about an order? Message me through eBay and I will answer while the
+    listing is live.</p>
+  </main>
+</div>
 
-  <p class="small" style="margin-top:28px">Premium Card Co is the card table. Beltstra Co is our
-  company and the scanner behind it. Questions about an order? Message me through eBay and I
-  will answer while the listing is live.</p>
-</div></main>
-
-<footer class="site"><div class="wrap">
-  <div>
-    <a href="index.html">Beltstra Co</a>
-    <a href="pricing.html">Pricing</a>
-    <a href="terms.html">Terms</a>
-    <a href="privacy.html">Privacy</a>
-  </div>
-  <p class="small">© 2026 Beltstra Co</p>
-</div></footer>
+<footer>
+  <a href="index.html">Beltstra Co</a>
+  <a href="pricing.html">Pricing</a>
+  <a href="terms.html">Terms</a>
+  <a href="privacy.html">Privacy</a>
+  <div style="margin-top:10px">© 2026 Beltstra Co</div>
+</footer>
 </body>
 </html>
