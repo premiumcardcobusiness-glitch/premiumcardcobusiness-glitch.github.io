@@ -3,83 +3,182 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Beltstra Co — trading-card scanner software</title>
-<meta name="description" content="Beltstra Co identifies trading cards from your phone camera, fetches live pricing, and generates marketplace listings — in the browser, nothing to install.">
+<title>Beltstra Co · the money app for card sellers</title>
+<meta name="description" content="Beltstra is the money app for trading card sellers: scan a card for today's price, track the cash from every sale in a Piggy Bank, see your profit on each card, keep a live page for friends whose cards you sell, and undo any mistake. Runs in your phone's browser.">
+<meta name="theme-color" content="#0b1016">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header class="site"><div class="wrap">
   <a class="brand" href="index.html">Beltstra <span>Co</span></a>
   <nav>
-    <a href="index.html">Home</a>
-    <a href="pricing.html">Pricing</a>
-    <a href="refund.html">Refunds</a>
-    <a href="terms.html">Terms</a>
-    <a href="privacy.html">Privacy</a>
-    <a href="https://app.beltstra.com/login"><b>Sign in</b></a>
+    <a class="hide-xs" href="pricing.html">Pricing</a>
+    <a href="https://app.beltstra.com/login">Sign in</a>
+    <a class="btn" href="https://api.beltstra.com/trial">Start free</a>
   </nav>
 </div></header>
 
-<main><div class="wrap">
-  <h1>Scan from your phone. Nothing to install.</h1>
-  <p class="lead">Point your phone camera at a Pokémon or other trading-card-game card and
-  Beltstra identifies it, pulls its current market price, and writes a ready-to-post
-  marketplace listing — in seconds, right in your browser. No app store, no downloads,
-  no setup: sign in and scan from any device.</p>
+<main>
+<div class="wrap">
+  <section class="hero">
+    <div>
+      <p class="eyebrow">For trading card sellers</p>
+      <h1>Know what your cards made you.</h1>
+      <p class="lead">Beltstra is the money app for card sellers. Scan a card for today's price, sell it at
+      your table, and see the cash, your profit and what you owe the friends you sell for. It runs in your
+      phone's browser. Nothing to install.</p>
+      <div class="actions">
+        <a class="btn" href="https://api.beltstra.com/trial">Start free</a>
+        <a class="btn ghost" href="#pricing">See pricing</a>
+      </div>
+      <p class="small">Free trial: 50 card scans over 7 days. No payment details needed.
+      Pokémon, One Piece, Dragon Ball, Union Arena and more.</p>
+    </div>
+    <figure>
+      <div class="phone"><img src="img/app-hero.webp" width="390" height="654"
+        alt="The Beltstra app right after a sale: Sold for $330.00, you paid $250.00, plus $80.00 profit, and $330.00 went into the Piggy Bank."></div>
+      <figcaption>The real app, with example data</figcaption>
+    </figure>
+  </section>
 
-  <a class="btn" href="pricing.html">See pricing →</a>
+  <section class="tool">
+    <div class="copy">
+      <p class="eyebrow">Piggy Bank</p>
+      <h2>Every cash sale lands in your Piggy Bank.</h2>
+      <p>Sell a card for cash and the money goes in by itself. Take money out for rent, gas or next show's
+      table and see <b>exactly where it went this month</b>. It can't go below zero, and money that belongs
+      to someone else is kept apart from what's yours.</p>
+      <div class="receipt" aria-label="Example Piggy Bank">
+        <span>In your Piggy Bank</span><b>$338.00</b>
+        <span>Owed to Mike</span><b>$190.40</b>
+        <span>Yours to spend</span><b class="up">$147.60</b>
+      </div>
+    </div>
+    <figure>
+      <div class="phone"><img src="img/app-bank.webp" width="390" height="880" loading="lazy"
+        alt="The Piggy Bank screen: $338.00 in it, profit this month plus $49.60, $190.40 owed to Mike, and where the money went: Paid Mike $100, Show table $40, Gas $25."></div>
+      <figcaption>Example data</figcaption>
+    </figure>
+  </section>
 
-  <h2>Pricing</h2>
-  <p class="muted"><b>Try it free:</b> your trial includes 50 card scans — no
-  payment details required. Then pick a plan:</p>
+  <section class="tool flip">
+    <div class="copy">
+      <p class="eyebrow">Profit per card</p>
+      <h2>See your profit before the buyer walks away.</h2>
+      <p>Add what you paid for a card, or one price for a whole stack, and Beltstra splits it by what each
+      card is worth. When you sell, the screen tells you <b>your profit or your loss</b> while the buyer is
+      still at your table, and the Piggy Bank adds it up for the month.</p>
+      <div class="receipt" aria-label="Example sale">
+        <span>Sold for</span><b>$330.00</b>
+        <span>You paid</span><b>$250.00</b>
+        <span>Profit</span><b class="up">+$80.00</b>
+      </div>
+    </div>
+    <figure>
+      <div class="phone"><img src="img/app-profit.webp" width="390" height="930" loading="lazy"
+        alt="Marking a card out: Sold for cash picked, $330 entered, and the summary says $330.00 goes into your Piggy Bank, you paid $250.00, so that's plus $80.00 profit."></div>
+      <figcaption>Example data</figcaption>
+    </figure>
+  </section>
+
+  <section class="tool">
+    <div class="copy">
+      <p class="eyebrow">Selling for friends</p>
+      <h2>Sell cards for a friend. They watch it live.</h2>
+      <p>Mark cards as Mike's and set your fee. Mike gets a private link, <b>no app and no account</b>, that
+      shows his cards in your case, what sold for how much, his cut, and what you've paid him. It updates by
+      itself, so nobody has to ask "did my card sell yet?"</p>
+      <div class="receipt" aria-label="Example sale for a friend">
+        <span>Sold for</span><b>$330.00</b>
+        <span>Your 12% fee</span><b>$39.60</b>
+        <span>Mike gets</span><b class="up">$290.40</b>
+      </div>
+    </div>
+    <figure>
+      <div class="phone"><img src="img/app-owner.webp" width="390" height="829" loading="lazy"
+        alt="Mike's private page: Hi Mike, Alex is selling your cards. You're owed $190.40. Still in the case: Mew ex and Sylveon ex. What happened: Sylveon ex sold for $330.00, fee $39.60, plus $290.40 yours."></div>
+      <figcaption>What your friend sees · example data</figcaption>
+    </figure>
+  </section>
+
+  <section class="tool flip">
+    <div class="copy">
+      <p class="eyebrow">Undo</p>
+      <h2>A wrong tap is one tap to fix.</h2>
+      <p>Picked the wrong copy or typed the wrong price at a busy table? <b>Undo</b> puts the card back,
+      takes the cash back out of your Piggy Bank, and fixes your profit and your friend's page. If the cash
+      is already spent, it tells you instead of breaking your numbers.</p>
+    </div>
+    <figure>
+      <div class="phone"><img src="img/app-undo.webp" width="390" height="576" loading="lazy"
+        alt="After tapping Undo: Undone. Leafeon ex is back in your collection, and the $330.00 came back out of your Piggy Bank."></div>
+      <figcaption>Example data</figcaption>
+    </figure>
+  </section>
+</div>
+
+<section class="band"><div class="wrap narrow">
+  <p class="eyebrow">The scanner</p>
+  <h2>Point your phone at a card. Get the exact printing and today's price.</h2>
+  <p class="muted">Beltstra reads the card's name, set and number and prices it from TCGplayer's market data,
+  updated daily. Cards that share a number can be worth very different amounts, so it checks the printing, and
+  when it isn't sure, it tells you instead of guessing. Every card you scan is saved to your collection, with a
+  one-tap eBay listing when you want one.</p>
+</div></section>
+
+<section class="band"><div class="wrap">
+  <p class="eyebrow">Getting started</p>
+  <h2>Three steps, about a minute.</h2>
+  <ol class="steps">
+    <li><h3>Enter your email</h3><p>Your free trial key shows up right away. No email to wait for, no card.</p></li>
+    <li><h3>Open Beltstra</h3><p>On your phone or any browser, paste the key. That's the whole setup.</p></li>
+    <li><h3>Scan your first card</h3><p>See its price, then sell it at your table and watch the Piggy Bank fill.</p></li>
+  </ol>
+  <div class="actions"><a class="btn" href="https://api.beltstra.com/trial">Start free</a></div>
+</div></section>
+
+<section class="band" id="pricing"><div class="wrap">
+  <p class="eyebrow">Pricing</p>
+  <h2>Every tool on every plan. Plans differ by how many cards you scan.</h2>
   <div class="tiers">
     <div class="tier">
       <h3>Trial</h3>
       <div class="price">Free</div>
-      <p class="muted">50 scans over 7 days. Full scanner, live pricing, listing drafts.</p>
-      <a class="btn" href="pricing.html">Details →</a>
+      <ul class="feat">
+        <li><b>50 card scans</b> over 7 days</li>
+        <li>Scanner, Piggy Bank, profit per card, selling for friends and Undo</li>
+        <li>No payment details required</li>
+      </ul>
+      <a class="btn ghost" href="https://api.beltstra.com/trial">Start free</a>
     </div>
     <div class="tier star">
       <span class="flag">MOST POPULAR</span>
       <h3>Pro</h3>
       <div class="price">$29<small> /month</small></div>
-      <p class="muted">800 scans/month (100/day) with live pricing + listing drafts.</p>
-      <a class="btn alt" href="pricing.html">Details →</a>
+      <ul class="feat">
+        <li>Everything in Trial, ongoing</li>
+        <li><b>800 card scans per month</b> (up to 100/day)</li>
+        <li>Email support</li>
+      </ul>
+      <a class="btn" href="pricing.html">See Pro</a>
     </div>
     <div class="tier">
       <h3>Studio</h3>
       <div class="price">$79<small> /month</small></div>
-      <p class="muted">3,000 scans/month (400/day) for bulk sellers and stores.</p>
-      <a class="btn" href="pricing.html">Details →</a>
+      <ul class="feat">
+        <li>Everything in Pro</li>
+        <li><b>3,000 card scans per month</b> (up to 400/day)</li>
+        <li>Priority email support, for bulk sellers and stores</li>
+      </ul>
+      <a class="btn ghost" href="pricing.html">See Studio</a>
     </div>
   </div>
-  <p class="small">All plans are auto-renewing subscriptions — cancel anytime. Annual
-  billing (2 months free) available on every plan. <b>Taxes may apply and will be
-  calculated at checkout.</b> All prices in USD. Checkout is securely handled by Paddle,
-  our authorized reseller and Merchant of Record.</p>
-
-  <h2>What it does</h2>
-  <ul class="feat">
-    <li>Computer-vision card recognition (name, set, number) from a phone photo</li>
-    <li>Live market pricing lookups so you list at the right number</li>
-    <li>Ready-to-post marketplace listing drafts from every scan</li>
-    <li>Works in any browser — phone, tablet, or computer; your scans and plan follow
-        your account</li>
-  </ul>
-
-  <h2>How it works</h2>
-  <div class="card">
-    <p><b>1. Get a license.</b> Start with a free 50-scan trial, or subscribe — checkout is
-    handled securely by Paddle, our authorized reseller and Merchant of Record.</p>
-    <p><b>2. Sign in.</b> Open the Beltstra scan app in your browser and paste your license
-    token. That's the whole setup.</p>
-    <p><b>3. Scan.</b> Point your camera at a card — identity, market price, and a listing
-    draft come back in seconds. Your plan's scan allowance is always visible in the app.</p>
-  </div>
-
-  <p class="small">Beltstra Co is a pure software product. We do not sell physical goods,
-  packs, or any random-chance / gambling products through this site.</p>
-</div></main>
+  <p class="small">The free trial does not turn into a paid plan by itself. Paid plans are auto-renewing
+  subscriptions: cancel anytime. Annual billing (2 months free) is available on every plan.
+  <b>Taxes may apply and will be calculated at checkout.</b> All prices in USD. Checkout is securely handled by
+  Paddle, our authorized reseller and Merchant of Record.</p>
+</div></section>
+</main>
 
 <footer class="site"><div class="wrap">
   <div>
@@ -87,7 +186,10 @@
     <a href="refund.html">Refund Policy</a>
     <a href="terms.html">Terms of Service</a>
     <a href="privacy.html">Privacy Policy</a>
+    <a href="https://app.beltstra.com/login">Sign in</a>
   </div>
+  <p class="small">Beltstra Co is a pure software product. We do not sell physical goods, packs, or any
+  random-chance / gambling products through this site.</p>
   <p class="small">© 2026 Beltstra Co · Aubrey, TX, USA · Contact:
   <a href="mailto:soliskenny2@gmail.com">soliskenny2@gmail.com</a><br>
   Payments and order fulfilment inquiries are handled by our Merchant of Record, Paddle.com.</p>
