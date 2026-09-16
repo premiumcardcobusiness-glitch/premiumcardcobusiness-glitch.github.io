@@ -67,6 +67,16 @@
     billing === "annual"
       ? "Renews automatically every 12 months at the price shown until you cancel."
       : "Renews automatically every month at the price shown until you cancel.";
+  // Launch offer (Sep 17 - Oct 16, 2026, matching the Paddle discount's expiry): Pro monthly is half
+  // price for the first three months. The Paddle discount LAUNCH is applied at checkout, so the buyer
+  // sees $14.50 before paying; the list price above is what it renews at afterwards. Remove LAUNCH_CODE
+  // (or expire the code in Paddle) to end it.
+  var LAUNCH_CODE = key === "pro-monthly" && new Date() < new Date("2026-10-16T23:59:00Z") ? "LAUNCH" : "";
+  if (LAUNCH_CODE) {
+    document.getElementById("renew-line").textContent =
+      "Launch offer: $14.50 USD / month for your first 3 months (50% off, applied at checkout), " +
+      "then $29.00 USD / month until you cancel.";
+  }
   // Which account the plan lands on. ?email= comes from app.beltstra.com/upgrade, where it is the
   // signed-in member's own address; a direct visitor types it.
   var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -100,11 +110,13 @@
       if (el) el.focus();
       return;
     }
-    Paddle.Checkout.open({
+    var opts = {
       items:[{priceId:sel.id,quantity:1}],
       customer:{email:email},
       customData:{email:email},        // the webhook mints the licence against THIS
-      settings:{displayMode:"overlay",theme:"light",successUrl:SUCCESS_URL}});
+      settings:{displayMode:"overlay",theme:"light",successUrl:SUCCESS_URL}};
+    if (LAUNCH_CODE) opts.discountCode = LAUNCH_CODE;
+    Paddle.Checkout.open(opts);
   }
   try{
     if(PADDLE_TOKEN.indexOf("__")===0){
