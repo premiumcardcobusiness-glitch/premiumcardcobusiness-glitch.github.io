@@ -21,6 +21,10 @@
   <h1 id="title">Subscribe to Beltstra Co</h1>
   <p class="lead" id="plan-line">Loading plan…</p>
   <p class="small" id="renew-line"></p>
+  <!-- A subscription unlocks ONE account. The app links here with that address already filled in;
+       anyone arriving straight from the price list is asked for it, because a plan minted against the
+       wrong address is money taken for nothing. -->
+  <div id="acct" style="margin:20px auto 6px;max-width:400px;text-align:left"></div>
   <button id="buy" class="btn">Continue to secure checkout</button>
   <p id="status" class="small" style="margin-top:18px"></p>
   <p class="small">Auto-renewing subscription — cancel anytime and keep access for what
@@ -46,7 +50,7 @@
 <script>
   var PADDLE_ENV   = "production";          // sandbox | production
   var PADDLE_TOKEN = "live_ff70306568f8eb8f868ceb86263";
-  var SUCCESS_URL  = "https://api.beltstra.com/purchase/success";
+  var SUCCESS_URL  = "https://app.beltstra.com/?paid=1";
   var PRICES = {
     "pro-monthly":    {id:"pri_01kx78c9cz8vgq36hqan990pwy",    label:"Pro — $29.00 USD / month · 800 scans/month (100/day)"},
     "pro-annual":     {id:"pri_01kx78c9mzdh2zcn7rxcr9z4a3",     label:"Pro — $290.00 USD / year · 800 scans/month (100/day)"},
@@ -63,8 +67,43 @@
     billing === "annual"
       ? "Renews automatically every 12 months at the price shown until you cancel."
       : "Renews automatically every month at the price shown until you cancel.";
+  // Which account the plan lands on. ?email= comes from app.beltstra.com/upgrade, where it is the
+  // signed-in member's own address; a direct visitor types it.
+  var EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+  var fromApp = (q.get("email")||"").trim();
+  var acct = document.getElementById("acct");
+  if (EMAIL_RE.test(fromApp)) {
+    acct.style.textAlign = "center";
+    acct.innerHTML = '<p class="small" style="margin:0">Unlocks <b id="acct-shown"></b></p>';
+    document.getElementById("acct-shown").textContent = fromApp;   // textContent: never inject an address
+  } else {
+    acct.innerHTML =
+      '<label class="small" for="acct-input">Which Beltstra account should this unlock?</label>' +
+      '<input id="acct-input" type="email" inputmode="email" autocomplete="email" ' +
+      'placeholder="you@example.com" style="width:100%;box-sizing:border-box;padding:12px;margin-top:6px;' +
+      'border-radius:10px;border:1px solid #2a3442;background:#0b1016;color:#e8eef6;font-size:16px">' +
+      '<p class="small" style="margin-top:6px">The email you sign in with at app.beltstra.com. ' +
+      'Don\'t have one yet? <a href="https://app.beltstra.com/login?start=1">Start free</a> first — it takes a minute.</p>';
+  }
+  function account(){
+    if (EMAIL_RE.test(fromApp)) return fromApp;
+    var el = document.getElementById("acct-input");
+    var v = el ? el.value.trim() : "";
+    return EMAIL_RE.test(v) ? v : "";
+  }
   function openCheckout(){
-    Paddle.Checkout.open({items:[{priceId:sel.id,quantity:1}],
+    var email = account();
+    if (!email) {
+      document.getElementById("status").textContent =
+        "Enter the email you sign in with, so the plan lands on your account.";
+      var el = document.getElementById("acct-input");
+      if (el) el.focus();
+      return;
+    }
+    Paddle.Checkout.open({
+      items:[{priceId:sel.id,quantity:1}],
+      customer:{email:email},
+      customData:{email:email},        // the webhook mints the licence against THIS
       settings:{displayMode:"overlay",theme:"light",successUrl:SUCCESS_URL}});
   }
   try{

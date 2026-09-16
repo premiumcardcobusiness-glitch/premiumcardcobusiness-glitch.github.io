@@ -56,7 +56,7 @@
         <li>Piggy Bank, profit per card, selling for friends and Undo</li>
         <li>Email support</li>
       </ul>
-      <a class="btn alt" data-plan="pro" href="checkout.html?plan=pro&billing=monthly">Start with Pro</a>
+      <a class="btn alt" data-plan="pro" href="https://app.beltstra.com/upgrade?plan=pro&billing=monthly">Start with Pro</a>
     </div>
 
     <div class="tier">
@@ -68,7 +68,7 @@
         <li>Built for bulk sellers and stores</li>
         <li>Priority email support</li>
       </ul>
-      <a class="btn ghost" data-plan="studio" href="checkout.html?plan=studio&billing=monthly">Start with Studio</a>
+      <a class="btn ghost" data-plan="studio" href="https://app.beltstra.com/upgrade?plan=studio&billing=monthly">Start with Studio</a>
     </div>
   </div>
 
@@ -128,7 +128,8 @@ function setBilling(mode){
     if (s && s.id) s.textContent = unit;
   });
   document.querySelectorAll('.tier .btn[data-plan]').forEach(function(a){
-    a.href = 'checkout.html?plan=' + a.getAttribute('data-plan') + '&billing=' + mode;
+    // Through the app: it knows the buyer's address, so the plan cannot land on a typo.
+    a.href = 'https://app.beltstra.com/upgrade?plan=' + a.getAttribute('data-plan') + '&billing=' + mode;
   });
 }
 </script>
