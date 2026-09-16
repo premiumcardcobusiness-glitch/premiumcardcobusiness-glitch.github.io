@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Beltstra Co · the money app for card sellers</title>
-<meta name="description" content="Beltstra is the money app for trading card sellers: scan a card for today's price, track the cash from every sale in a Piggy Bank, see your profit on each card, keep a live page for friends whose cards you sell, and undo any mistake. Runs in your phone's browser.">
+<meta name="description" content="Beltstra is the money app for trading card sellers: scan a card for today's price, track the cash from every sale in a Piggy Bank, see your profit on each card, keep a live page for friends whose cards you sell, put your binders on the card show's page so buyers find your table, and undo any mistake. Runs in your phone's browser.">
 <meta name="theme-color" content="#0b1016">
 <link rel="stylesheet" href="style.css">
 </head>
@@ -45,7 +45,28 @@
     </figure>
   </section>
 
-  <section class="tool">
+  <section class="tool" id="show">
+    <div class="copy">
+      <p class="eyebrow">New · At the show</p>
+      <h2>Buyers search your binders before they walk over.</h2>
+      <p>Post your table on the show's page and every binder you show is on it. Someone in the aisle types
+      "umbreon" and gets <b>your name, your table, the binder, the page and the pocket</b>, then walks straight
+      to you instead of past you. Every vendor who posts makes the page worth more. Free, for every table.</p>
+      <div class="receipt" aria-label="Example search hit">
+        <span>Umbreon VMAX · 215/203</span><b>$1,380.00</b>
+        <span>Table 42 · Chase binder</span><b class="up">page 2, pocket 5</b>
+      </div>
+      <p class="small">Only binders you've set to "Show it to anyone" appear, first names only, prices only if you
+      show them. Your table comes off the page by itself after the show.</p>
+    </div>
+    <figure>
+      <div class="phone"><img src="img/app-show.webp" width="390" height="898" loading="lazy"
+        alt="The show page for NTX Lewisville: 3 tables posted their binders. Searching umbreon finds Umbreon VMAX 215/203 at Alex, Table 42, Chase binder, page 2, pocket 5, $1,380.00, then an Umbreon at Dre's Table 15 and an Umbreon VMAX at Maria's Table 108."></div>
+      <figcaption>What a buyer sees · example data</figcaption>
+    </figure>
+  </section>
+
+  <section class="tool flip">
     <div class="copy">
       <p class="eyebrow">Piggy Bank</p>
       <h2>Every cash sale lands in your Piggy Bank.</h2>
@@ -65,7 +86,7 @@
     </figure>
   </section>
 
-  <section class="tool flip">
+  <section class="tool">
     <div class="copy">
       <p class="eyebrow">Profit per card</p>
       <h2>See your profit before the buyer walks away.</h2>
@@ -85,7 +106,7 @@
     </figure>
   </section>
 
-  <section class="tool">
+  <section class="tool flip">
     <div class="copy">
       <p class="eyebrow">Selling for friends</p>
       <h2>Sell cards for a friend. They watch it live.</h2>
@@ -105,7 +126,7 @@
     </figure>
   </section>
 
-  <section class="tool flip">
+  <section class="tool">
     <div class="copy">
       <p class="eyebrow">Undo</p>
       <h2>A wrong tap is one tap to fix.</h2>
@@ -152,7 +173,7 @@
       <ul class="feat">
         <li>Starts with a 7-day trial: <b>50 card scans</b></li>
         <li>Then <b>20 card scans a month</b> (up to 5 a day), free for as long as you like</li>
-        <li>Piggy Bank, profit per card, selling for friends, Undo, Pack check and Friends</li>
+        <li>Piggy Bank, profit per card, selling for friends, Undo, Pack check, Friends, binders and show pages</li>
         <li>No payment details required</li>
       </ul>
       <a class="btn ghost" href="https://app.beltstra.com/login?start=1">Start free</a>
