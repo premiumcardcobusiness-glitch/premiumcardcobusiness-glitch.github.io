@@ -72,10 +72,23 @@
   // sees $14.50 before paying; the list price above is what it renews at afterwards. Remove LAUNCH_CODE
   // (or expire the code in Paddle) to end it.
   var LAUNCH_CODE = key === "pro-monthly" && new Date() < new Date("2026-10-16T23:59:00Z") ? "LAUNCH" : "";
-  if (LAUNCH_CODE) {
+  // A code in the link wins over the launch offer, on Pro monthly only: ?code=FOUNDER (Sep 17-20, 2026: five
+  // founding members get Pro at half price for a full year). The code has to exist in Paddle; Paddle is the
+  // one that says what it is worth, this page only repeats it for the codes it knows.
+  var LINK_CODE = (q.get("code")||"").trim().toUpperCase();
+  if (!/^[A-Z0-9_-]{2,30}$/.test(LINK_CODE) || key !== "pro-monthly") LINK_CODE = "";
+  if (LINK_CODE) LAUNCH_CODE = LINK_CODE;
+  if (LAUNCH_CODE === "FOUNDER") {
+    document.getElementById("renew-line").textContent =
+      "Founding member: $14.50 USD / month for your first 12 months (50% off, applied at checkout), " +
+      "then $29.00 USD / month until you cancel.";
+  } else if (LAUNCH_CODE === "LAUNCH") {
     document.getElementById("renew-line").textContent =
       "Launch offer: $14.50 USD / month for your first 3 months (50% off, applied at checkout), " +
       "then $29.00 USD / month until you cancel.";
+  } else if (LAUNCH_CODE) {
+    document.getElementById("renew-line").textContent =
+      "Code " + LAUNCH_CODE + " is applied at checkout; the price you pay is shown there before you confirm.";
   }
   // Which account the plan lands on. ?email= comes from app.beltstra.com/upgrade, where it is the
   // signed-in member's own address; a direct visitor types it.
