@@ -84,6 +84,10 @@ figcaption{font-size:13px;color:var(--faint);margin-top:12px;text-align:center}
 .steps li:before{content:counter(step);display:inline-flex;align-items:center;justify-content:center;width:32px;height:32px;
   border-radius:50%;background:var(--blue);color:#fff;font-weight:800;margin-bottom:10px}
 .steps li p{color:var(--muted);margin:0}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:26px 0 0}
+.trio div{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:20px 22px}
+.trio h3{margin:0 0 6px}
+.trio p{color:var(--muted);margin:0}
 
 /* cards, pricing */
 .card{border:1px solid var(--line);border-radius:16px;padding:24px;background:var(--panel);margin:18px 0}
@@ -118,6 +122,6 @@ footer.site .small{margin-top:12px}
   .hero,.tool{grid-template-columns:1fr;gap:34px}
   .tool.flip .copy{order:0}
   .phone{max-width:290px}
-  .steps,.tiers{grid-template-columns:1fr}
+  .steps,.tiers,.trio{grid-template-columns:1fr}
 }
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
