@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Checkout — Beltstra Co</title>
+<title>Checkout · Beltstra Co</title>
 <link rel="stylesheet" href="style.css">
 <script src="https://cdn.paddle.com/paddle/v2/paddle.js"></script>
 </head>
@@ -27,7 +27,7 @@
   <div id="acct" style="margin:20px auto 6px;max-width:400px;text-align:left"></div>
   <button id="buy" class="btn">Continue to secure checkout</button>
   <p id="status" class="small" style="margin-top:18px"></p>
-  <p class="small">Auto-renewing subscription — cancel anytime and keep access for what
+  <p class="small">Auto-renewing subscription. Cancel anytime and keep access for what
   you've paid. Taxes may apply and will be calculated at checkout.</p>
   <p class="small">By continuing you agree to our <a href="terms.html">Terms</a> and
   <a href="refund.html">Refund Policy</a>. Checkout is securely handled by Paddle, our
@@ -52,10 +52,10 @@
   var PADDLE_TOKEN = "live_ff70306568f8eb8f868ceb86263";
   var SUCCESS_URL  = "https://app.beltstra.com/?paid=1";
   var PRICES = {
-    "pro-monthly":    {id:"pri_01kx78c9cz8vgq36hqan990pwy",    label:"Pro — $29.00 USD / month · 2,000 scans/month (300/day)"},
-    "pro-annual":     {id:"pri_01kx78c9mzdh2zcn7rxcr9z4a3",     label:"Pro — $290.00 USD / year · 2,000 scans/month (300/day)"},
-    "studio-monthly": {id:"pri_01kx78c9wm5wt1y7fa654ncd8d", label:"Studio — $79.00 USD / month · 6,000 scans/month (800/day)"},
-    "studio-annual":  {id:"pri_01kx78ca3qa8zctwkfx4dekrt2",  label:"Studio — $790.00 USD / year · 6,000 scans/month (800/day)"}
+    "pro-monthly":    {id:"pri_01kx78c9cz8vgq36hqan990pwy",    label:"Pro · $29.00 USD / month · 2,000 scans/month (300/day)"},
+    "pro-annual":     {id:"pri_01kx78c9mzdh2zcn7rxcr9z4a3",     label:"Pro · $290.00 USD / year · 2,000 scans/month (300/day)"},
+    "studio-monthly": {id:"pri_01kx78c9wm5wt1y7fa654ncd8d", label:"Studio · $79.00 USD / month · 6,000 scans/month (800/day)"},
+    "studio-annual":  {id:"pri_01kx78ca3qa8zctwkfx4dekrt2",  label:"Studio · $790.00 USD / year · 6,000 scans/month (800/day)"}
   };
   var q = new URLSearchParams(location.search);
   var plan = (q.get("plan")||"pro").toLowerCase();
@@ -93,7 +93,7 @@
       'placeholder="you@example.com" style="width:100%;box-sizing:border-box;padding:12px;margin-top:6px;' +
       'border-radius:10px;border:1px solid #2a3442;background:#0b1016;color:#e8eef6;font-size:16px">' +
       '<p class="small" style="margin-top:6px">The email you sign in with at app.beltstra.com. ' +
-      'Don\'t have one yet? <a href="https://app.beltstra.com/login?start=1">Start free</a> first — it takes a minute.</p>';
+      'Don\'t have one yet? <a href="https://app.beltstra.com/login?start=1">Start free</a> first. It takes a minute.</p>';
   }
   function account(){
     if (EMAIL_RE.test(fromApp)) return fromApp;
