@@ -27,7 +27,7 @@ nav a{color:var(--muted);text-decoration:none;font-size:15px;padding:8px 10px;bo
 nav a:hover{color:var(--ink)}
 nav a.btn{color:#fff;min-height:40px;padding:8px 14px;font-size:15px;margin-left:4px}
 @media(max-width:360px){nav a.hide-xs{display:none}}
-@media(max-width:480px){nav a.hide-sm{display:none}}
+@media(max-width:480px){nav a.hide-sm,nav a.hide-xs{display:none}}
 
 /* type */
 main{padding:36px 0 10px}
