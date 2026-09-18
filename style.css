@@ -1,10 +1,11 @@
 /* Beltstra Co site. One dark theme on purpose (the owner's rule: never a white page), system fonts
-   (no third-party requests), Beltstra blue for actions, money green for cash and profit, the same
-   greens and slates the app itself uses so the screenshots and the page read as one thing. */
+   (no third-party requests). Black, white and green (Kenny, 9/17): black ground, near-black panels, white ink,
+   and green for the one action, links, cash and profit, the same palette the app itself uses so the screenshots
+   and the page read as one thing. The --blue names stay so nothing else has to change; they hold green now. */
 :root{
-  --ground:#0b1016; --panel:#121a23; --panel-2:#16212c; --line:#233040;
-  --ink:#e6edf3; --muted:#9aabbb; --faint:#6f8193;
-  --blue:#0b6bcb; --blue-ink:#6aaef1; --green:#4ade80;
+  --ground:#000000; --panel:#141414; --panel-2:#1a1a1a; --line:#2e2e2e;
+  --ink:#f2f2f2; --muted:#a3a3a3; --faint:#6e6e6e;
+  --blue:#16a34a; --blue-ink:#4ade80; --green:#4ade80;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -17,7 +18,7 @@ img{max-width:100%;height:auto}
 .wrap.narrow{max-width:760px}
 
 /* header */
-header.site{position:sticky;top:0;z-index:10;background:rgba(11,16,22,.92);backdrop-filter:blur(8px);
+header.site{position:sticky;top:0;z-index:10;background:rgba(0,0,0,.92);backdrop-filter:blur(8px);
   -webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
 header.site .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:10px}
 .brand{font-weight:800;font-size:19px;letter-spacing:-.02em;color:var(--ink);text-decoration:none;white-space:nowrap}
@@ -45,7 +46,7 @@ p{margin:0 0 14px}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:12px 24px;
   border-radius:12px;background:var(--blue);color:#fff;font-weight:700;font-size:17px;text-decoration:none;
   border:0;cursor:pointer}
-.btn:hover{background:#0d78e3}
+.btn:hover{background:#15803d}
 .btn.ghost{background:transparent;border:1.5px solid var(--line);color:var(--ink)}
 .btn.ghost:hover{border-color:var(--faint)}
 .btn.alt{background:var(--blue)}
@@ -58,8 +59,8 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue-ink);outline-o
 .hero .phone{justify-self:center}
 
 /* a phone showing the real app */
-.phone{width:100%;max-width:320px;border-radius:36px;border:9px solid #1d2835;background:#0f172a;overflow:hidden;
-  box-shadow:0 30px 70px rgba(0,0,0,.5),0 0 0 1px #2b3847}
+.phone{width:100%;max-width:320px;border-radius:36px;border:9px solid #1f1f1f;background:#000000;overflow:hidden;
+  box-shadow:0 30px 70px rgba(0,0,0,.5),0 0 0 1px #2e2e2e}
 .phone img{display:block;width:100%;height:auto}
 figure{margin:0;display:flex;flex-direction:column;align-items:center}
 figcaption{font-size:13px;color:var(--faint);margin-top:12px;text-align:center}
