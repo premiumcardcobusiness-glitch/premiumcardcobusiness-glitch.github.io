@@ -31,8 +31,14 @@
   </div>
   <p class="small">A free account keeps every card you scan and one person you sell for, and your first week has
   every Pro tool. Pro sells for as many people as you like and lists on eBay from the app. No payment
-  details. <b>Launch price through Oct 16:</b> Pro is $14.50 USD/month for your first 3
-  months, then $29.00 USD/month, applied automatically at checkout.</p>
+  details. <span id="launch-line"><b>Launch price through Oct 16:</b> Pro is $14.50 USD/month for your first 3
+  months, then $29.00 USD/month, applied automatically at checkout.</span></p>
+  <script>
+    // Founder weekend (Sep 17 to 20, 2026): the same clock as the app and the checkout.
+    if (new Date() < new Date("2026-09-20T23:59:00Z")) {
+      document.getElementById("launch-line").innerHTML = "<b>Founder seats through Sunday 6pm Central:</b> five seats, Pro monthly is $14.50 USD/month for your first 12 months (50% off, applied automatically at checkout), then $29.00 USD/month. Pay now and your free weeks are added to the end of your year.";
+    }
+  </script>
 
   <h2>What it does that a price checker doesn't</h2>
 

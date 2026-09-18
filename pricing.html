@@ -62,6 +62,13 @@
       </ul>
       <p class="small" id="launch-line"><b>Launch offer through Oct 16:</b> Pro monthly is $14.50 USD/month for your
       first 3 months (50% off, applied automatically at checkout), then $29.00 USD/month.</p>
+      <script>
+        // Founder weekend (Sep 17 to 20, 2026): the same clock as the app and the checkout; the launch text above
+        // comes back by itself when the seats close.
+        if (new Date() < new Date("2026-09-20T23:59:00Z")) {
+          document.getElementById("launch-line").innerHTML = "<b>Founder seats through Sunday 6pm Central:</b> five seats, Pro monthly is $14.50 USD/month for your first 12 months (50% off, applied automatically at checkout), then $29.00 USD/month. Pay now and your free weeks are added to the end of your year.";
+        }
+      </script>
       <a class="btn alt" data-plan="pro" href="https://app.beltstra.com/upgrade?plan=pro&billing=monthly">Start with Pro</a>
     </div>
 

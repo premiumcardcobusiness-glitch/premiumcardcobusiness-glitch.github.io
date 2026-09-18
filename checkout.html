@@ -73,6 +73,14 @@
   // sees $14.50 before paying; the list price above is what it renews at afterwards. Remove LAUNCH_CODE
   // (or expire the code in Paddle) to end it.
   var LAUNCH_CODE = key === "pro-monthly" && new Date() < new Date("2026-10-16T23:59:00Z") ? "LAUNCH" : "";
+  // Founder weekend (Sep 17 to 20, 2026; 23:59 UTC is Sunday 6:59pm Central): the five FOUNDER seats are the live
+  // offer on Pro monthly, so the app's button, this page and the overlay all charge the same thing. A code in the
+  // link still wins below.
+  if (key === "pro-monthly" && new Date() < new Date("2026-09-20T23:59:00Z")) LAUNCH_CODE = "FOUNDER";
+  // Founder weekend (Sep 17 to 20, 2026; 23:59 UTC is Sunday 6:59pm Central): the five FOUNDER seats are the live
+  // offer on Pro monthly, so the app's button, this page and the overlay all charge the same thing. A code in the
+  // link still wins below.
+  if (key === "pro-monthly" && new Date() < new Date("2026-09-20T23:59:00Z")) LAUNCH_CODE = "FOUNDER";
   // A code in the link wins over the launch offer, on Pro monthly only: ?code=FOUNDER (Sep 17-20, 2026: five
   // founding members get Pro at half price for a full year). The code has to exist in Paddle; Paddle is the
   // one that says what it is worth, this page only repeats it for the codes it knows.
