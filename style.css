@@ -54,6 +54,22 @@ p{margin:0 0 14px}
 a:focus-visible,button:focus-visible{outline:3px solid var(--blue-ink);outline-offset:3px}
 .actions{display:flex;flex-wrap:wrap;gap:12px;margin:26px 0 12px}
 
+/* The show weekend hero (9/18): the same page, wearing the vendor's coat until Sunday night. */
+.eyebrow.amber{color:#f59e0b}
+.btn.vendor{background:#4ade80;color:#07120b;font-size:18px;padding:16px 22px;width:100%;justify-content:center;
+  text-align:center}
+.btn.vendor:hover{background:#6ee7a7}
+.vsteps{list-style:none;margin:20px 0 14px;padding:0;display:grid;gap:10px;max-width:560px}
+.vsteps li{display:flex;gap:14px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);
+  border-radius:14px;padding:14px}
+.vsteps li.last{background:#17130a;border-color:#3b2f12}
+.vsteps .n{flex:none;width:34px;height:34px;border-radius:50%;background:#0f2417;color:#4ade80;font-weight:800;
+  display:flex;align-items:center;justify-content:center;font-size:16px}
+.vsteps li.last .n{background:#2a1f0a;color:#f59e0b}
+.vsteps b{display:block;font-size:17px;margin-bottom:3px}
+.vsteps span span,.vsteps li>span:last-child{color:var(--muted);font-size:15px;line-height:1.45}
+@media(max-width:480px){.vsteps b{font-size:16px}}
+
 /* hero */
 .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;padding:20px 0 56px}
 /* 9/18: the hero is words and one green button, with the binder shot under it, full width and no phone frame.

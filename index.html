@@ -6,7 +6,7 @@
 <title>Beltstra Co · your cards, your people, your money</title>
 <meta name="description" content="Beltstra is where card people keep their binders online and their money straight. Photograph a page of your binder and every pocket comes back priced. Share the whole binder with one link, find the collectors and vendors around you on Explore, add your friends, put your table on the show's page. When you sell, see the cash, your profit and what you owe the friends you sell for. Runs in your phone's browser.">
 <meta name="theme-color" content="#000000">
-<link rel="stylesheet" href="style.css?v=20260918b">
+<link rel="stylesheet" href="style.css?v=20260919a">
 </head>
 <body>
 <header class="site"><div class="wrap">
@@ -22,7 +22,27 @@
 
 <main>
 <div class="wrap">
-  <section class="hero solo">
+  <!-- The show weekend (9/18, Kenny's draft): the front page is the vendor's page while the show is on. The
+       collector hero below takes it back by itself once the show is over. -->
+  <section class="hero solo" id="heroShow">
+    <div>
+      <p class="eyebrow amber">NTX TCG Card Show · Sat and Sun</p>
+      <h1>Put your table in front of everyone in the room.</h1>
+      <p class="lead">Photograph your binder pages. Every card comes back named and priced, and anyone
+      searching at this show sees which table has it.</p>
+      <div class="actions">
+        <a class="btn vendor" data-ev="hero" href="https://app.beltstra.com/login?start=1&amp;src=table">Post my table</a>
+      </div>
+      <p class="small">Free this weekend. About a minute a page.</p>
+      <ol class="vsteps">
+        <li><span class="n">1</span><span><b>Photograph your pages</b>Lay a page flat, one photo, nine cards.</span></li>
+        <li><span class="n">2</span><span><b>Prices come back</b>Named, numbered and priced, in the same pockets.</span></li>
+        <li class="last"><span class="n">3</span><span><b>Buyers walk to you</b>Someone searching this show for a card sees your table number.</span></li>
+      </ol>
+      <p class="small"><a href="https://app.beltstra.com/show/ntx-tcg-sept-2026">Just browsing? Search every binder</a></p>
+    </div>
+  </section>
+  <section class="hero solo" id="heroCollector">
     <div>
       <p class="eyebrow">For card collectors</p>
       <h1>Photograph a binder page. Every pocket comes back priced.</h1>
@@ -35,6 +55,24 @@
       <p class="small"><a href="https://app.beltstra.com/explore">Explore real binders</a></p>
     </div>
   </section>
+
+  <script>
+    // One clock, the same one the app and the checkout use: the show weekend ends Sun Sep 20, 23:59 UTC
+    // (6:59pm Central). Before it the front page is the vendor's; after it the collector hero comes back by
+    // itself, with nobody having to remember to change it.
+    (function () {
+      var show = new Date() < new Date("2026-09-20T23:59:00Z");
+      var a = document.getElementById("heroShow"), b = document.getElementById("heroCollector");
+      if (a) a.style.display = show ? "" : "none";
+      if (b) b.style.display = show ? "none" : "";
+      // The button in the sticky header says the same thing as the one in the hero, whichever hero is up.
+      var h = document.querySelector("header.site .btn");
+      if (h && show) {
+        h.textContent = "Post my table";
+        h.href = "https://app.beltstra.com/login?start=1&src=table";
+      }
+    })();
+  </script>
 
   <figure class="shot">
     <img src="img/binder-page.webp" width="520" height="796"
