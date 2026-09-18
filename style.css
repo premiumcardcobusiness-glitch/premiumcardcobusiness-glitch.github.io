@@ -56,6 +56,20 @@ a:focus-visible,button:focus-visible{outline:3px solid var(--blue-ink);outline-o
 
 /* hero */
 .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;padding:20px 0 56px}
+/* 9/18: the hero is words and one green button, with the binder shot under it, full width and no phone frame.
+   The h1 comes down on a phone so the button is whole on a 390 by 844 screen without scrolling. */
+.hero.solo{grid-template-columns:1fr;gap:0;padding:18px 0 22px}
+.hero.solo .lead{max-width:36ch}
+.hero.solo .actions{margin:22px 0 10px}
+.shot{margin:0 0 20px;max-width:520px}
+.shot img{display:block;width:100%;height:auto;border-radius:14px;border:1px solid var(--line);background:#000000}
+.shot figcaption{color:var(--muted);font-size:14px;margin-top:10px}
+p.small.under{max-width:60ch;margin:0 0 10px}
+@media(max-width:480px){
+  .hero.solo h1{font-size:31px}
+  .hero.solo{padding-top:10px}
+  .hero.solo .lead{font-size:17px}
+}
 .hero .phone{justify-self:center}
 
 /* a phone showing the real app */
