@@ -3,10 +3,107 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Beltstra Co · your cards, your people, your money</title>
-<meta name="description" content="Beltstra is where card people keep their binders online and their money straight. Photograph a page of your binder and every pocket comes back priced. Share the whole binder with one link, find the collectors and vendors around you on Explore, add your friends, put your table on the show's page. When you sell, see the cash, your profit and what you owe the friends you sell for. Runs in your phone's browser.">
+<title>Beltstra Co · your binder, in your pocket</title>
+<meta name="description" content="Your binder, in your pocket. Photograph a binder page and every card comes back priced, then re-priced every morning. Share the whole binder with friends and on Explore. Vendors sell cards for friends with a Piggy Bank, profit per card and eBay synced. Runs in your phone's browser.">
 <meta name="theme-color" content="#000000">
 <link rel="stylesheet" href="style.css?v=20260919a">
+<script>document.documentElement.className += ' js';</script>
+<style>
+  /* 9/22, Kenny: "Upgrade the ui, maybe add effects or some nice visuals like the ad... too many words again on the
+     front page." The hero IS the ad: nine real cards, the price tags pop cheapest first, the total counts up, and the
+     best card is revealed last with the green glow. Every label is a symbol or two words. These rules are this page's
+     only, so pricing, sellers, checkout and the rest keep style.css exactly as it was. */
+  .hx{position:relative;overflow:hidden}
+  .hx:before{content:"";position:absolute;left:-30%;right:-30%;top:-10%;height:980px;pointer-events:none;
+    background:radial-gradient(ellipse 55% 48% at 64% 46%,rgba(22,163,74,.24),rgba(0,0,0,0) 70%)}
+  .hx .wrap{position:relative;display:grid;grid-template-columns:1fr;gap:22px;padding-top:6px;padding-bottom:34px}
+  .hx h1{font-size:clamp(36px,6.4vw,66px);margin:0 0 16px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:0 0 22px}
+  .chips li{display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border:1px solid var(--line);
+    border-radius:999px;background:rgba(20,20,20,.85);font-weight:700;font-size:15px;line-height:1.2}
+  .ic{width:17px;height:17px;flex:none;color:var(--green)}
+  .cta{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:0 0 10px}
+  .btn.big{min-height:56px;padding:14px 30px;font-size:19px;border-radius:999px;background:#4ade80;color:#04110a;
+    font-weight:800;animation:beat 2.4s ease-in-out 2.8s infinite}
+  .btn.big:hover{background:#6ee7a7}
+  .btn.ghost.round{border-radius:999px;min-height:56px;padding:14px 24px}
+  @keyframes beat{0%,72%,100%{transform:scale(1)}82%{transform:scale(1.045)}}
+
+  /* the page, priced */
+  .stage{position:relative;justify-self:center;width:100%;max-width:430px;cursor:pointer;
+    -webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
+  .worth{text-align:center;margin:0 0 12px}
+  .worth span{display:block;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green)}
+  .worth b{display:block;font-size:clamp(40px,11vw,58px);font-weight:900;letter-spacing:-.02em;line-height:1.1;
+    font-variant-numeric:tabular-nums}
+  .grid9{display:grid;grid-template-columns:repeat(3,1fr);gap:16px 9px;padding:0 6px 14px;
+    transform:perspective(1100px) rotateX(6deg);transform-origin:50% 0;animation:float 7s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:perspective(1100px) rotateX(6deg) translateY(0)}
+    50%{transform:perspective(1100px) rotateX(6deg) translateY(-6px)}}
+  .pk{position:relative;aspect-ratio:240/334}
+  .pk .face{position:absolute;inset:0;border-radius:8px;overflow:hidden;background:#111;box-shadow:0 8px 22px rgba(0,0,0,.6)}
+  .pk img{display:block;width:100%;height:100%;object-fit:cover}
+  .pk .face:after{content:"";position:absolute;inset:0;transform:translateX(-130%);mix-blend-mode:screen;
+    background:linear-gradient(112deg,transparent 30%,rgba(255,255,255,.30) 45%,rgba(150,255,200,.20) 52%,transparent 66%)}
+  .pk .tag{position:absolute;left:50%;bottom:-12px;z-index:4;transform:translateX(-50%);opacity:0;background:#4ade80;
+    color:#04110a;font-weight:900;font-size:clamp(12px,3.4vw,15px);line-height:1.5;padding:2px 10px;border-radius:999px;
+    white-space:nowrap;font-variant-numeric:tabular-nums;box-shadow:0 4px 12px rgba(0,0,0,.65)}
+  .pk.top{z-index:2}
+  .pk.top .face{filter:blur(9px) brightness(.45);transform:scale(.92)}
+  .pk .qm{position:absolute;inset:0;z-index:3;display:flex;align-items:center;justify-content:center;font-weight:900;
+    font-size:clamp(44px,12vw,64px);color:#4ade80;text-shadow:0 0 24px rgba(74,222,128,.7)}
+  .go .pk .tag{animation:pop .26s cubic-bezier(.2,.9,.3,1.35) var(--d) both}
+  .go .pk.top .face{animation:reveal .45s cubic-bezier(.2,.9,.3,1.3) 1.95s both,glow 1.7s ease-in-out 2.4s infinite}
+  .go .pk .qm{animation:fade .2s linear 1.95s both}
+  .go .pk .face:after{animation:sheen 5s ease-in-out calc(2.9s + var(--s,0s)) infinite}
+  @keyframes pop{from{opacity:0;transform:translateX(-50%) scale(1.7)}to{opacity:1;transform:translateX(-50%) scale(1)}}
+  @keyframes reveal{to{filter:none;transform:scale(1)}}
+  @keyframes glow{0%,100%{box-shadow:0 0 0 3px rgba(74,222,128,.6),0 0 24px rgba(74,222,128,.35)}
+    50%{box-shadow:0 0 0 3px rgba(74,222,128,1),0 0 46px rgba(74,222,128,.6)}}
+  @keyframes fade{to{opacity:0}}
+  @keyframes sheen{0%{transform:translateX(-130%)}28%,100%{transform:translateX(130%)}}
+  .stage .ex{display:block;text-align:center;font-size:12px;color:var(--faint);margin-top:4px}
+
+  /* snap it, share it, sell it */
+  .px{padding:56px 0;border-top:1px solid var(--line)}
+  .px .wrap{display:grid;grid-template-columns:1fr;gap:26px;align-items:center}
+  .px h2{font-size:clamp(30px,4.4vw,46px);margin:0 0 10px}
+  .px .line{font-size:19px;color:var(--muted);margin:0 0 14px}
+  .px .more{font-weight:700;text-decoration:none;font-size:17px}
+  .px .eyebrow{display:inline-flex;align-items:center;gap:7px}
+  .px .receipt{margin:4px 0 16px}
+  .js .rise{opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.2,1)}
+  .js .rise.in{opacity:1;transform:none}
+
+  /* the last word */
+  .fin{padding:64px 0 60px;border-top:1px solid var(--line);text-align:center;
+    background:radial-gradient(ellipse 55% 70% at 50% 62%,rgba(22,163,74,.18),rgba(0,0,0,0) 70%)}
+  .fin .logo{display:inline-flex;align-items:center;justify-content:center;width:72px;height:72px;border-radius:20px;
+    background:#4ade80;color:#04110a;font-size:48px;font-weight:900;margin:0 0 16px}
+  .fin h2{margin:0 0 22px}
+  .fin .cta{justify-content:center}
+  .fin .small{margin:14px 0 0}
+
+  @media(min-width:900px){
+    .hx .wrap{grid-template-columns:1.05fr .95fr;align-items:center;gap:48px;padding-top:26px;padding-bottom:64px}
+    .stage{max-width:380px}                 /* the whole page, tags and all, inside a 1280 by 800 window */
+    .px .wrap{grid-template-columns:1fr 1fr;gap:56px}
+    .px.flip .copy{order:2}
+  }
+  @media(max-width:480px){
+    .hx h1{font-size:34px;margin-bottom:14px}
+    .chips{margin-bottom:18px}
+    .chips li{font-size:14px;padding:6px 11px}
+    .btn.big,.btn.ghost.round{min-height:52px;font-size:18px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    .grid9,.btn.big{animation:none}
+    .pk .tag{opacity:1;animation:none!important}
+    .pk.top .face{filter:none;transform:none;animation:none!important;box-shadow:0 0 0 3px rgba(74,222,128,.8)}
+    .pk .qm,.pk .face:after{display:none}
+    .js .rise{opacity:1;transform:none;transition:none}
+  }
+</style>
 </head>
 <body>
 <header class="site"><div class="wrap">
@@ -16,249 +113,145 @@
     <a class="hide-xs" href="sellers.html">For sellers</a>
     <a class="hide-xs" href="pricing.html">Pricing</a>
     <a href="https://app.beltstra.com/login">Sign in</a>
-    <a class="btn" data-ev="header" href="https://app.beltstra.com/try/page?src=header">Price a page free</a>
+    <a class="btn" data-ev="header" href="https://app.beltstra.com/try/page?src=header">Try free</a>
   </nav>
 </div></header>
 
 <main>
-<div class="wrap">
-  <!-- The show weekend (9/18, Kenny's draft): the front page is the vendor's page while the show is on. The
-       collector hero below takes it back by itself once the show is over. -->
-  <section class="hero solo" id="heroShow">
-    <div>
-      <p class="eyebrow amber">NTX TCG Card Show · Sat and Sun</p>
-      <h1>Put your table in front of everyone in the room.</h1>
-      <p class="lead">Photograph your binder pages. Every card comes back named and priced, and anyone
-      searching at this show sees which table has it.</p>
-      <div class="actions">
-        <a class="btn vendor" data-ev="hero" href="https://app.beltstra.com/login?start=1&amp;src=table">Post my table</a>
-      </div>
-      <p class="small">Free this weekend. About a minute a page.</p>
-      <ol class="vsteps">
-        <li><span class="n">1</span><span><b>Photograph your pages</b>Lay a page flat, one photo, nine cards.</span></li>
-        <li><span class="n">2</span><span><b>Prices come back</b>Named, numbered and priced, in the same pockets.</span></li>
-        <li class="last"><span class="n">3</span><span><b>Buyers walk to you</b>Someone searching this show for a card sees your table number.</span></li>
-      </ol>
-      <p class="small"><a href="https://app.beltstra.com/show/ntx-tcg-sept-2026">Just browsing? Search every binder</a></p>
+<section class="hx"><div class="wrap">
+  <div>
+    <p class="eyebrow">Collectors + vendors</p>
+    <h1>Your binder, in your pocket.</h1>
+    <ul class="chips">
+      <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>Snap it</li>
+      <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Share it</li>
+      <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Sell it</li>
+    </ul>
+    <div class="cta">
+      <a class="btn big" data-ev="hero" href="https://app.beltstra.com/try/page?src=hero">Try free &rsaquo;</a>
+      <a class="btn ghost round" href="https://app.beltstra.com/explore">Explore</a>
     </div>
-  </section>
-  <section class="hero solo" id="heroCollector">
-    <div>
-      <p class="eyebrow">For card collectors</p>
-      <h1>Photograph a binder page. Every pocket comes back priced.</h1>
-      <p class="lead">Nine cards at a time, not one. Lay a page flat, take one photo, and every pocket comes
-      back named, numbered and priced in about a minute.</p>
-      <div class="actions">
-        <a class="btn" data-ev="hero" href="https://app.beltstra.com/try/page?src=hero">Price a page free</a>
-      </div>
-      <p class="small">No account, no card needed. Runs in your phone browser.</p>
-      <p class="small"><a href="https://app.beltstra.com/explore">Explore real binders</a></p>
+    <p class="small">No app · No account</p>
+  </div>
+
+  <!-- One photo of a page, priced: the ad's first four seconds (ads/src_0922). Real cards and their TCGplayer market
+       prices on 9/22; the centre card is the best one and it is revealed last. A tap plays it again. -->
+  <div class="stage" id="stage" aria-hidden="true">
+    <div class="worth"><span>Page worth</span><b id="worth">$0.00</b></div>
+    <div class="grid9">
+      <div class="pk"><div class="face"><img src="img/page/124119.webp" width="240" height="335" alt=""></div><span class="tag" style="--d:.25s" data-p="48.55">$48.55</span></div>
+      <div class="pk"><div class="face" style="--s:.12s"><img src="img/page/478065.webp" width="240" height="334" alt=""></div><span class="tag" style="--d:.44s" data-p="52.05">$52.05</span></div>
+      <div class="pk"><div class="face" style="--s:.24s"><img src="img/page/610512.webp" width="240" height="335" alt=""></div><span class="tag" style="--d:.63s" data-p="52.55">$52.55</span></div>
+      <div class="pk"><div class="face" style="--s:.12s"><img src="img/page/157781.webp" width="240" height="335" alt=""></div><span class="tag" style="--d:.82s" data-p="52.95">$52.95</span></div>
+      <div class="pk top"><div class="face" style="--s:.24s"><img src="img/page/517044.webp" width="240" height="334" alt=""></div><span class="qm">?</span><span class="tag" style="--d:2.25s" data-p="113.66">$113.66</span></div>
+      <div class="pk"><div class="face" style="--s:.36s"><img src="img/page/676097.webp" width="240" height="334" alt=""></div><span class="tag" style="--d:1.01s" data-p="53.08">$53.08</span></div>
+      <div class="pk"><div class="face" style="--s:.24s"><img src="img/page/633040.webp" width="240" height="333" alt=""></div><span class="tag" style="--d:1.2s" data-p="55.76">$55.76</span></div>
+      <div class="pk"><div class="face" style="--s:.36s"><img src="img/page/478067.webp" width="240" height="334" alt=""></div><span class="tag" style="--d:1.39s" data-p="64.22">$64.22</span></div>
+      <div class="pk"><div class="face" style="--s:.48s"><img src="img/page/567429.webp" width="240" height="334" alt=""></div><span class="tag" style="--d:1.58s" data-p="99.91">$99.91</span></div>
     </div>
-  </section>
-
-  <script>
-    // One clock, the same one the app and the checkout use: the show weekend ends Sun Sep 20, 23:59 UTC
-    // (6:59pm Central). Before it the front page is the vendor's; after it the collector hero comes back by
-    // itself, with nobody having to remember to change it.
-    (function () {
-      var show = new Date() < new Date("2026-09-20T23:59:00Z");
-      var a = document.getElementById("heroShow"), b = document.getElementById("heroCollector");
-      if (a) a.style.display = show ? "" : "none";
-      if (b) b.style.display = show ? "none" : "";
-      // The button in the sticky header says the same thing as the one in the hero, whichever hero is up.
-      var h = document.querySelector("header.site .btn");
-      if (h && show) {
-        h.textContent = "Post my table";
-        h.href = "https://app.beltstra.com/login?start=1&src=table";
-      }
-    })();
-  </script>
-
-  <figure class="shot">
-    <img src="img/binder-page.webp" width="520" height="796"
-      alt="Kenny's binder on Beltstra: 191 cards, page 12 of 19, nine pockets holding Jolteon ex, Espeon ex, Sylveon ex, Iron Valiant ex, Bloodmoon Ursaluna ex, Gengar, Bulbasaur and Caterpie, each in its own pocket.">
-    <figcaption>A real binder on Beltstra. 191 cards, 19 pages.</figcaption>
-  </figure>
-
-  <p class="small under">Pokémon, One Piece, Dragon Ball, Union Arena and more. Just one card in hand?
-  <a href="https://app.beltstra.com/try">Scan it free, no account.</a></p>
-  <p class="small under"><b>Sell cards for friends or at shows?</b> Beltstra also keeps the cash, your profit and
-  what you owe each person straight. <a href="sellers.html">See the seller side.</a></p>
-
-  <section class="tool" id="binders">
-    <div class="copy">
-      <p class="eyebrow">Binders</p>
-      <h2>Photograph a page. Share the whole binder.</h2>
-      <p>Lay a page of your real binder flat and take one photo. All nine pockets come back identified and
-      priced, <b>in the same pockets</b>. Turn on "Show it to anyone" and the binder gets a link you can drop
-      in a group chat or your bio. People see your first name, your picture and your cards, page by page.
-      Never what you paid.</p>
-      <div class="receipt" aria-label="Example shared binder">
-        <span>Kenny's binder</span><b>192 cards</b>
-        <span>Page 1 of 19</span><b class="up">one link, no app needed</b>
-      </div>
-      <p class="small">Every card you scan can go in a pocket. Move it, sell it from the binder, or keep it private.
-      The link stops working the moment you turn sharing off.</p>
-    </div>
-    <figure>
-      <div class="phone"><img src="img/app-page.webp" width="390" height="813" loading="lazy"
-        alt="The binder in the app after one photo of the page: Trade binder, 9 of 9 on this page, a Scan this page button, and nine pockets holding Dedenne, Umbreon VMAX, Charizard ex, Mew ex, Umbreon, Espeon, Leafeon VMAX and more."></div>
-      <figcaption>After one photo of the page · test data</figcaption>
-    </figure>
-  </section>
-
-  <section class="tool flip" id="explore">
-    <div class="copy">
-      <p class="eyebrow">Explore</p>
-      <h2>Find the binders around you.</h2>
-      <p>Explore lists the binders people chose to show, by the area they picked: DFW, Houston, wherever they
-      said they are. <b>No GPS, no map, no address.</b> Search every listed binder at once for the card you're
-      chasing and see who has it, which page and which pocket. Then message them the way you already do.</p>
-      <div class="receipt" aria-label="Example Explore search">
-        <span>umbreon · Anywhere</span><b>3 hits</b>
-        <span>Alex · DFW · Chase binder</span><b class="up">page 2, pocket 5</b>
-      </div>
-      <p class="small">Put your own binders on Explore with one tap, first name only. Take them off whenever you like.</p>
-    </div>
-    <figure>
-      <div class="phone"><img src="img/app-explore.webp" width="390" height="900" loading="lazy"
-        alt="Explore: binders you can search. 3 binders from 3 people, area chips Anywhere, DFW and Houston, a search for umbreon finding Umbreon VMAX at Alex in DFW, Chase binder, page 2, pocket 5, $1,380.00, then Dre in Houston and Maria in DFW. Below: At a show right now, NTX Lewisville, and the binders by person."></div>
-      <figcaption>Example data</figcaption>
-    </figure>
-  </section>
-</div>
-
-<section class="band"><div class="wrap">
-  <p class="eyebrow">Your people</p>
-  <h2>The card people you already know, in one place.</h2>
-  <div class="trio">
-    <div><h3>Friends</h3><p>Send an invite link, or let them scan your code. Friends see each other's shared binders from the
-      home screen. Nobody else does.</p></div>
-    <div><h3>Your page</h3><p>A picture, a background and your first name on everything you share. Your costs and
-      your email never show.</p></div>
-    <div><h3>Show pages</h3><p>Post your table on the show's code and buyers search every binder in the building
-      before they walk over.</p></div>
+    <span class="ex">Example page</span>
   </div>
 </div></section>
 
-<div class="wrap">
-  <section class="tool" id="show">
-    <div class="copy">
-      <p class="eyebrow">At the show</p>
-      <h2>Buyers search your binders before they walk over.</h2>
-      <p>Post your table on the show's page and every binder you show is on it. Someone in the aisle types
-      "umbreon" and gets <b>your name, your table, the binder, the page and the pocket</b>, then walks straight
-      to you instead of past you. Every vendor who posts makes the page worth more. Free, for every table.</p>
-      <div class="receipt" aria-label="Example search hit">
-        <span>Umbreon VMAX · 215/203</span><b>$1,380.00</b>
-        <span>Table 42 · Chase binder</span><b class="up">page 2, pocket 5</b>
-      </div>
-      <p class="small">Only binders you've set to "Show it to anyone" appear, first names only, prices only if you
-      show them. Your table comes off the page by itself after the show.</p>
-    </div>
-    <figure>
-      <div class="phone"><img src="img/app-show.webp" width="390" height="898" loading="lazy"
-        alt="The show page for NTX Lewisville: 3 tables posted their binders. Searching umbreon finds Umbreon VMAX 215/203 at Alex, Table 42, Chase binder, page 2, pocket 5, $1,380.00, then an Umbreon at Dre's Table 15 and an Umbreon VMAX at Maria's Table 108."></div>
-      <figcaption>What a buyer sees · example data</figcaption>
-    </figure>
-  </section>
-
-  <section class="tool flip">
-    <div class="copy">
-      <p class="eyebrow">Piggy Bank</p>
-      <h2>Every cash sale lands in your Piggy Bank.</h2>
-      <p>Sell a card for cash and the money goes in by itself. Take money out for rent, gas or next show's
-      table and see <b>exactly where it went this month</b>. It can't go below zero, and money that belongs
-      to someone else is kept apart from what's yours.</p>
-      <div class="receipt" aria-label="Example Piggy Bank">
-        <span>In your Piggy Bank</span><b>$338.00</b>
-        <span>Owed to Mike</span><b>$190.40</b>
-        <span>Yours to spend</span><b class="up">$147.60</b>
-      </div>
-    </div>
-    <figure>
-      <div class="phone"><img src="img/app-bank.webp" width="390" height="880" loading="lazy"
-        alt="The Piggy Bank screen: $338.00 in it, profit this month plus $49.60, $190.40 owed to Mike, and where the money went: Paid Mike $100, Show table $40, Gas $25."></div>
-      <figcaption>Example data</figcaption>
-    </figure>
-  </section>
-
-  <section class="tool">
-    <div class="copy">
-      <p class="eyebrow">Profit per card</p>
-      <h2>See your profit before the buyer walks away.</h2>
-      <p>Add what you paid for a card, or one price for a whole stack, and Beltstra splits it by what each
-      card is worth. When you sell, the screen tells you <b>your profit or your loss</b> while the buyer is
-      still at your table, and the Piggy Bank adds it up for the month.</p>
-      <div class="receipt" aria-label="Example sale">
-        <span>Sold for</span><b>$330.00</b>
-        <span>You paid</span><b>$250.00</b>
-        <span>Profit</span><b class="up">+$80.00</b>
-      </div>
-    </div>
-    <figure>
-      <div class="phone"><img src="img/app-profit.webp" width="390" height="930" loading="lazy"
-        alt="Marking a card out: Sold for cash picked, $330 entered, and the summary says $330.00 goes into your Piggy Bank, you paid $250.00, so that's plus $80.00 profit."></div>
-      <figcaption>Example data</figcaption>
-    </figure>
-  </section>
-
-  <section class="tool flip">
-    <div class="copy">
-      <p class="eyebrow">Selling for friends</p>
-      <h2>Sell cards for a friend. They watch it live.</h2>
-      <p>Mark cards as Mike's and set your fee. Mike gets a private link, <b>no app and no account</b>, that
-      shows his cards in your case, what sold for how much, his cut, and what you've paid him. It updates by
-      itself, so nobody has to ask "did my card sell yet?"</p>
-      <div class="receipt" aria-label="Example sale for a friend">
-        <span>Sold for</span><b>$330.00</b>
-        <span>Your 12% fee</span><b>$39.60</b>
-        <span>Mike gets</span><b class="up">$290.40</b>
-      </div>
-    </div>
-    <figure>
-      <div class="phone"><img src="img/app-owner.webp" width="390" height="829" loading="lazy"
-        alt="Mike's private page: Hi Mike, Alex is selling your cards. You're owed $190.40. Still in the case: Mew ex and Sylveon ex. What happened: Sylveon ex sold for $330.00, fee $39.60, plus $290.40 yours."></div>
-      <figcaption>What your friend sees · example data</figcaption>
-    </figure>
-  </section>
-
-  <section class="tool">
-    <div class="copy">
-      <p class="eyebrow">Undo</p>
-      <h2>A wrong tap is one tap to fix.</h2>
-      <p>Picked the wrong copy or typed the wrong price at a busy table? <b>Undo</b> puts the card back,
-      takes the cash back out of your Piggy Bank, and fixes your profit and your friend's page. If the cash
-      is already spent, it tells you instead of breaking your numbers.</p>
-    </div>
-    <figure>
-      <div class="phone"><img src="img/app-undo.webp" width="390" height="576" loading="lazy"
-        alt="After tapping Undo: Undone. Leafeon ex is back in your collection, and the $330.00 came back out of your Piggy Bank."></div>
-      <figcaption>Example data</figcaption>
-    </figure>
-  </section>
-</div>
-
-<section class="band"><div class="wrap narrow">
-  <p class="eyebrow">The scanner</p>
-  <h2>Point your phone at a card. Get the exact printing and today's price.</h2>
-  <p class="muted">Beltstra reads the card's name, set and number and prices it from TCGplayer's market data,
-  updated daily. Cards that share a number can be worth very different amounts, so it checks the printing, and
-  when it isn't sure, it tells you instead of guessing. Every card you scan is saved to your collection, with a
-  one-tap eBay listing when you want one.</p>
+<section class="px" id="snap"><div class="wrap">
+  <div class="copy rise">
+    <p class="eyebrow"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>Snap it</p>
+    <h2>Nine cards. One photo.</h2>
+    <p class="line">Re-priced every morning.</p>
+  </div>
+  <figure class="rise">
+    <div class="phone"><img src="img/app-page.webp" width="390" height="813" loading="lazy"
+      alt="The binder in the app after one photo of the page: Trade binder, 9 of 9 on this page, a Scan this page button, and nine pockets holding Dedenne, Umbreon VMAX, Charizard ex, Mew ex, Umbreon, Espeon, Leafeon VMAX and more."></div>
+    <figcaption>Example</figcaption>
+  </figure>
 </div></section>
 
-<section class="band"><div class="wrap">
-  <p class="eyebrow">Getting started</p>
-  <h2>Three steps, about a minute.</h2>
-  <ol class="steps">
-    <li><h3>Enter your email</h3><p>Pick a password and your free account starts right away. No card needed.</p></li>
-    <li><h3>You're in</h3><p>Beltstra opens in your browser, signed in. Use the same email on any phone.</p></li>
-    <li><h3>Photograph a binder page</h3><p>Every pocket comes back priced. Share the link, or sell from it at your table and watch the Piggy Bank fill.</p></li>
-  </ol>
-  <div class="actions"><a class="btn" href="https://app.beltstra.com/login?start=1&amp;page=1">Price a whole binder page</a>
-    <a class="btn ghost" href="https://app.beltstra.com/try">Just one card? Scan it free</a></div>
+<section class="px flip" id="share"><div class="wrap">
+  <div class="copy rise">
+    <p class="eyebrow"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Share it</p>
+    <h2>One link. Whole binder.</h2>
+    <p class="line">Friends and Explore see it.</p>
+    <a class="more" href="https://app.beltstra.com/explore">Explore &rsaquo;</a>
+  </div>
+  <figure class="rise">
+    <div class="phone"><img src="img/binder-page.webp" width="520" height="796" loading="lazy"
+      alt="Kenny's binder on Beltstra: 191 cards, page 12 of 19, nine pockets holding Jolteon ex, Espeon ex, Sylveon ex, Iron Valiant ex, Bloodmoon Ursaluna ex, Gengar, Bulbasaur and Caterpie, each in its own pocket."></div>
+    <figcaption>Real binder</figcaption>
+  </figure>
 </div></section>
+
+<section class="px" id="sell"><div class="wrap">
+  <div class="copy rise">
+    <p class="eyebrow"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Sell it</p>
+    <h2>Sell for friends.</h2>
+    <p class="line">Piggy Bank. Profit. eBay synced.</p>
+    <div class="receipt" aria-label="Example sale for a friend">
+      <span>Sold for</span><b>$330.00</b>
+      <span>12% fee</span><b>$39.60</b>
+      <span>Mike gets</span><b class="up">$290.40</b>
+    </div>
+    <a class="more" href="sellers.html">Seller tools &rsaquo;</a>
+  </div>
+  <figure class="rise">
+    <div class="phone"><img src="img/app-owner.webp" width="390" height="829" loading="lazy"
+      alt="Mike's private page: Hi Mike, Alex is selling your cards. You're owed $190.40. Still in the case: Mew ex and Sylveon ex. What happened: Sylveon ex sold for $330.00, fee $39.60, plus $290.40 yours."></div>
+    <figcaption>Example</figcaption>
+  </figure>
+</div></section>
+
+<section class="fin"><div class="wrap">
+  <div class="logo" aria-hidden="true">B</div>
+  <h2>Price a page free.</h2>
+  <div class="cta">
+    <a class="btn big" data-ev="hero" href="https://app.beltstra.com/try/page?src=hero">Try free &rsaquo;</a>
+  </div>
+  <p class="small">Pokémon · One Piece · Dragon Ball · Made in DFW</p>
+</div></section>
+
+<script>
+  // The page prices itself when it comes on screen, the way the ad does: each tag pops on its own delay (CSS), and
+  // the total adds each card as its tag lands. A tap plays it again. Reduced motion: the finished page, no counting.
+  (function () {
+    var st = document.getElementById('stage'), out = document.getElementById('worth');
+    if (!st || !out) return;
+    var tags = [].slice.call(st.querySelectorAll('.tag'));
+    var price = function (t) { return parseFloat(t.getAttribute('data-p')) || 0; };
+    var all = tags.reduce(function (a, t) { return a + price(t); }, 0);
+    var money = function (n) { return '$' + n.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}); };
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) { out.textContent = money(all); return; }
+    var raf = 0;
+    function play() {
+      cancelAnimationFrame(raf);
+      st.classList.remove('go'); void st.offsetWidth; st.classList.add('go');
+      var t0 = performance.now();
+      (function tick(now) {
+        var t = (now - t0) / 1000, sum = 0;
+        tags.forEach(function (tg) {
+          var k = Math.max(0, Math.min(1, (t - parseFloat(tg.style.getPropertyValue('--d')) - 0.04) / 0.3));
+          sum += price(tg) * (1 - Math.pow(1 - k, 3));
+        });
+        out.textContent = money(t < 2.7 ? sum : all);
+        if (t < 2.7) raf = requestAnimationFrame(tick);
+      })(t0);
+    }
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { io.disconnect(); play(); } });
+      }, {threshold: 0.3});
+      io.observe(st);
+    } else { play(); }
+    st.addEventListener('click', play);
+  })();
+  // Each section slides up once as it arrives.
+  (function () {
+    var els = [].slice.call(document.querySelectorAll('.rise'));
+    if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {threshold: 0.15});
+    els.forEach(function (e) { io.observe(e); });
+  })();
+</script>
 
 <section class="band" id="pricing"><div class="wrap">
   <p class="eyebrow">Pricing</p>
