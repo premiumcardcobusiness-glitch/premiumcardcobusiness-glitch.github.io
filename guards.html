@@ -11,13 +11,13 @@
 <meta property="og:title" content="Slab Guard · Beltstra Co">
 <meta property="og:description" content="Thick, stackable TPU armor for your PSA slabs.">
 <meta property="og:url" content="https://beltstra.com/guards.html">
-<meta property="og:image" content="https://beltstra.com/img/guards/guards-og.jpg">
+<meta property="og:image" content="https://beltstra.com/img/guards/render/r-og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Slab Guard · Beltstra Co">
 <meta name="twitter:description" content="Thick, stackable TPU armor for your PSA slabs.">
-<meta name="twitter:image" content="https://beltstra.com/img/guards/guards-og.jpg">
+<meta name="twitter:image" content="https://beltstra.com/img/guards/render/r-og.jpg">
 <link rel="stylesheet" href="style.css?v=20260919a">
 <style>
   /* This page's rules only, written phone first; style.css stays as the other pages have it. Every photo frame
@@ -35,7 +35,7 @@
   .gallery::-webkit-scrollbar{display:none}
   .gallery figure{flex:0 0 100%;scroll-snap-align:start}
   .gallery img{display:block;width:100%;aspect-ratio:1/1;object-fit:contain}
-  .gallery video{display:block;width:100%;aspect-ratio:1/1;object-fit:cover}
+  .gallery video{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover}
   .thumbs{display:flex;gap:10px;margin:12px 0 0}
   .thumbs button{flex:1;padding:0;cursor:pointer;opacity:.55;max-width:84px}
   .thumbs button.on{opacity:1;border-color:var(--green)}
@@ -105,8 +105,24 @@
   <section class="gx">
     <div>
       <div class="gallery frame" id="gallery">
+        <figure><img src="img/guards/render/r-hero-800.webp" srcset="img/guards/render/r-hero-800.webp 800w, img/guards/render/r-hero.webp 1600w"
+          sizes="(min-width:860px) 520px, 90vw" width="800" height="800"
+          alt="Slab Guard holding a PSA 10 slab on a dark studio surface"></figure>
+        <figure><video src="img/guards/render/r-spin.mp4" poster="img/guards/render/r-spin.jpg" width="1080" height="1080" autoplay muted loop playsinline preload="metadata" aria-label="Slab Guard turning in a slow circle"><source src="img/guards/render/r-spin.webm" type="video/webm"><source src="img/guards/render/r-spin.mp4" type="video/mp4"></video></figure>
+        <figure><img src="img/guards/render/r-stack-800.webp" srcset="img/guards/render/r-stack-800.webp 800w, img/guards/render/r-stack.webp 1600w"
+          sizes="(min-width:860px) 520px, 90vw" width="800" height="600" loading="lazy"
+          alt="Four Slab Guards stacked flat, beltstra.com on each edge"></figure>
+        <figure><img src="img/guards/render/r-angle-800.webp" srcset="img/guards/render/r-angle-800.webp 800w, img/guards/render/r-angle.webp 1600w"
+          sizes="(min-width:860px) 520px, 90vw" width="800" height="600" loading="lazy"
+          alt="Three-quarter view showing the thick wall and flat lip"></figure>
+        <figure><img src="img/guards/render/r-edge-800.webp" srcset="img/guards/render/r-edge-800.webp 800w, img/guards/render/r-edge.webp 1600w"
+          sizes="(min-width:860px) 520px, 90vw" width="800" height="450" loading="lazy"
+          alt="Close-up of beltstra.com pressed into the guard's edge"></figure>
+        <figure><img src="img/guards/render/r-row-800.webp" srcset="img/guards/render/r-row-800.webp 800w, img/guards/render/r-row.webp 1600w"
+          sizes="(min-width:860px) 520px, 90vw" width="800" height="450" loading="lazy"
+          alt="Five guarded slabs standing in a row"></figure>
         <figure><img src="img/guards/hero-front-800.webp" srcset="img/guards/hero-front-800.webp 523w, img/guards/hero-front.webp 1046w"
-          sizes="(min-width:860px) 520px, 90vw" width="523" height="800"
+          sizes="(min-width:860px) 520px, 90vw" width="523" height="800" loading="lazy"
           alt="Black sparkle Slab Guard holding a PSA 10 Delibird slab, seen from the front"></figure>
         <figure><img src="img/guards/angle-1-800.webp" srcset="img/guards/angle-1-800.webp 690w, img/guards/angle-1.webp 1380w"
           sizes="(min-width:860px) 520px, 90vw" width="690" height="800" loading="lazy"
@@ -119,10 +135,16 @@
           alt="Side profile showing how thick the guard's walls are"></figure>
       </div>
       <div class="thumbs" id="thumbs">
-        <button type="button" class="frame on" aria-label="Photo 1"><img src="img/guards/hero-front-800.webp" width="523" height="800" alt=""></button>
-        <button type="button" class="frame" aria-label="Photo 2"><img src="img/guards/angle-1-800.webp" width="690" height="800" alt=""></button>
-        <button type="button" class="frame" aria-label="Photo 3"><img src="img/guards/angle-2-800.webp" width="800" height="725" alt=""></button>
-        <button type="button" class="frame" aria-label="Photo 4"><img src="img/guards/side-profile-800.webp" width="800" height="276" alt=""></button>
+        <button type="button" class="frame on" aria-label="Photo 1"><img src="img/guards/render/r-hero-800.webp" width="800" height="800" alt=""></button>
+        <button type="button" class="frame" aria-label="Photo 2"><img src="img/guards/render/r-spin.jpg" width="1080" height="1080" alt=""></button>
+        <button type="button" class="frame" aria-label="Photo 3"><img src="img/guards/render/r-stack-800.webp" width="800" height="600" alt=""></button>
+        <button type="button" class="frame" aria-label="Photo 4"><img src="img/guards/render/r-angle-800.webp" width="800" height="600" alt=""></button>
+        <button type="button" class="frame" aria-label="Photo 5"><img src="img/guards/render/r-edge-800.webp" width="800" height="450" alt=""></button>
+        <button type="button" class="frame" aria-label="Photo 6"><img src="img/guards/render/r-row-800.webp" width="800" height="450" alt=""></button>
+        <button type="button" class="frame" aria-label="Photo 7"><img src="img/guards/hero-front-800.webp" width="523" height="800" alt=""></button>
+        <button type="button" class="frame" aria-label="Photo 8"><img src="img/guards/angle-1-800.webp" width="690" height="800" alt=""></button>
+        <button type="button" class="frame" aria-label="Photo 9"><img src="img/guards/angle-2-800.webp" width="800" height="725" alt=""></button>
+        <button type="button" class="frame" aria-label="Photo 10"><img src="img/guards/side-profile-800.webp" width="800" height="276" alt=""></button>
       </div>
     </div>
     <div>
