@@ -11,52 +11,85 @@
 <meta property="og:title" content="Slab Guard · Beltstra Co">
 <meta property="og:description" content="Thick, stackable TPU armor for your PSA slabs.">
 <meta property="og:url" content="https://beltstra.com/guards.html">
-<meta property="og:image" content="https://beltstra.com/img/guards/guards-og.jpg">
+<meta property="og:image" content="https://beltstra.com/img/guards/render/r-og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Slab Guard · Beltstra Co">
 <meta name="twitter:description" content="Thick, stackable TPU armor for your PSA slabs.">
-<meta name="twitter:image" content="https://beltstra.com/img/guards/guards-og.jpg">
+<meta name="twitter:image" content="https://beltstra.com/img/guards/render/r-og.jpg">
 <link rel="stylesheet" href="style.css?v=20260919a">
 <style>
-  /* This page's rules only, written phone first; style.css stays as the other pages have it. The photos sit on
-     the same dark blue-black they were cut out onto, so each frame reads as one piece. */
-  .gx{display:grid;grid-template-columns:1fr;gap:22px;padding:6px 0 30px}
-  .gx .shot{margin:0 auto;max-width:420px;width:100%}
-  .gx .shot img{background:#0e1320}
-  .gx .lead{margin:0 0 18px}
-  .buybox{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px}
-  .buybox .price{font-size:36px;line-height:1.1;margin:0 0 4px}
-  .buybox .toggle{margin:12px 0 14px}
-  .buybox .toggle button{font-size:15px;padding:10px 20px}
+  /* This page's rules only, written phone first; style.css stays as the other pages have it. Every photo frame
+     carries the same gradient the guards were cut out onto (TOP/BOTTOM in make_guard_images.py), so a
+     letterboxed shot and its frame read as one piece. */
+  .topbar{background:#0f2417;color:#4ade80;text-align:center;font-size:14px;font-weight:700;padding:7px 12px}
+  .thanks{background:#0f2417;border-bottom:1px solid #1f4d2e;color:var(--ink);text-align:center;font-weight:700;
+    padding:12px 16px}
+
+  .gx{display:grid;grid-template-columns:1fr;gap:22px;padding:0 0 30px}
+  .frame{background:linear-gradient(#0b0f1a,#111827);border:1px solid var(--line);border-radius:14px}
+
+  .gallery{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
+    scrollbar-width:none;border-radius:14px}
+  .gallery::-webkit-scrollbar{display:none}
+  .gallery figure{flex:0 0 100%;scroll-snap-align:start}
+  .gallery img{display:block;width:100%;aspect-ratio:1/1;object-fit:contain}
+  .thumbs{display:flex;gap:10px;margin:12px 0 0}
+  .thumbs button{flex:1;padding:0;cursor:pointer;opacity:.55;max-width:84px}
+  .thumbs button.on{opacity:1;border-color:var(--green)}
+  .thumbs img{display:block;width:100%;aspect-ratio:1/1;object-fit:contain;border-radius:13px}
+
+  .gx h1{font-size:clamp(32px,5vw,46px);margin:0 0 8px}
+  .gx .lead{margin:0 0 10px}
+  .gx .price{margin:0 0 16px;line-height:1.1}
+  .opts{display:grid;gap:10px;margin:0 0 16px}
+  .opt{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;text-align:left;
+    background:var(--panel);border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;color:var(--ink);
+    font:inherit;cursor:pointer;position:relative}
+  .opt.on{border-color:var(--green);background:#0f1a13}
+  .opt b{font-size:17px}
+  .opt .ship{display:block;font-size:14px;color:var(--muted)}
+  .opt .amt{font-size:19px;font-weight:800;font-variant-numeric:tabular-nums}
+  .opt .badge{position:absolute;top:-10px;right:14px;background:#4ade80;color:#04110a;font-size:12px;font-weight:800;
+    padding:2px 10px;border-radius:99px}
+  .opt .free{color:var(--green)}
   .btn.buy{width:100%;min-height:58px;font-size:20px;font-weight:800;border-radius:999px;background:#4ade80;color:#04110a}
   .btn.buy:hover{background:#6ee7a7}
   .soon{margin:10px 0 0;text-align:center}
+  .secure{margin:12px 0 0;text-align:center}
 
-  .gallery{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;
-    margin:22px -20px 0;padding:0 20px 12px;scroll-padding:0 20px}
-  .gallery figure{flex:0 0 84%;scroll-snap-align:start}
-  .gallery img{display:block;width:100%;aspect-ratio:1/1;object-fit:contain;background:#0e1320;border-radius:14px;
-    border:1px solid var(--line)}
-
-  .tiles{list-style:none;padding:0;margin:22px 0 0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
-  .tiles li{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;font-weight:700;
+  .blk{padding:34px 0 0}
+  .glance{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .glance li{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:16px;font-weight:700;
     font-size:16px;line-height:1.3}
-  .tiles svg{display:block;width:28px;height:28px;color:var(--green);margin-bottom:10px}
+  .glance svg{display:block;width:28px;height:28px;color:var(--green);margin-bottom:10px}
 
-  .facts{margin:22px 0}
-  .app-line{font-size:18px;font-weight:700;margin:0}
+  .fit{list-style:none;padding:0;margin:0;display:grid;gap:14px}
+  .fit li{display:flex;gap:14px;align-items:center;background:var(--panel);border:1px solid var(--line);
+    border-radius:16px;padding:12px}
+  .fit img{flex:none;width:96px;height:96px;object-fit:contain}
+  .fit .n{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;
+    background:#0f2417;color:#4ade80;font-weight:800;font-size:15px;margin-right:8px}
+
+  .faq details{background:var(--panel);border:1px solid var(--line);border-radius:14px;margin:0 0 10px;padding:0 16px}
+  .faq summary{cursor:pointer;font-weight:700;padding:14px 0}
+  .faq details p{color:var(--muted);margin:0 0 14px}
+
+  .app-line{font-size:18px;font-weight:700;margin:34px 0 0}
 
   @media(min-width:860px){
-    .gx{grid-template-columns:1fr 1fr;gap:48px;align-items:center;padding:20px 0 50px}
-    .gx .shot{max-width:none}
-    .gallery{display:grid;grid-template-columns:repeat(5,1fr);overflow:visible;margin:22px 0 0;padding:0}
-    .tiles{grid-template-columns:repeat(4,1fr)}
+    .gx{grid-template-columns:1fr 1fr;gap:48px;align-items:start;padding:10px 0 20px}
+    .glance{grid-template-columns:repeat(3,1fr)}
+    .fit{grid-template-columns:repeat(3,1fr)}
+    .fit li{flex-direction:column;align-items:flex-start}
+    .fit img{width:100%;height:200px}
   }
 </style>
 </head>
 <body>
+<div class="topbar">Free US shipping on the 5-pack</div>
+<div class="thanks" id="thanks" hidden>Order received. It ships from Dallas within <span style="white-space:nowrap">1-2</span> business days.</div>
 <header class="site"><div class="wrap">
   <a class="brand" href="index.html">Beltstra <span>Co</span></a>
   <nav>
@@ -69,61 +102,115 @@
 
 <main><div class="wrap">
   <section class="gx">
-    <figure class="shot">
-      <img src="img/guards/hero-front-800.webp" srcset="img/guards/hero-front-800.webp 523w, img/guards/hero-front.webp 1046w"
-        sizes="(min-width:860px) 520px, 90vw" width="523" height="800"
-        alt="Black sparkle Slab Guard holding a PSA 10 Delibird slab, seen from the front">
-    </figure>
     <div>
-      <h1>Slab Guard</h1>
-      <p class="lead">Thick, stackable TPU armor for your PSA slabs.</p>
-      <div class="buybox">
-        <p class="price" id="price-one"></p>
-        <p class="muted" id="price-three" style="margin:0"></p>
-        <p class="small" id="shipping" style="margin:4px 0 0"></p>
-        <div class="toggle" role="group" aria-label="How many">
-          <button type="button" id="qty-one" class="on" aria-pressed="true">1 guard</button>
-          <button type="button" id="qty-three" aria-pressed="false">3 guards</button>
-        </div>
-        <a class="btn buy" id="buy" href="#buy-coming">Buy</a>
-        <p class="small soon" id="buy-coming" hidden>Checkout opens soon</p>
+      <div class="gallery frame" id="gallery">
+        <figure><img src="img/guards/render/r-hero-800.webp" srcset="img/guards/render/r-hero-800.webp 800w, img/guards/render/r-hero.webp 1600w"
+          sizes="(min-width:860px) 520px, 90vw" width="800" height="800"
+          alt="Slab Guard holding a PSA 10 slab on a dark studio surface"></figure>
+        <figure><img src="img/guards/render/r-stack-800.webp" srcset="img/guards/render/r-stack-800.webp 800w, img/guards/render/r-stack.webp 1600w"
+          sizes="(min-width:860px) 520px, 90vw" width="800" height="600" loading="lazy"
+          alt="Four Slab Guards stacked flat, beltstra.com on each edge"></figure>
+        <figure><img src="img/guards/render/r-angle-800.webp" srcset="img/guards/render/r-angle-800.webp 800w, img/guards/render/r-angle.webp 1600w"
+          sizes="(min-width:860px) 520px, 90vw" width="800" height="600" loading="lazy"
+          alt="Three-quarter view showing the thick wall and flat lip"></figure>
+        <figure><img src="img/guards/render/r-edge-800.webp" srcset="img/guards/render/r-edge-800.webp 800w, img/guards/render/r-edge.webp 1600w"
+          sizes="(min-width:860px) 520px, 90vw" width="800" height="450" loading="lazy"
+          alt="Close-up of beltstra.com pressed into the guard's edge"></figure>
+        <figure><img src="img/guards/render/r-row-800.webp" srcset="img/guards/render/r-row-800.webp 800w, img/guards/render/r-row.webp 1600w"
+          sizes="(min-width:860px) 520px, 90vw" width="800" height="450" loading="lazy"
+          alt="Five guarded slabs standing in a row"></figure>
+        <figure><img src="img/guards/hero-front-800.webp" srcset="img/guards/hero-front-800.webp 523w, img/guards/hero-front.webp 1046w"
+          sizes="(min-width:860px) 520px, 90vw" width="523" height="800" loading="lazy"
+          alt="Black sparkle Slab Guard holding a PSA 10 Delibird slab, seen from the front"></figure>
+        <figure><img src="img/guards/angle-1-800.webp" srcset="img/guards/angle-1-800.webp 690w, img/guards/angle-1.webp 1380w"
+          sizes="(min-width:860px) 520px, 90vw" width="690" height="800" loading="lazy"
+          alt="Three-quarter view showing the sparkle in the black TPU and the thick side wall"></figure>
+        <figure><img src="img/guards/angle-2-800.webp" srcset="img/guards/angle-2-800.webp 800w, img/guards/angle-2.webp 1600w"
+          sizes="(min-width:860px) 520px, 90vw" width="800" height="725" loading="lazy"
+          alt="Low angle view along the guard, lip and wall around the slab"></figure>
+        <figure><img src="img/guards/side-profile-800.webp" srcset="img/guards/side-profile-800.webp 800w, img/guards/side-profile.webp 1600w"
+          sizes="(min-width:860px) 520px, 90vw" width="800" height="276" loading="lazy"
+          alt="Side profile showing how thick the guard's walls are"></figure>
       </div>
+      <div class="thumbs" id="thumbs">
+        <button type="button" class="frame on" aria-label="Photo 1"><img src="img/guards/render/r-hero-800.webp" width="800" height="800" alt=""></button>
+        <button type="button" class="frame" aria-label="Photo 2"><img src="img/guards/render/r-stack-800.webp" width="800" height="600" alt=""></button>
+        <button type="button" class="frame" aria-label="Photo 3"><img src="img/guards/render/r-angle-800.webp" width="800" height="600" alt=""></button>
+        <button type="button" class="frame" aria-label="Photo 4"><img src="img/guards/render/r-edge-800.webp" width="800" height="450" alt=""></button>
+        <button type="button" class="frame" aria-label="Photo 5"><img src="img/guards/render/r-row-800.webp" width="800" height="450" alt=""></button>
+        <button type="button" class="frame" aria-label="Photo 6"><img src="img/guards/hero-front-800.webp" width="523" height="800" alt=""></button>
+        <button type="button" class="frame" aria-label="Photo 7"><img src="img/guards/angle-1-800.webp" width="690" height="800" alt=""></button>
+        <button type="button" class="frame" aria-label="Photo 8"><img src="img/guards/angle-2-800.webp" width="800" height="725" alt=""></button>
+        <button type="button" class="frame" aria-label="Photo 9"><img src="img/guards/side-profile-800.webp" width="800" height="276" alt=""></button>
+      </div>
+    </div>
+    <div>
+      <h1>Slab Guard · PSA</h1>
+      <p class="lead">Armor for the slabs you care about most.</p>
+      <p class="price" id="price"></p>
+      <div class="opts" role="radiogroup" aria-label="How many">
+        <button type="button" class="opt" id="opt-one" role="radio" aria-checked="false">
+          <span><b>1 guard</b><span class="ship">+$4.99 shipping</span></span><span class="amt">$9.99</span>
+        </button>
+        <button type="button" class="opt" id="opt-three" role="radio" aria-checked="false">
+          <span><b>3-pack</b><span class="ship">+$4.99 shipping</span></span><span class="amt">$24.99</span>
+        </button>
+        <button type="button" class="opt" id="opt-five" role="radio" aria-checked="false">
+          <span class="badge">Best value</span>
+          <span><b>5-pack</b><span class="ship free">Free shipping</span></span><span class="amt">$44.99</span>
+        </button>
+      </div>
+      <a class="btn buy" id="buy" href="#buy-coming">Buy now</a>
+      <p class="small soon" id="buy-coming" hidden>Checkout opens soon</p>
+      <p class="small secure">Secure checkout by Stripe · Ships from Dallas, TX in 1-2 business days</p>
     </div>
   </section>
 
-  <div class="gallery">
-    <figure><img src="img/guards/hero-front-800.webp" srcset="img/guards/hero-front-800.webp 523w, img/guards/hero-front.webp 1046w"
-      sizes="(min-width:860px) 200px, 84vw" width="523" height="800" loading="lazy"
-      alt="Front view: the guard's flat lip frames the slab and leaves the PSA label clear"></figure>
-    <figure><img src="img/guards/angle-1-800.webp" srcset="img/guards/angle-1-800.webp 690w, img/guards/angle-1.webp 1380w"
-      sizes="(min-width:860px) 200px, 84vw" width="690" height="800" loading="lazy"
-      alt="Three-quarter view showing the sparkle in the black TPU and the thick side wall"></figure>
-    <figure><img src="img/guards/angle-2-800.webp" srcset="img/guards/angle-2-800.webp 800w, img/guards/angle-2.webp 1600w"
-      sizes="(min-width:860px) 200px, 84vw" width="800" height="725" loading="lazy"
-      alt="Low angle view along the guard, lip and wall around the slab"></figure>
-    <figure><img src="img/guards/side-profile-800.webp" srcset="img/guards/side-profile-800.webp 800w, img/guards/side-profile.webp 1600w"
-      sizes="(min-width:860px) 200px, 84vw" width="800" height="276" loading="lazy"
-      alt="Side profile showing how thick the guard's walls are"></figure>
-    <figure><img src="img/guards/edge-logo-800.webp" srcset="img/guards/edge-logo-800.webp 800w, img/guards/edge-logo.webp 1600w"
-      sizes="(min-width:860px) 200px, 84vw" width="800" height="393" loading="lazy"
-      alt="Close-up of beltstra.com embossed on the bottom edge of the guard"></figure>
-  </div>
-
-  <ul class="tiles">
-    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Thick walls absorb drops</li>
-    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>Stacks flat, groove to lip</li>
-    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Flat lip, clear view of the label</li>
-    <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Fits standard PSA slabs</li>
-  </ul>
-
-  <div class="card facts">
-    <h3>The details</h3>
-    <ul class="feat">
-      <li>Material: flexible TPU, black with a sparkle</li>
-      <li>Fits standard PSA slabs. Not tested on PSA Mega or CGC slabs, so we don't claim those.</li>
-      <li>Made in Dallas by a card vendor, each one checked by hand</li>
+  <section class="blk">
+    <h2>At a glance</h2>
+    <ul class="glance">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Covers every edge</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><rect x="7" y="7" width="10" height="10" rx="1"/></svg>Raised lip front and back</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>Stacks flat and steady</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12c0-4 3-8 8-8s8 4 8 8-3 8-8 8-8-4-8-8z"/><path d="M8 12c0-2 2-4 4-4s4 2 4 4-2 4-4 4-4-2-4-4z"/></svg>Thick, flexible TPU</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>Label stays in clear view</li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 0 1 0 20a15 15 0 0 1 0-20z"/></svg>beltstra.com on the edge</li>
     </ul>
-  </div>
+  </section>
+
+  <section class="blk">
+    <h2>Fits</h2>
+    <p>PSA standard slabs.</p>
+    <p class="muted">BGS, CGC and TAG versions coming soon. <a class="small" href="mailto:soliskenny2@gmail.com?subject=Slab%20Guard%20for%20BGS/CGC/TAG">Tell me when</a></p>
+  </section>
+
+  <section class="blk">
+    <h2>How to fit it</h2>
+    <ol class="fit">
+      <li><img class="frame" src="img/guards/angle-2-800.webp" width="800" height="725" loading="lazy" alt=""><span><span class="n">1</span>Slide the slab in, bottom first.</span></li>
+      <li><img class="frame" src="img/guards/side-profile-800.webp" width="800" height="276" loading="lazy" alt=""><span><span class="n">2</span>Press the top edge in.</span></li>
+      <li><img class="frame" src="img/guards/hero-front-800.webp" width="523" height="800" loading="lazy" alt=""><span><span class="n">3</span>Done.</span></li>
+    </ol>
+  </section>
+
+  <section class="blk">
+    <h2>Show us your slabs</h2>
+    <p class="muted">Tag @premiumcardco_ with your guarded slabs.</p>
+  </section>
+
+  <section class="blk faq">
+    <h2>FAQ</h2>
+    <details><summary>Which slabs does it fit?</summary>
+      <p>PSA standard slabs. BGS, CGC and TAG versions are coming soon.</p></details>
+    <details><summary>Does it scratch the slab?</summary>
+      <p>No. The guard is soft TPU, so nothing hard rubs against the slab.</p></details>
+    <details><summary>Do they stack?</summary>
+      <p>Yes. They stack flat and steady, one guarded slab on top of the next.</p></details>
+    <details><summary>How long does shipping take, and what does it cost?</summary>
+      <p>Orders ship from Dallas, TX in 1-2 business days. US shipping is $4.99, and free on the 5-pack.</p></details>
+    <details><summary>What if it's not right?</summary>
+      <p>Not right? Email within 30 days for a refund.</p></details>
+  </section>
 
   <p class="app-line"><a href="https://app.beltstra.com">Price your cards free at app.beltstra.com</a></p>
 </div></main>
@@ -142,33 +229,49 @@
 <script>
   // Prices and checkout links. Change these lines and nothing else; the page fills itself in from them.
   var PRICE_ONE = "$9.99";
-  var PRICE_THREE = "3 for $24.99";
-  var SHIPPING = "Ships from DFW · $4.99 US shipping";
+  var PRICE_THREE = "$24.99";
+  var PRICE_FIVE = "$44.99";
   var BUY_URL_ONE = 'https://buy.stripe.com/7sYfZggtTcD6cXs8N9fw400';
   var BUY_URL_THREE = 'https://buy.stripe.com/7sY3cu3H76eI1eKd3pfw401';
+  var BUY_URL_FIVE = 'https://buy.stripe.com/00w4gy0uV5aE9Lg3sPfw402';
 
   (function () {
-    var PLACEHOLDER = "#buy-coming";
-    document.getElementById("price-one").textContent = PRICE_ONE;
-    document.getElementById("price-three").textContent = PRICE_THREE;
-    document.getElementById("shipping").textContent = SHIPPING;
+    // Stripe sends buyers back here with ?thanks=1.
+    if (/[?&]thanks=1(&|$)/.test(location.search)) document.getElementById("thanks").hidden = false;
 
+    var PLACEHOLDER = "#buy-coming";
+    var price = document.getElementById("price");
     var buy = document.getElementById("buy");
     var soon = document.getElementById("buy-coming");
-    var one = document.getElementById("qty-one");
-    var three = document.getElementById("qty-three");
-    function pick(qty) {
-      var BUY_URL = qty === 3 ? BUY_URL_THREE : BUY_URL_ONE;
-      buy.href = BUY_URL;
-      soon.hidden = BUY_URL !== PLACEHOLDER;
-      one.classList.toggle("on", qty === 1);
-      three.classList.toggle("on", qty === 3);
-      one.setAttribute("aria-pressed", String(qty === 1));
-      three.setAttribute("aria-pressed", String(qty === 3));
+    var opts = [
+      { el: document.getElementById("opt-one"), price: PRICE_ONE, url: BUY_URL_ONE },
+      { el: document.getElementById("opt-three"), price: PRICE_THREE, url: BUY_URL_THREE },
+      { el: document.getElementById("opt-five"), price: PRICE_FIVE, url: BUY_URL_FIVE }
+    ];
+    function pick(chosen) {
+      price.textContent = chosen.price;
+      buy.href = chosen.url;
+      soon.hidden = chosen.url !== PLACEHOLDER;
+      opts.forEach(function (o) {
+        o.el.classList.toggle("on", o === chosen);
+        o.el.setAttribute("aria-checked", String(o === chosen));
+      });
     }
-    one.addEventListener("click", function () { pick(1); });
-    three.addEventListener("click", function () { pick(3); });
-    pick(1);
+    opts.forEach(function (o) { o.el.addEventListener("click", function () { pick(o); }); });
+    pick(opts[0]);
+
+    // The gallery is a swipe strip; the thumbnails scroll it and follow it.
+    var gallery = document.getElementById("gallery");
+    var thumbs = document.getElementById("thumbs").querySelectorAll("button");
+    thumbs.forEach(function (t, i) {
+      t.addEventListener("click", function () {
+        gallery.scrollTo({ left: i * gallery.clientWidth, behavior: "smooth" });
+      });
+    });
+    gallery.addEventListener("scroll", function () {
+      var i = Math.round(gallery.scrollLeft / gallery.clientWidth);
+      thumbs.forEach(function (t, j) { t.classList.toggle("on", j === i); });
+    });
   })();
 </script>
 </body>
