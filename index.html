@@ -45,13 +45,19 @@
   .pk img{display:block;width:100%;height:100%;object-fit:cover}
   .pk .face:after{content:"";position:absolute;inset:0;transform:translateX(-130%);mix-blend-mode:screen;
     background:linear-gradient(112deg,transparent 30%,rgba(255,255,255,.30) 45%,rgba(150,255,200,.20) 52%,transparent 66%)}
-  .pk .tag{position:absolute;left:50%;bottom:-12px;z-index:4;transform:translateX(-50%);opacity:0;background:#4ade80;
+  /* 10/1: the page at rest is the FINISHED page: every tag showing, the best card revealed, the real total in the HTML.
+     That is what no JS, reduced motion, a link preview or a slow phone sees. Only when the script below is running
+     and motion is allowed does it add .armed (tags off, best card hidden) until the page comes on screen and plays. */
+  .pk .tag{position:absolute;left:50%;bottom:-12px;z-index:4;transform:translateX(-50%);background:#4ade80;
     color:#04110a;font-weight:900;font-size:clamp(12px,3.4vw,15px);line-height:1.5;padding:2px 10px;border-radius:999px;
     white-space:nowrap;font-variant-numeric:tabular-nums;box-shadow:0 4px 12px rgba(0,0,0,.65)}
   .pk.top{z-index:2}
-  .pk.top .face{filter:blur(9px) brightness(.45);transform:scale(.92)}
-  .pk .qm{position:absolute;inset:0;z-index:3;display:flex;align-items:center;justify-content:center;font-weight:900;
+  .pk.top .face{box-shadow:0 0 0 3px rgba(74,222,128,.8)}
+  .pk .qm{position:absolute;inset:0;z-index:3;display:none;align-items:center;justify-content:center;font-weight:900;
     font-size:clamp(44px,12vw,64px);color:#4ade80;text-shadow:0 0 24px rgba(74,222,128,.7)}
+  .armed .pk .tag{opacity:0}
+  .armed .pk.top .face{filter:blur(9px) brightness(.45);transform:scale(.92);box-shadow:0 8px 22px rgba(0,0,0,.6)}
+  .armed .pk .qm{display:flex}
   .go .pk .tag{animation:pop .26s cubic-bezier(.2,.9,.3,1.35) var(--d) both}
   .go .pk.top .face{animation:reveal .45s cubic-bezier(.2,.9,.3,1.3) 1.95s both,glow 1.7s ease-in-out 2.4s infinite}
   .go .pk .qm{animation:fade .2s linear 1.95s both}
@@ -72,6 +78,7 @@
   .px .more{font-weight:700;text-decoration:none;font-size:17px}
   .px .eyebrow{display:inline-flex;align-items:center;gap:7px}
   .px .receipt{margin:4px 0 16px}
+  .px .receipt .end{border-top:1px solid var(--line);padding-top:5px}
   .js .rise{opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.2,1)}
   .js .rise.in{opacity:1;transform:none}
 
@@ -135,9 +142,11 @@
   </div>
 
   <!-- One photo of a page, priced: the ad's first four seconds (ads/src_0922). Real cards and their TCGplayer market
-       prices on 9/22; the centre card is the best one and it is revealed last. A tap plays it again. -->
+       prices on 9/22; the centre card is the best one and it is revealed last. A tap plays it again.
+       The total below is the sum of the nine data-p prices (592.73). Change a price, change the total too; the
+       script also re-adds them on load, so the two can never disagree on screen. -->
   <div class="stage" id="stage" aria-hidden="true">
-    <div class="worth"><span>Page worth</span><b id="worth">$0.00</b></div>
+    <div class="worth"><span>Page worth</span><b id="worth">$592.73</b></div>
     <div class="grid9">
       <div class="pk"><div class="face"><img src="img/page/124119.webp" width="240" height="335" alt=""></div><span class="tag" style="--d:.25s" data-p="48.55">$48.55</span></div>
       <div class="pk"><div class="face" style="--s:.12s"><img src="img/page/478065.webp" width="240" height="334" alt=""></div><span class="tag" style="--d:.44s" data-p="52.05">$52.05</span></div>
@@ -185,16 +194,20 @@
     <p class="eyebrow"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Sell it</p>
     <h2>Sell for friends.</h2>
     <p class="line">Piggy Bank. Profit. eBay synced.</p>
+    <!-- 10/1: the same numbers as the screenshot beside it: the sale, then the $100.00 already paid, ending on the
+         $190.40 the screenshot shows as "You're owed". -->
     <div class="receipt" aria-label="Example sale for a friend">
       <span>Sold for</span><b>$330.00</b>
-      <span>12% fee</span><b>$39.60</b>
-      <span>Mike gets</span><b class="up">$290.40</b>
+      <span>12% fee</span><b>&minus;$39.60</b>
+      <span>Mike gets</span><b>$290.40</b>
+      <span>Paid out</span><b>&minus;$100.00</b>
+      <span class="end">Still owed</span><b class="end up">$190.40</b>
     </div>
     <a class="more" href="sellers.html">Seller tools &rsaquo;</a>
   </div>
   <figure class="rise">
     <div class="phone"><img src="img/app-owner.webp" width="390" height="829" loading="lazy"
-      alt="Mike's private page: Hi Mike, Alex is selling your cards. You're owed $190.40. Still in the case: Mew ex and Sylveon ex. What happened: Sylveon ex sold for $330.00, fee $39.60, plus $290.40 yours."></div>
+      alt="Mike's private page: Hi Mike, Alex is selling your cards. You're owed $190.40. Paid to you so far: $100.00. Alex's fee: 12% of each sale. Still in the case: Mew ex and Sylveon ex. What happened: Sylveon ex sold for $330.00, fee $39.60, plus $290.40 yours. Paid to you: $100.00 on Sep 15."></div>
     <figcaption>Example</figcaption>
   </figure>
 </div></section>
@@ -211,14 +224,17 @@
 <script>
   // The page prices itself when it comes on screen, the way the ad does: each tag pops on its own delay (CSS), and
   // the total adds each card as its tag lands. A tap plays it again. Reduced motion: the finished page, no counting.
+  // At rest (before it plays, after it plays, or if it never plays) the total is always the whole page's total.
   (function () {
     var st = document.getElementById('stage'), out = document.getElementById('worth');
     if (!st || !out) return;
     var tags = [].slice.call(st.querySelectorAll('.tag'));
-    var price = function (t) { return parseFloat(t.getAttribute('data-p')) || 0; };
-    var all = tags.reduce(function (a, t) { return a + price(t); }, 0);
+    var price = function (t) { return Math.round((parseFloat(t.getAttribute('data-p')) || 0) * 100); };
+    var all = tags.reduce(function (a, t) { return a + price(t); }, 0) / 100;
     var money = function (n) { return '$' + n.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}); };
-    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) { out.textContent = money(all); return; }
+    out.textContent = money(all);
+    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    st.classList.add('armed');               // tags off until the page is on screen; the total stays put
     var raf = 0;
     function play() {
       cancelAnimationFrame(raf);
@@ -228,7 +244,7 @@
         var t = (now - t0) / 1000, sum = 0;
         tags.forEach(function (tg) {
           var k = Math.max(0, Math.min(1, (t - parseFloat(tg.style.getPropertyValue('--d')) - 0.04) / 0.3));
-          sum += price(tg) * (1 - Math.pow(1 - k, 3));
+          sum += price(tg) / 100 * (1 - Math.pow(1 - k, 3));
         });
         out.textContent = money(t < 2.7 ? sum : all);
         if (t < 2.7) raf = requestAnimationFrame(tick);
