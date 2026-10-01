@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Beltstra Co · your binder, in your pocket</title>
+<title>Pokémon card scanner: price a whole binder page · Beltstra Co</title>
 <meta name="description" content="Your binder, in your pocket. Photograph a binder page and every card comes back priced, then re-priced every morning. Share the whole binder with friends and on Explore. Vendors sell cards for friends with a Piggy Bank, profit per card and eBay synced. Runs in your phone's browser.">
 <meta name="theme-color" content="#000000">
 <link rel="stylesheet" href="style.css?v=20260919a">
@@ -113,6 +113,31 @@
 </style>
 </head>
 <body>
+<!-- Show banner (10/1): same name and venue as app.beltstra.com/show/ntx-oct-2026. It hides itself from Mon Oct 5
+     00:00 CDT; take this block out after the show (no-JS visitors would still see it). Same block in sellers.html. -->
+<style>
+  .showbar{background:#0b2414;border-bottom:1px solid #1f5c35;color:#d6eedd;font-size:14px;line-height:1.4}
+  .showbar .wrap{display:flex;align-items:center;gap:4px;padding-top:7px;padding-bottom:7px}
+  .showbar p{margin:0;flex:1;min-width:0}
+  .showbar b{color:#fff}
+  .showbar a{color:var(--green);font-weight:700;white-space:nowrap}
+  .showbar button{flex:none;display:grid;place-items:center;width:44px;height:44px;margin:-6px -12px -6px 0;padding:0;
+    border:0;background:transparent;color:#d6eedd;font-size:24px;line-height:1;cursor:pointer}
+  .showbar button[hidden]{display:none}
+</style>
+<div id="showbar" class="showbar"><div class="wrap">
+  <p><b>NTX Sports Card Show Weekend</b> · Sat Oct 3 and Sun Oct 4 · NTX Arena, Lewisville.
+  <a href="https://app.beltstra.com/show/ntx-oct-2026">Find a card at the show&nbsp;›</a></p>
+  <button type="button" aria-label="Hide this" hidden>×</button>
+</div></div>
+<script>(function () {
+  var b = document.getElementById('showbar'), k = 'hide-ntx-oct-2026', gone = false;
+  try { gone = !!localStorage.getItem(k); } catch (e) {}
+  if (gone || Date.now() >= 1791176400000) { b.remove(); return; }        // Mon Oct 5 00:00 CDT
+  var x = b.querySelector('button');
+  x.hidden = false;
+  x.onclick = function () { try { localStorage.setItem(k, '1'); } catch (e) {} b.remove(); };
+})();</script>
 <header class="site"><div class="wrap">
   <a class="brand" href="index.html">Beltstra <span>Co</span></a>
   <nav>
