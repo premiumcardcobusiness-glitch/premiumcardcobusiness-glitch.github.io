@@ -19,7 +19,7 @@
 
 <main><div class="wrap">
   <h1>Privacy Policy</h1>
-  <p class="muted">Last updated: 14 September 2026</p>
+  <p class="muted">Last updated: 4 October 2026</p>
 
   <p>This Privacy Policy explains what information Beltstra Co ("we", "us"), a sole
   proprietorship based in Aubrey, Texas, USA, collects and how we use it.</p>
@@ -44,6 +44,23 @@
   your browser sends a small visit notice to our server. We record the time, which button was
   tapped, your browser type, and your network address with its last part removed. We use this
   only to count visits. No cookies are set and nothing is stored on your device.</p>
+  <h3>App visits and error reports</h3>
+  <p>We use PostHog to count visits, sign-ups and orders. Its script runs only on these pages of app.beltstra.com:
+  Price a binder page (/try/page and /buy), Your childhood binder (/childhood and links shared from it) and the
+  sign-in page (/login). Our website beltstra.com, its links page and the rest of the app do not load it. It notes
+  when one of those pages opens and when you start to sign up, with the page address, the site or link that sent
+  you, and basic details such as your browser and device type. It keeps a random ID in a cookie and in local storage
+  on your device, to tell a return visit from a new one. Your browser sends these notes to PostHog directly, so
+  PostHog receives your network address and may use it to estimate your rough location. PostHog does not record your
+  screen, your clicks or what you type.</p>
+  <p>Our server also tells PostHog when you make an account, save your first card or make your first binder, and
+  when you start a checkout or pay for an order, with plain details such as how you signed up or the pack and its
+  price. These notes do not include your network address. PostHog knows your account only by a coded ID, never by
+  your name or email address. When you sign up, the random ID from your visit is linked to it.</p>
+  <p>We use Sentry to get a report when something breaks. Reports come only from our server, including errors your
+  browser passes to it while you are signed in. A report says what went wrong, where in our code, on which page and
+  in which browser. It leaves out your account, cookies, network address and the forms and photos you send us, and
+  our server removes email addresses, sign-in tokens, private link codes and payment IDs before it is sent.</p>
   <h3>Your eBay account, if you connect it</h3>
   <p>If you connect your eBay account, we keep the sign-in token eBay gives us, so the Service can create
   the listings you ask for and show your open eBay orders on the Pack orders screen. We only read your
@@ -72,12 +89,15 @@
   <ul class="feat">
     <li>To issue, verify, and support your membership license</li>
     <li>To respond to support requests you send us</li>
+    <li>To count visits, sign-ups and orders, and to find and fix errors</li>
     <li>To comply with legal and tax obligations (largely handled by Paddle)</li>
   </ul>
 
   <h2>3. Sharing</h2>
   <p>We share information only with service providers necessary to run the Service — primarily
-  Paddle.com for payment processing. We do not sell your personal information.</p>
+  Paddle.com for payment processing. Our service providers also include PostHog, for counting visits, sign-ups and
+  orders, and Sentry, for error reports (see "App visits and error reports" above). We do not sell your personal
+  information.</p>
 
   <h2>4. Data retention</h2>
   <p>We keep license and contact information for as long as your account is active and as needed
