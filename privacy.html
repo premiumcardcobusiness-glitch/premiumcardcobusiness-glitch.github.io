@@ -23,7 +23,7 @@
 
 <main><div class="wrap">
   <h1>Privacy Policy</h1>
-  <p class="muted">Last updated: 4 October 2026</p>
+  <p class="muted">Last updated: 12 October 2026</p>
 
   <p>This Privacy Policy explains what information Beltstra Co ("we", "us"), a sole
   proprietorship based in Aubrey, Texas, USA, collects and how we use it.</p>
@@ -71,12 +71,23 @@
     in your browser's storage.</li>
     <li><b>Who gets it.</b> Your browser sends the notes straight to PostHog, so PostHog also gets your network
     address and may use it to estimate your rough location. The cookie also goes to our own sites when you visit
-    them, and our server reads the random ID from it when you sign up or start a checkout.</li>
+    them, and our server reads the random ID from it when you sign up, start a checkout or use a free price
+    check.</li>
+    <li><b>Instagram and Facebook.</b> Inside Instagram's or Facebook's own browser, the page adds the random ID to
+    the end of its address, after a "#", so that if you open the page in Safari or Chrome we count one visitor, not
+    two. The part after a "#" is never sent to our server or to PostHog. Safari or Chrome takes it off the address
+    as soon as the page opens, and uses it only if it is less than an hour old and that browser has no random ID of
+    its own. Instagram's or Facebook's browser can see the address, including that ID. If you copy the address there
+    and someone opens it within the hour, their visit may be counted with yours.</li>
   </ul>
-  <p>Our server also tells PostHog when you make an account, save your first card or make your first binder, and
-  when you start a checkout or pay for an order. These notes carry only plain details, such as how you signed up, or
-  what you bought and its price. We never send PostHog your name or email address: it knows your account by a coded
-  ID. When you sign up, that coded ID is linked to the random ID from your visits, so PostHog can tie your account to
+  <p>Our server also tells PostHog when you make an account; when you save your first card, and each time you save
+  a card; when you make your first binder, and each time you make a binder; each time you scan cards or post a show
+  table; and when you start a checkout or pay for an order. If you scan with a free price check before you have an
+  account, our server notes that scan too, under the random ID from your visits when your browser has one. These
+  notes carry only plain details, such as how you signed up, which screen a scan came from and how many cards a
+  free scan read, whether a saved card is new to your collection or another copy, how many pockets a binder page
+  has, how many days a show table stays up, or what you bought and its price. They never say which cards you have.
+  We never send PostHog your name or email address: it knows your account by a coded ID. When you sign up, that coded ID is linked to the random ID from your visits, so PostHog can tie your account to
   those visits and to your rough location.</p>
   <p>Sentry gets a report when something breaks. Only our server sends reports to Sentry: if the app hits an error
   on your phone while you are signed in, the app tells our server, which may pass it on. A report says what went
