@@ -23,7 +23,9 @@
 
 <main><div class="wrap">
   <h1>Privacy Policy</h1>
-  <p class="muted">Last updated: 12 October 2026</p>
+  <p class="muted">Last updated: 17 October 2026 (version 2026-10-17). Changed: sign-in with Google and Apple; what is
+  stored for binders, photos, shows, ledgers and buys and for how long; what a shared page shows with no sign-in; the
+  services that process email and card photos; how to export and delete.</p>
 
   <p>This Privacy Policy explains what information Beltstra Co ("we", "us"), a sole
   proprietorship based in Aubrey, Texas, USA, collects and how we use it.</p>
@@ -34,15 +36,45 @@
   our Merchant of Record, <b>Paddle.com</b>, who collects the information needed to complete your
   purchase (such as name, email, billing country, and payment details) under their own privacy
   policy.</p>
-  <h3>License information</h3>
-  <p>To operate your membership we store a license identifier associated with your purchase and
-  the email address you used, so we can issue and verify your license. When you sign in or scan,
-  we receive your license token to confirm it is active.</p>
-  <h3>Card images and usage</h3>
-  <p>When you scan a card, the image is sent to our servers to identify the card and is
-  <b>deleted after processing</b> — we do not keep your card photos. We record per-scan usage
-  (a count, timestamp, and basic device/connection information) to enforce your plan's scan
-  allowance and to detect account sharing or automated abuse.</p>
+  <h3>Your account</h3>
+  <p>To run your account we store your email address, a salted hash of your password (never the password), the
+  first name you choose to show, your avatar if you add one, when the account was made, and the license record that
+  says which plan you are on and until when.</p>
+  <h3>Sign in with Google or Apple</h3>
+  <p>If you sign in with Google, Google tells us your email address, that it is verified, your first name, and a
+  Google account ID; we store the email, the first name (if you had none yet) and the ID, so the same Google
+  account signs you in next time. We never see your Google password and we ask Google for nothing else. Apple
+  sign-in, where we offer it, works the same way with Apple's ID and the name Apple sends once. Google and Apple
+  see that you signed in to Beltstra, under their own privacy policies.</p>
+  <h3>Card photos and the services that read them</h3>
+  <p>When you scan a card or a binder page, the photo goes to our server, which sends it to an image-reading
+  service to identify the cards. Today those services are <b>Groq</b> and <b>Google (Gemini)</b>; they receive the
+  photo and return the card names, under their own terms, and we do not send them your name or email. The scan
+  photo itself is <b>deleted from our server after the read</b>. What stays is what you choose to keep: when you
+  keep a card that the app could not match to a catalogue picture, its photo is saved on that card so your binder
+  can show it; the pictures you upload for a binder cover, your avatar and the childhood-binder feature are saved
+  too. All of these stay until you remove them or delete your account. We record per-scan usage (a count, a time,
+  and basic device and connection information) to enforce your plan's scan allowance and to detect account sharing
+  or automated abuse.</p>
+  <h3>Your collection, binders, ledgers and buys</h3>
+  <p>We store what you put in: the cards in your collection with their prices, what you paid where you told us,
+  your binders and where each card sits, the people you sell for and their share of each sale, your Piggy Bank
+  entries, payouts, buys and show tables. These stay for as long as your account exists. Every change to a money
+  record is kept in a history (an undo, a removal, an edited cost) so a figure can always be traced. When you
+  delete your account the collection, binders, photos and most records are removed at once; money records
+  (sales, Piggy Bank entries, payouts) are kept with your name and email removed, because the other side of each
+  sale belongs to someone else's records; our <a href="account-delete.html">account deletion page</a> lists it
+  exactly.</p>
+  <h3>What a shared page shows with no sign-in</h3>
+  <p>A binder link, an Explore listing, a show table or a person's no-login page can be opened by anyone who has
+  the link, with no account. It shows what you chose to share: the cards, their pictures and market prices, the
+  binder's name, your first name if you set one, and for a show table its place and days. It never shows what you
+  paid, your cash, your email address, or your other binders. A person's no-login page shows only their own cards,
+  sales and payouts.</p>
+  <h3>Email</h3>
+  <p>We send email through <b>Resend</b>: sign-in codes, a welcome note, order confirmations, friend requests you
+  make, the morning email if you turn it on, and notes when a trial is ending. Resend processes your email address
+  and the message under its own privacy policy. We do not send marketing email to a list.</p>
   <h3>Links page visits</h3>
   <p>When you open our links page (the page our printed QR code opens) or tap one of its buttons,
   your browser sends a small visit notice to our server. We record the time, which button was
@@ -134,18 +166,25 @@
   </ul>
 
   <h2>3. Sharing</h2>
-  <p>We share information only with service providers necessary to run the Service — primarily
-  Paddle.com for payment processing. Our service providers also include PostHog, for counting visits, sign-ups and
-  orders, and Sentry, for error reports (see "App visits and error reports" above). We do not sell your personal
-  information.</p>
+  <p>We share information only with service providers necessary to run the Service: Paddle.com for plan payments
+  and Stripe for shop orders; Groq and Google (Gemini) to read card photos; Resend to send email; Google and Apple
+  when you sign in with them; Hetzner, which hosts our server and holds the encrypted backups; PostHog, for counting
+  visits, sign-ups and orders, and Sentry, for error reports (see "App visits and error reports" above). We do not
+  sell your personal information.</p>
 
   <h2>4. Data retention</h2>
-  <p>We keep license and contact information for as long as your account is active and as needed
-  to meet legal obligations, then delete or anonymize it.</p>
+  <p>Your account, collection, binders, kept photos and records stay for as long as your account exists. Scan
+  photos are deleted after the read. Visit counts for shared pages keep a coded form of a network address for
+  about four months. Server backups keep a copy of the databases and kept photos for 7 nightly and 4 weekly
+  cycles, so a deleted account leaves the backups within about five weeks. License and order records stay as long
+  as the law requires for tax and billing (largely held by Paddle and Stripe).</p>
 
-  <h2>5. Your rights</h2>
-  <p>You may request access to, correction of, or deletion of the personal information we hold
-  about you by emailing us. For payment data held by Paddle, contact Paddle directly.</p>
+  <h2>5. Your rights: export and deletion</h2>
+  <p><b>Export:</b> from the app you can download your collection and each ledger (sales, Piggy Bank, payouts,
+  buys) as a CSV file at any time. <b>Deletion:</b> Account &gt; Delete account removes your account in the app;
+  the <a href="account-delete.html">account deletion page</a> says what is removed and what is kept and why. You
+  may also ask us by email to export, correct or delete your information. For payment data held by Paddle or
+  Stripe, contact them directly.</p>
 
   <h2>6. Contact</h2>
   <p>Privacy questions or requests:
@@ -158,12 +197,13 @@
     <a href="refund.html">Refund Policy</a>
     <a href="terms.html">Terms of Service</a>
     <a href="privacy.html">Privacy Policy</a>
+    <a href="earlyaccess.html">Early Access</a>
     <a href="status.html">Status</a>
     <a href="help.html">Help</a>
   </div>
   <p class="small">© 2026 Beltstra Co · Aubrey, TX, USA · Contact:
   <a href="mailto:soliskenny2@gmail.com">soliskenny2@gmail.com</a><br>
-  Payments and order fulfilment inquiries are handled by our Merchant of Record, Paddle.com.</p>
+  Beltstra is in <a href="earlyaccess.html">early access</a>. Payments and order fulfilment inquiries for plans are handled by our Merchant of Record, Paddle.com.</p>
 </div></footer>
 </body>
 </html>
