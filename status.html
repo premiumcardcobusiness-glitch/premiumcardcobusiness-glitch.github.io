@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#000000">
+<title>Status — Beltstra Co</title>
+<link rel="stylesheet" href="style.css?v=20260918a">
+<style>
+  .st { border-radius: 16px; padding: 22px; margin: 18px 0; background: #171717; }
+  .st.ok { border: 1px solid #14532d; } .st.warn { border: 1px solid #7a4a00; } .st.down { border: 1px solid #7f1d1d; }
+  .st h2 { margin: 0 0 6px; font-size: 22px; }
+  .st p { margin: 6px 0 0; }
+  .muted { color: #a3a3a3; }
+</style>
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Beltstra <span>Co</span></a>
+  <nav>
+    <a class="hide-xs" href="pricing.html">Pricing</a>
+    <a href="https://app.beltstra.com/login">Sign in</a>
+    <a class="btn" href="https://app.beltstra.com/login?start=1">Start free</a>
+  </nav>
+</div></header>
+
+<main><div class="wrap">
+  <h1>Status</h1>
+  <p class="muted">Is Beltstra up right now, and what is the last thing that went wrong. Read live from the app's server;
+  if this page cannot reach it, that is the status.</p>
+  <div class="st" id="st"><h2 id="stH">Checking…</h2><p id="stP" class="muted"></p></div>
+  <div class="st" id="inc" hidden><h2 style="font-size:16px">Last incident</h2><p id="incP" class="muted"></p></div>
+  <p class="muted">Something wrong that this page does not show? Email
+  <a href="mailto:soliskenny2@gmail.com">soliskenny2@gmail.com</a> or tap Feedback in the app; we reply within 2
+  business days.</p>
+</div></main>
+
+<footer class="site"><div class="wrap">
+  <div>
+    <a href="pricing.html">Pricing</a>
+    <a href="refund.html">Refund Policy</a>
+    <a href="terms.html">Terms of Service</a>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="status.html">Status</a>
+  </div>
+  <p class="small">© 2026 Beltstra Co · Aubrey, TX, USA · Contact:
+  <a href="mailto:soliskenny2@gmail.com">soliskenny2@gmail.com</a><br>
+  Payments and order fulfilment inquiries are handled by our Merchant of Record, Paddle.com.</p>
+</div></footer>
+<script>
+(async () => {
+  const st = document.getElementById('st'), h = document.getElementById('stH'), p = document.getElementById('stP');
+  const when = t => t ? new Date(t * 1000).toLocaleString() : '';
+  try {
+    const r = await fetch('https://app.beltstra.com/api/site-status', {cache: 'no-store'});
+    if (!r.ok) throw new Error('status ' + r.status);
+    const d = await r.json();
+    const sev = d.notice ? d.notice.severity : (d.ok ? 'ok' : 'down');
+    st.className = 'st ' + (d.ok ? (sev === 'warn' ? 'warn' : 'ok') : 'down');
+    h.textContent = d.ok ? (d.notice ? 'Up, with a note' : 'All systems normal') : 'Something is down';
+    let line = d.notice ? d.notice.message + ' (since ' + when(d.notice.since) + ')' : 'The app, the sign-in page and this site answered the last check.';
+    if (d.uptime && d.uptime.down && d.uptime.down.length) line += ' Not answering: ' + d.uptime.down.join(', ') + (d.uptime.since ? ' since ' + when(d.uptime.since) : '') + '.';
+    if (d.uptime && d.uptime.last) line += ' Last check ' + when(d.uptime.last) + '.';
+    p.textContent = line;
+    if (d.last_incident) {
+      document.getElementById('inc').hidden = false;
+      const i = d.last_incident;
+      document.getElementById('incP').textContent = i.message + ' · started ' + when(i.started) + (i.ended ? ' · ended ' + when(i.ended) : ' · still open');
+    }
+  } catch (e) {
+    st.className = 'st down';
+    h.textContent = 'Cannot reach the app right now';
+    p.textContent = 'This page could not get an answer from app.beltstra.com. If it stays this way for more than a few minutes, email us.';
+  }
+})();
+</script>
+</body>
+</html>
