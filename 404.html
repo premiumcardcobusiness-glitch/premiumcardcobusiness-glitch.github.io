@@ -12,6 +12,9 @@
     var m = /[?&]src=([a-z0-9_-]{1,24})(?:&|$)/i.exec(location.search);
     if (p === "/premiumcardco" || p === "/premiumcardco.html")
       location.replace("https://app.beltstra.com/s/premiumcardco" + (m ? "?src=" + m[1].toLowerCase() : ""));
+    // V5 (10/26): the ad's page, typed /Try or /try/, goes to /try with only the ad network's utm_source
+    var u = /[?&]utm_source=([a-z0-9._-]{1,32})(?:&|$)/i.exec(location.search);
+    if (p === "/try" && location.pathname !== "/try") location.replace("/try" + (u ? "?utm_source=" + u[1].toLowerCase() : ""));
   })();
 </script>
 <meta name="theme-color" content="#000000">
