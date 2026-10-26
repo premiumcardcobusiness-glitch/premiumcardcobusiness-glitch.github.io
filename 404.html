@@ -8,7 +8,10 @@
   // matches page names exactly, so /PremiumCardCo or /premiumcardco/ lands on this page: those go on to the binder too.
   (function () {
     var p = location.pathname.toLowerCase().replace(/\/+$/, "");
-    if (p === "/premiumcardco" || p === "/premiumcardco.html") location.replace("https://app.beltstra.com/s/premiumcardco");
+    // V3 (10/26): the link's ?src= tag goes on with it (only that, never the "#" part)
+    var m = /[?&]src=([a-z0-9_-]{1,24})(?:&|$)/i.exec(location.search);
+    if (p === "/premiumcardco" || p === "/premiumcardco.html")
+      location.replace("https://app.beltstra.com/s/premiumcardco" + (m ? "?src=" + m[1].toLowerCase() : ""));
   })();
 </script>
 <meta name="theme-color" content="#000000">

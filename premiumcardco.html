@@ -3,13 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<script>location.replace("https://app.beltstra.com/s/premiumcardco");</script>
+<script>var m = /[?&]src=([a-z0-9_-]{1,24})(?:&|$)/i.exec(location.search);
+  location.replace("https://app.beltstra.com/s/premiumcardco" + (m ? "?src=" + m[1].toLowerCase() : ""));</script>
 <title>Premium Card Co · Beltstra Co</title>
 <meta name="robots" content="noindex">
 <!-- J50 (Kenny 10/12): the short link in Premium Card Co's Instagram bio. It opens his shared binder in the app, and the
      app finds that binder's current /b/ link itself (/s/premiumcardco), so this page never changes when that link does.
-     /PremiumCardCo and /premiumcardco/ land on 404.html, which sends them on here too. No query string or "#" part is
-     passed on: the app needs neither. -->
+     /PremiumCardCo and /premiumcardco/ land on 404.html, which sends them on here too. V3 (10/26): only the link's
+     ?src= tag goes on (the table sign's QR says src=table), so the app knows where a sign-up came from; nothing else
+     of the address and never its "#" part. -->
 <link rel="canonical" href="https://app.beltstra.com/s/premiumcardco">
 <meta http-equiv="refresh" content="0; url=https://app.beltstra.com/s/premiumcardco">
 <meta name="theme-color" content="#000000">
