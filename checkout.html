@@ -141,7 +141,22 @@
       customData:{email:email},        // the webhook mints the licence against THIS
       settings:{displayMode:"overlay",theme:"dark",successUrl:SUCCESS_URL}};
     if (LAUNCH_CODE) opts.discountCode = LAUNCH_CODE;
-    Paddle.Checkout.open(opts);
+    try { Paddle.Checkout.open(opts); } catch(e) { checkoutDown(); }
+  }
+  // Paddle's script didn't come (a content blocker, a weak connection) or its checkout wouldn't open: words and a way on, never a code error.
+  function checkoutDown(){
+    var st = document.getElementById("status");
+    st.textContent = "The secure checkout didn't load. A content blocker or a weak connection can stop it. Turn the blocker off for this page, or try again. Nothing was charged. ";
+    st.style.color = "#f2f2f2";
+    var mail = document.createElement("a");
+    mail.href = "mailto:soliskenny2@gmail.com?subject=My%20Beltstra%20checkout";
+    mail.textContent = "Email us";
+    mail.style.cssText = "display:inline-flex;align-items:center;min-height:44px";
+    st.appendChild(mail);
+    var buy = document.getElementById("buy");
+    buy.removeEventListener("click", openCheckout);
+    buy.textContent = "Try again";
+    buy.onclick = function(){ location.reload(); };
   }
   try{
     if(PADDLE_TOKEN.indexOf("__")===0){
@@ -152,7 +167,7 @@
       Paddle.Initialize({token:PADDLE_TOKEN});
       document.getElementById("buy").addEventListener("click",openCheckout);
     }
-  }catch(e){document.getElementById("status").textContent="Checkout failed to load: "+e;}
+  }catch(e){checkoutDown();}
 </script>
 </body>
 </html>
