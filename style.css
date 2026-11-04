@@ -43,6 +43,7 @@ p{margin:0 0 14px}
   color:var(--blue-ink);margin:0 0 12px}
 
 /* buttons */
+button,input,select,textarea{font-family:inherit}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:12px 24px;
   border-radius:12px;background:var(--blue);color:#fff;font-weight:700;font-size:17px;text-decoration:none;
   border:0;cursor:pointer}

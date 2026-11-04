@@ -108,6 +108,9 @@
     acct.style.textAlign = "center";
     acct.innerHTML = '<p class="small" style="margin:0">Unlocks <b id="acct-shown"></b></p>';
     document.getElementById("acct-shown").textContent = fromApp;   // textContent: never inject an address
+    // A member from the app came to pay: her way back, and no second filled button over Continue. A stranger keeps Sign in and Start free.
+    document.querySelector("header.site nav").innerHTML =
+      '<a id="back-app" href="https://app.beltstra.com/" style="display:inline-flex;align-items:center;min-height:44px">Back to the app</a>';
   } else {
     acct.innerHTML =
       '<label class="small" for="acct-input">Which Beltstra account should this unlock?</label>' +
@@ -136,7 +139,7 @@
       items:[{priceId:sel.id,quantity:1}],
       customer:{email:email},
       customData:{email:email},        // the webhook mints the licence against THIS
-      settings:{displayMode:"overlay",theme:"light",successUrl:SUCCESS_URL}};
+      settings:{displayMode:"overlay",theme:"dark",successUrl:SUCCESS_URL}};
     if (LAUNCH_CODE) opts.discountCode = LAUNCH_CODE;
     Paddle.Checkout.open(opts);
   }
