@@ -151,7 +151,7 @@
     var mail = document.createElement("a");
     mail.href = "mailto:soliskenny2@gmail.com?subject=My%20Beltstra%20checkout";
     mail.textContent = "Email us";
-    mail.style.cssText = "display:inline-flex;align-items:center;min-height:44px";
+    mail.style.cssText = "padding:14px 4px;white-space:nowrap";   // a finger's height from padding, not a 44 px line (evenline1108: that pushed its line apart); its words kept together
     st.appendChild(mail);
     var buy = document.getElementById("buy");
     buy.removeEventListener("click", openCheckout);
