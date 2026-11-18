@@ -17,82 +17,81 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#000000">
 <link rel="stylesheet" href="style.css?v=20261101a">
+<link rel="preload" as="image" href="img/hero/dialga-gg68.webp" fetchpriority="high">
 <script>document.documentElement.className += ' js';</script>
 <style>
-  /* 9/22, Kenny: "Upgrade the ui, maybe add effects or some nice visuals like the ad... too many words again on the
-     front page." The hero IS the ad: nine real cards, the price tags pop cheapest first, the total counts up, and the
-     best card is revealed last with the green glow. Every label is a symbol or two words. These rules are this page's
-     only, so pricing, sellers, checkout and the rest keep style.css exactly as it was. */
+  /* landing1118 (Kenny 11/18, Phase 2): hero, how it works, a show day, features, pricing, FAQ, privacy, the last word.
+     The first screen holds Kenny's 11/04 rule (check_three_words, door "landing"): every line 3 words or fewer, one
+     filled button. The hero card is a still of the foil as the app draws it (the poster); the live 3D card comes after
+     it, from the app's own server, so no foil code or recipe is ever in this public site. These rules are this page's
+     only: pricing, sellers, checkout and the rest keep style.css as it was. */
   .hx{position:relative;overflow:hidden}
-  .hx:before{content:"";position:absolute;left:-30%;right:-30%;top:-10%;height:980px;pointer-events:none;
-    background:radial-gradient(ellipse 55% 48% at 64% 46%,rgba(22,163,74,.24),rgba(0,0,0,0) 70%)}
-  .hx .wrap{position:relative;display:grid;grid-template-columns:1fr;gap:22px;padding-top:6px;padding-bottom:34px}
-  .hx h1{font-size:clamp(36px,6.4vw,66px);margin:0 0 16px}
-  .chips{display:flex;flex-wrap:wrap;gap:8px;list-style:none;padding:0;margin:0 0 22px}
-  .chips li{display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border:1px solid var(--line);
-    border-radius:999px;background:rgba(20,20,20,.85);font-weight:700;font-size:15px;line-height:1.2}
-  .ic{width:17px;height:17px;flex:none;color:var(--green)}
+  .hx:before{content:"";position:absolute;left:-30%;right:-30%;top:-10%;height:900px;pointer-events:none;
+    background:radial-gradient(ellipse 50% 46% at 66% 44%,rgba(22,163,74,.22),rgba(0,0,0,0) 70%)}
+  .hx .wrap{position:relative;display:grid;grid-template-columns:1fr;gap:22px;padding-top:18px;padding-bottom:40px}
+  .hx h1{font-size:clamp(38px,6.6vw,68px);margin:0 0 8px}
+  .sub{font-size:clamp(20px,2.6vw,26px);font-weight:700;color:var(--muted);margin:0 0 22px;letter-spacing:-.01em}
+  .ea{display:inline-flex;align-items:center;gap:7px;margin:0 0 14px;padding:5px 12px;border:1px solid var(--line);
+    border-radius:999px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
+    text-decoration:none}
+  .ea:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green)}
   .cta{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:0 0 10px}
-  .btn.big{min-height:56px;padding:14px 30px;font-size:19px;border-radius:999px;background:#4ade80;color:#04110a;
-    font-weight:800;animation:beat 2.4s ease-in-out 2.8s infinite}
+  .btn.big{min-height:56px;padding:14px 28px;font-size:19px;border-radius:999px;background:#4ade80;color:#04110a;font-weight:800}
   .btn.big:hover{background:#6ee7a7}
-  .btn.ghost.round{border-radius:999px;min-height:56px;padding:14px 24px}
-  @keyframes beat{0%,72%,100%{transform:scale(1)}82%{transform:scale(1.045)}}
+  .btn.ghost.round{border-radius:999px;min-height:56px;padding:14px 24px;font-size:18px;font-weight:700}
 
-  /* the page, priced */
-  .stage{position:relative;justify-self:center;width:100%;max-width:430px;cursor:pointer;
-    -webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none}
-  .worth{text-align:center;margin:0 0 12px}
-  .worth span{display:block;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green)}
-  .worth b{display:block;font-size:clamp(40px,11vw,58px);font-weight:900;letter-spacing:-.02em;line-height:1.1;
-    font-variant-numeric:tabular-nums}
-  .grid9{display:grid;grid-template-columns:repeat(3,1fr);gap:16px 9px;padding:0 6px 14px;
-    transform:perspective(1100px) rotateX(6deg);transform-origin:50% 0;animation:float 7s ease-in-out infinite}
-  @keyframes float{0%,100%{transform:perspective(1100px) rotateX(6deg) translateY(0)}
-    50%{transform:perspective(1100px) rotateX(6deg) translateY(-6px)}}
-  .pk{position:relative;aspect-ratio:240/334}
-  .pk .face{position:absolute;inset:0;border-radius:8px;overflow:hidden;background:#111;box-shadow:0 8px 22px rgba(0,0,0,.6)}
-  .pk img{display:block;width:100%;height:100%;object-fit:cover}
-  .pk .face:after{content:"";position:absolute;inset:0;transform:translateX(-130%);mix-blend-mode:screen;
-    background:linear-gradient(112deg,transparent 30%,rgba(255,255,255,.30) 45%,rgba(150,255,200,.20) 52%,transparent 66%)}
-  /* 10/1: the page at rest is the FINISHED page: every tag showing, the best card revealed, the real total in the HTML.
-     That is what no JS, reduced motion, a link preview or a slow phone sees. Only when the script below is running
-     and motion is allowed does it add .armed (tags off, best card hidden) until the page comes on screen and plays. */
-  .pk .tag{position:absolute;left:50%;bottom:-12px;z-index:4;transform:translateX(-50%);background:#4ade80;
-    color:#04110a;font-weight:900;font-size:clamp(12px,3.4vw,15px);line-height:1.5;padding:2px 10px;border-radius:999px;
-    white-space:nowrap;font-variant-numeric:tabular-nums;box-shadow:0 4px 12px rgba(0,0,0,.65)}
-  .pk.top{z-index:2}
-  .pk.top .face{box-shadow:0 0 0 3px rgba(74,222,128,.8)}
-  .pk .qm{position:absolute;inset:0;z-index:3;display:none;align-items:center;justify-content:center;font-weight:900;
-    font-size:clamp(44px,12vw,64px);color:#4ade80;text-shadow:0 0 24px rgba(74,222,128,.7)}
-  .armed .pk .tag{opacity:0}
-  .armed .pk.top .face{filter:blur(9px) brightness(.45);transform:scale(.92);box-shadow:0 8px 22px rgba(0,0,0,.6)}
-  .armed .pk .qm{display:flex}
-  .go .pk .tag{animation:pop .26s cubic-bezier(.2,.9,.3,1.35) var(--d) both}
-  .go .pk.top .face{animation:reveal .45s cubic-bezier(.2,.9,.3,1.3) 1.95s both,glow 1.7s ease-in-out 2.4s infinite}
-  .go .pk .qm{animation:fade .2s linear 1.95s both}
-  .go .pk .face:after{animation:sheen 5s ease-in-out calc(2.9s + var(--s,0s)) infinite}
-  @keyframes pop{from{opacity:0;transform:translateX(-50%) scale(1.7)}to{opacity:1;transform:translateX(-50%) scale(1)}}
-  @keyframes reveal{to{filter:none;transform:scale(1)}}
-  @keyframes glow{0%,100%{box-shadow:0 0 0 3px rgba(74,222,128,.6),0 0 24px rgba(74,222,128,.35)}
-    50%{box-shadow:0 0 0 3px rgba(74,222,128,1),0 0 46px rgba(74,222,128,.6)}}
-  @keyframes fade{to{opacity:0}}
-  @keyframes sheen{0%{transform:translateX(-130%)}28%,100%{transform:translateX(130%)}}
-  .stage .ex{display:block;text-align:center;font-size:12px;color:var(--faint);margin-top:4px}
+  /* the hero card: the poster now, the live card on top of it when it has drawn */
+  .hcard{position:relative;justify-self:center;width:min(64vw,250px);perspective:900px;
+    -webkit-tap-highlight-color:transparent}
+  .tilt{position:relative;aspect-ratio:63/88;border-radius:4.6%/3.3%;overflow:hidden;background:#111;
+    transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .25s ease-out;
+    box-shadow:0 26px 60px rgba(0,0,0,.75),0 0 0 1px rgba(255,255,255,.06),0 0 70px rgba(74,222,128,.16)}
+  .tilt img{display:block;width:100%;height:100%;object-fit:cover}
+  .sway .tilt{animation:sway 6s ease-in-out infinite}
+  @keyframes sway{0%,100%{transform:rotateX(2deg) rotateY(-7deg)}50%{transform:rotateX(-2deg) rotateY(7deg)}}
 
-  /* snap it, share it, sell it */
-  .px{padding:56px 0;border-top:1px solid var(--line)}
-  .px .wrap{display:grid;grid-template-columns:1fr;gap:26px;align-items:center}
-  .px h2{font-size:clamp(30px,4.4vw,46px);margin:0 0 10px}
-  .px .line{font-size:19px;color:var(--muted);margin:0 0 14px}
-  .px .more{font-weight:700;text-decoration:none;font-size:17px}
-  .px .eyebrow{display:inline-flex;align-items:center;gap:7px}
-  .px .receipt{margin:4px 0 16px}
-  .px .receipt .end{border-top:1px solid var(--line);padding-top:5px}
-  .js .rise{opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.2,1)}
-  .js .rise.in{opacity:1;transform:none}
+  /* sections */
+  .sec{padding:60px 0;border-top:1px solid var(--line)}
+  .sec h2{margin:0 0 26px}
+  .sec .eyebrow{display:block;margin-bottom:8px}
+  .steps{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr;gap:14px;counter-reset:s}
+  .steps li{counter-increment:s;position:relative;padding:20px 20px 20px 74px;border:1px solid var(--line);
+    border-radius:16px;background:var(--panel)}
+  .steps li:before{content:counter(s);position:absolute;left:20px;top:20px;width:38px;height:38px;border-radius:50%;
+    background:#4ade80;color:#04110a;font-weight:900;font-size:19px;display:flex;align-items:center;justify-content:center}
+  .steps h3,.tl h3,.fc h3{font-size:19px;margin:0 0 4px}
+  .steps p,.tl p,.fc p{margin:0;color:var(--muted)}
 
-  /* the last word */
+  .tl{list-style:none;padding:0;margin:0;position:relative}
+  .tl:before{content:"";position:absolute;left:9px;top:8px;bottom:8px;width:2px;background:var(--line)}
+  .tl li{position:relative;padding:0 0 26px 40px}
+  .tl li:last-child{padding-bottom:0}
+  .tl li:before{content:"";position:absolute;left:2px;top:6px;width:16px;height:16px;border-radius:50%;
+    background:var(--ground);border:2px solid var(--green)}
+  .tl .when{display:block;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin:0 0 2px}
+
+  .fcs{display:grid;grid-template-columns:1fr;gap:16px}
+  .fc{border:1px solid var(--line);border-radius:16px;background:var(--panel);overflow:hidden;display:flex;flex-direction:column}
+  .fc .shot{height:260px;overflow:hidden;background:#0a0a0a;border-bottom:1px solid var(--line);display:flex;justify-content:center}
+  .fc .shot img{display:block;width:78%;max-width:300px;height:auto;align-self:flex-start;margin-top:18px;border-radius:18px 18px 0 0;
+    border:6px solid #1f1f1f;border-bottom:0}
+  .fc .txt{padding:18px 20px 20px}
+  .fc .more{display:inline-block;margin-top:10px;font-weight:700;text-decoration:none}
+
+  .faq details{border:1px solid var(--line);border-radius:14px;background:var(--panel);margin:0 0 10px}
+  .faq summary{cursor:pointer;list-style:none;padding:16px 48px 16px 18px;font-weight:700;font-size:18px;position:relative}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary:after{content:"+";position:absolute;right:18px;top:12px;font-size:24px;color:var(--green);font-weight:400}
+  .faq details[open] summary:after{content:"\2212"}
+  .faq details p{margin:0;padding:0 18px 16px;color:var(--muted)}
+  .faq .small{margin:16px 0 0}
+
+  .priv{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:1fr;gap:12px}
+  .priv li{position:relative;padding:0 0 0 32px}
+  .priv li:before{content:"";position:absolute;left:4px;top:6px;width:14px;height:8px;border-left:2.5px solid var(--green);
+    border-bottom:2.5px solid var(--green);transform:rotate(-45deg)}
+  .priv + .small{margin:18px 0 0}
+
   .fin{padding:64px 0 60px;border-top:1px solid var(--line);text-align:center;
     background:radial-gradient(ellipse 55% 70% at 50% 62%,rgba(22,163,74,.18),rgba(0,0,0,0) 70%)}
   .fin .logo{display:inline-flex;align-items:center;justify-content:center;width:72px;height:72px;border-radius:20px;
@@ -101,23 +100,29 @@
   .fin .cta{justify-content:center}
   .fin .small{margin:14px 0 0}
 
+  .js .rise{opacity:0;transform:translateY(26px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.8,.2,1)}
+  .js .rise.in{opacity:1;transform:none}
+
+  @media(min-width:760px){
+    .steps{grid-template-columns:repeat(3,1fr)}
+    .steps li{padding:74px 22px 22px}
+    .fcs{grid-template-columns:repeat(3,1fr)}
+    .priv{grid-template-columns:1fr 1fr;gap:14px 28px}
+    .faq,.tl{max-width:760px}
+  }
   @media(min-width:900px){
-    .hx .wrap{grid-template-columns:1.05fr .95fr;align-items:center;gap:48px;padding-top:26px;padding-bottom:64px}
-    .stage{max-width:380px}                 /* the whole page, tags and all, inside a 1280 by 800 window */
-    .px .wrap{grid-template-columns:1fr 1fr;gap:56px}
-    .px.flip .copy{order:2}
+    .hx .wrap{grid-template-columns:1.1fr .9fr;align-items:center;gap:48px;padding-top:40px;padding-bottom:70px}
+    .hcard{width:300px}
   }
   @media(max-width:480px){
-    .hx h1{font-size:34px;margin-bottom:14px}
-    .chips{margin-bottom:18px}
-    .chips li{font-size:14px;padding:6px 11px}
-    .btn.big,.btn.ghost.round{min-height:52px;font-size:18px}
+    .hx h1{font-size:40px}
+    .sub{font-size:21px;margin-bottom:18px}
+    .btn.big{min-height:52px;padding:12px 22px;font-size:18px}
+    .btn.ghost.round{min-height:52px;padding:12px 20px;font-size:17px}
   }
   @media(prefers-reduced-motion:reduce){
-    .grid9,.btn.big{animation:none}
-    .pk .tag{opacity:1;animation:none!important}
-    .pk.top .face{filter:none;transform:none;animation:none!important;box-shadow:0 0 0 3px rgba(74,222,128,.8)}
-    .pk .qm,.pk .face:after{display:none}
+    .sway .tilt{animation:none}
+    .tilt{transition:none}
     .js .rise{opacity:1;transform:none;transition:none}
   }
 </style>
@@ -132,153 +137,75 @@
     <a class="hide-xs" href="sellers.html">For sellers</a>
     <a class="hide-xs" href="pricing.html">Pricing</a>
     <a href="https://app.beltstra.com/login">Sign in</a>
-    <a class="btn" data-ev="header" href="https://app.beltstra.com/try/page?src=header">Try free</a>
+    <a class="btn" data-ev="header" href="https://app.beltstra.com/login?start=1&amp;src=header">Start free</a>
   </nav>
 </div></header>
 
 <main>
 <section class="hx"><div class="wrap">
   <div>
+    <a class="ea" href="earlyaccess.html">Early access</a>
     <h1>Scan your binder.</h1>
-    <ul class="chips">
-      <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>Snap it</li>
-      <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Share it</li>
-      <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Sell it</li>
-    </ul>
+    <p class="sub">Every card, priced.</p>
     <div class="cta">
-      <a class="btn big" data-ev="hero" href="https://app.beltstra.com/try/page?src=hero">Try free &rsaquo;</a>
-      <a class="btn ghost round" href="https://app.beltstra.com/explore">Explore</a>
+      <a class="btn big" data-ev="hero" href="https://app.beltstra.com/login?start=1&amp;src=hero">Create free account</a>
+      <a class="btn ghost round" data-ev="hero_try" href="https://app.beltstra.com/try/page?src=hero">Try it first</a>
     </div>
-    <p class="small">Free. No account.</p>
+    <p class="small">No payment details.</p>
   </div>
 
-  <!-- One photo of a page, priced: the ad's first four seconds (ads/src_0922). Real cards and their TCGplayer market
-       prices on 9/22; the centre card is the best one and it is revealed last. A tap plays it again.
-       The total below is the sum of the nine data-p prices (592.73). Change a price, change the total too; the
-       script also re-adds them on load, so the two can never disagree on screen. -->
-  <div class="stage" id="stage" aria-hidden="true">
-    <div class="worth"><span>Page worth</span><b id="worth">$592.73</b></div>
-    <div class="grid9">
-      <div class="pk"><div class="face"><img src="img/page/124119.webp" width="240" height="335" alt=""></div><span class="tag" style="--d:.25s" data-p="48.55">$48.55</span></div>
-      <div class="pk"><div class="face" style="--s:.12s"><img src="img/page/478065.webp" width="240" height="334" alt=""></div><span class="tag" style="--d:.44s" data-p="52.05">$52.05</span></div>
-      <div class="pk"><div class="face" style="--s:.24s"><img src="img/page/610512.webp" width="240" height="335" alt=""></div><span class="tag" style="--d:.63s" data-p="52.55">$52.55</span></div>
-      <div class="pk"><div class="face" style="--s:.12s"><img src="img/page/157781.webp" width="240" height="335" alt=""></div><span class="tag" style="--d:.82s" data-p="52.95">$52.95</span></div>
-      <div class="pk top"><div class="face" style="--s:.24s"><img src="img/page/517044.webp" width="240" height="334" alt=""></div><span class="qm">?</span><span class="tag" style="--d:2.25s" data-p="113.66">$113.66</span></div>
-      <div class="pk"><div class="face" style="--s:.36s"><img src="img/page/676097.webp" width="240" height="334" alt=""></div><span class="tag" style="--d:1.01s" data-p="53.08">$53.08</span></div>
-      <div class="pk"><div class="face" style="--s:.24s"><img src="img/page/633040.webp" width="240" height="333" alt=""></div><span class="tag" style="--d:1.2s" data-p="55.76">$55.76</span></div>
-      <div class="pk"><div class="face" style="--s:.36s"><img src="img/page/478067.webp" width="240" height="334" alt=""></div><span class="tag" style="--d:1.39s" data-p="64.22">$64.22</span></div>
-      <div class="pk"><div class="face" style="--s:.48s"><img src="img/page/567429.webp" width="240" height="334" alt=""></div><span class="tag" style="--d:1.58s" data-p="99.91">$99.91</span></div>
+  <!-- Kenny 11/18: the hero card is Origin Forme Dialga VSTAR GG68, the most trusted card on the texture lane's finished
+       list. This is the poster: one still of the foil as the app draws it. The live card replaces it once it has drawn. -->
+  <div class="hcard" id="hcard">
+    <div class="tilt"><img src="img/hero/dialga-gg68.webp" width="630" height="880" fetchpriority="high" decoding="async"
+      alt="Origin Forme Dialga VSTAR, a gold Pokémon card, as Beltstra draws it"></div>
+  </div>
+</div></section>
+
+<section class="sec" id="how"><div class="wrap rise">
+  <p class="eyebrow">How it works</p>
+  <h2>Three steps. No typing.</h2>
+  <ol class="steps">
+    <li><h3>Snap a page</h3><p>Hold your phone over a binder page. Nine cards, one photo.</p></li>
+    <li><h3>Check the reads</h3><p>Each card comes back named and priced. One it isn't sure of is marked, so it never looks sure.</p></li>
+    <li><h3>Keep it</h3><p>Your binder, page for page, in your pocket. Prices refresh every morning.</p></li>
+  </ol>
+</div></section>
+
+<section class="sec" id="show"><div class="wrap rise">
+  <p class="eyebrow">A show day</p>
+  <h2>From the first buyer to the last box.</h2>
+  <ol class="tl">
+    <li><span class="when">Before the doors open</span><h3>Post your table</h3><p>One code for the whole show, one tap in the app.</p></li>
+    <li><span class="when">In the aisle</span><h3>Buyers find you</h3><p>Someone types &ldquo;umbreon&rdquo; and gets your table, the binder, the page and the pocket.</p></li>
+    <li><span class="when">A friend's card sells</span><h3>The split is done</h3><p>Your cut comes off and the app keeps a running total of what they're owed.</p></li>
+    <li><span class="when">After the show</span><h3>Pack up</h3><p>Your table comes off the show page by itself. With Pro, list what's left on eBay from the scan.</p></li>
+  </ol>
+</div></section>
+
+<section class="sec" id="features"><div class="wrap">
+  <p class="eyebrow">What it does</p>
+  <h2>Snap it. Share it. Sell it.</h2>
+  <div class="fcs">
+    <div class="fc rise">
+      <div class="shot"><img src="img/app-page.webp" width="390" height="813" loading="lazy"
+        alt="A binder page in the app after one photo: nine pockets holding Dedenne, Umbreon VMAX, Charizard ex, Mew ex and more."></div>
+      <div class="txt"><h3>Nine cards. One photo.</h3><p>One photo of a page fills the whole page at once.</p></div>
     </div>
-    <span class="ex">Example page</span>
-  </div>
-</div></section>
-
-<section class="px" id="snap"><div class="wrap">
-  <div class="copy rise">
-    <p class="eyebrow"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>Snap it</p>
-    <h2>Nine cards. One photo.</h2>
-    <p class="line">Re-priced every morning.</p>
-  </div>
-  <figure class="rise">
-    <div class="phone"><img src="img/app-page.webp" width="390" height="813" loading="lazy"
-      alt="The binder in the app after one photo of the page: Trade binder, 9 of 9 on this page, a Scan this page button, and nine pockets holding Dedenne, Umbreon VMAX, Charizard ex, Mew ex, Umbreon, Espeon, Leafeon VMAX and more."></div>
-    <figcaption>Example</figcaption>
-  </figure>
-</div></section>
-
-<section class="px flip" id="share"><div class="wrap">
-  <div class="copy rise">
-    <p class="eyebrow"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Share it</p>
-    <h2>One link. Whole binder.</h2>
-    <p class="line">Friends and Explore see it.</p>
-    <a class="more" href="https://app.beltstra.com/explore">Explore &rsaquo;</a>
-  </div>
-  <figure class="rise">
-    <div class="phone"><img src="img/binder-page.webp" width="520" height="796" loading="lazy"
-      alt="Kenny's binder on Beltstra: 191 cards, page 12 of 19, nine pockets holding Jolteon ex, Espeon ex, Sylveon ex, Iron Valiant ex, Bloodmoon Ursaluna ex, Gengar, Bulbasaur and Caterpie, each in its own pocket."></div>
-    <figcaption>Real binder</figcaption>
-  </figure>
-</div></section>
-
-<section class="px" id="sell"><div class="wrap">
-  <div class="copy rise">
-    <p class="eyebrow"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>Sell it</p>
-    <h2>Sell for friends.</h2>
-    <p class="line">Piggy Bank. Profit. eBay synced.</p>
-    <!-- 10/1: the same numbers as the screenshot beside it: the sale, then the $100.00 already paid, ending on the
-         $190.40 the screenshot shows as "You're owed". -->
-    <div class="receipt" aria-label="Example sale for a friend">
-      <span>Sold for</span><b>$330.00</b>
-      <span>12% fee</span><b>&minus;$39.60</b>
-      <span>Mike gets</span><b>$290.40</b>
-      <span>Paid out</span><b>&minus;$100.00</b>
-      <span class="end">Still owed</span><b class="end up">$190.40</b>
+    <div class="fc rise">
+      <div class="shot"><img src="img/binder-page.webp" width="520" height="796" loading="lazy"
+        alt="Kenny's binder on Beltstra: page 12 of 19, nine pockets holding Jolteon ex, Espeon ex, Sylveon ex and more."></div>
+      <div class="txt"><h3>One link. Whole binder.</h3><p>Friends flip through your pages. They never see what you paid.</p>
+        <a class="more" href="https://app.beltstra.com/explore">Explore &rsaquo;</a></div>
     </div>
-    <a class="more" href="sellers.html">Seller tools &rsaquo;</a>
+    <div class="fc rise">
+      <div class="shot"><img src="img/app-owner.webp" width="390" height="829" loading="lazy"
+        alt="An example private page for a friend: what they're owed, what's still in the case, and each sale with its fee."></div>
+      <div class="txt"><h3>Sell for friends.</h3><p>The Piggy Bank keeps what each person is owed, and they get their own page to check it.</p>
+        <a class="more" href="sellers.html">Seller tools &rsaquo;</a></div>
+    </div>
   </div>
-  <figure class="rise">
-    <div class="phone"><img src="img/app-owner.webp" width="390" height="829" loading="lazy"
-      alt="Mike's private page: Hi Mike, Alex is selling your cards. You're owed $190.40. Paid to you so far: $100.00. Alex's fee: 12% of each sale. Still in the case: Mew ex and Sylveon ex. What happened: Sylveon ex sold for $330.00, fee $39.60, plus $290.40 yours. Paid to you: $100.00 on Sep 15."></div>
-    <figcaption>Example</figcaption>
-  </figure>
 </div></section>
-
-<section class="fin"><div class="wrap">
-  <div class="logo" aria-hidden="true">B</div>
-  <h2>Price a page free.</h2>
-  <div class="cta">
-    <a class="btn big" data-ev="hero" href="https://app.beltstra.com/try/page?src=hero">Try free &rsaquo;</a>
-  </div>
-  <p class="small">Pokémon · One Piece · Dragon Ball · Made in DFW</p>
-</div></section>
-
-<script>
-  // The page prices itself when it comes on screen, the way the ad does: each tag pops on its own delay (CSS), and
-  // the total adds each card as its tag lands. A tap plays it again. Reduced motion: the finished page, no counting.
-  // At rest (before it plays, after it plays, or if it never plays) the total is always the whole page's total.
-  (function () {
-    var st = document.getElementById('stage'), out = document.getElementById('worth');
-    if (!st || !out) return;
-    var tags = [].slice.call(st.querySelectorAll('.tag'));
-    var price = function (t) { return Math.round((parseFloat(t.getAttribute('data-p')) || 0) * 100); };
-    var all = tags.reduce(function (a, t) { return a + price(t); }, 0) / 100;
-    var money = function (n) { return '$' + n.toLocaleString('en-US', {minimumFractionDigits: 2, maximumFractionDigits: 2}); };
-    out.textContent = money(all);
-    if (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    st.classList.add('armed');               // tags off until the page is on screen; the total stays put
-    var raf = 0;
-    function play() {
-      cancelAnimationFrame(raf);
-      st.classList.remove('go'); void st.offsetWidth; st.classList.add('go');
-      var t0 = performance.now();
-      (function tick(now) {
-        var t = (now - t0) / 1000, sum = 0;
-        tags.forEach(function (tg) {
-          var k = Math.max(0, Math.min(1, (t - parseFloat(tg.style.getPropertyValue('--d')) - 0.04) / 0.3));
-          sum += price(tg) / 100 * (1 - Math.pow(1 - k, 3));
-        });
-        out.textContent = money(t < 2.7 ? sum : all);
-        if (t < 2.7) raf = requestAnimationFrame(tick);
-      })(t0);
-    }
-    if ('IntersectionObserver' in window) {
-      var io = new IntersectionObserver(function (es) {
-        es.forEach(function (e) { if (e.isIntersecting) { io.disconnect(); play(); } });
-      }, {threshold: 0.3});
-      io.observe(st);
-    } else { play(); }
-    st.addEventListener('click', play);
-  })();
-  // Each section slides up once as it arrives.
-  (function () {
-    var els = [].slice.call(document.querySelectorAll('.rise'));
-    if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
-    var io = new IntersectionObserver(function (es) {
-      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
-    }, {threshold: 0.15});
-    els.forEach(function (e) { io.observe(e); });
-  })();
-</script>
 
 <section class="band" id="pricing"><div class="wrap">
   <p class="eyebrow">Pricing</p>
@@ -293,7 +220,7 @@
         <li>Binder pages, share links, the Piggy Bank, profit per card, and one person you sell for</li>
         <li>No payment details required. Your first three weeks have every Pro tool.</li>
       </ul>
-      <a class="btn ghost" href="https://app.beltstra.com/login?start=1">Start free</a>
+      <a class="btn ghost" href="https://app.beltstra.com/login?start=1&amp;src=pricing">Start free</a>
     </div>
     <div class="tier star">
       <span class="flag">Best for sellers</span>
@@ -324,7 +251,71 @@
   <b>Taxes may apply and will be calculated at checkout.</b> All prices in USD. Checkout is securely handled by
   Paddle, our authorized reseller and Merchant of Record.</p>
 </div></section>
+
+<section class="sec faq" id="faq"><div class="wrap">
+  <p class="eyebrow">Questions</p>
+  <h2>Before you start.</h2>
+  <details><summary>What does the free account include?</summary>
+    <p>1,000 card scans a month (up to 300 a day), as many cards as you like, and your first three weeks with every Pro tool. No payment details. When the three weeks end, you stay on Free.</p></details>
+  <details><summary>Do I need to install an app?</summary>
+    <p>No. Beltstra runs in your phone's browser. You can add it to your home screen so it opens like an app.</p></details>
+  <details><summary>Which cards does it read?</summary>
+    <p>Pokémon, One Piece and Dragon Ball cards.</p></details>
+  <details><summary>What if it reads a card wrong?</summary>
+    <p>A card it isn't sure of is marked, so it never looks sure. Tap the right printing, or scan it again closer and flat.</p></details>
+  <details><summary>Where do the prices come from?</summary>
+    <p>TCGplayer market prices, matched to the exact printing where we can and refreshed every morning. They are estimates for your records, not offers to buy.</p></details>
+  <p class="small"><a href="help.html">More questions</a></p>
+</div></section>
+
+<section class="sec" id="privacy"><div class="wrap rise">
+  <p class="eyebrow">Privacy and data</p>
+  <h2>Your cards are yours.</h2>
+  <ul class="priv">
+    <li>Scan photos are deleted from our server after the read.</li>
+    <li>A page you share never shows what you paid, your cash or your email.</li>
+    <li>Download your collection and every ledger as a spreadsheet, any time.</li>
+    <li>Delete your account from the app.</li>
+    <li>We do not sell your information.</li>
+  </ul>
+  <p class="small"><a href="privacy.html">Privacy Policy</a></p>
+</div></section>
+
+<section class="fin"><div class="wrap">
+  <div class="logo" aria-hidden="true">B</div>
+  <h2>Price a page free.</h2>
+  <div class="cta">
+    <a class="btn big" data-ev="fin" href="https://app.beltstra.com/login?start=1&amp;src=fin">Create free account</a>
+    <a class="btn ghost round" data-ev="fin_try" href="https://app.beltstra.com/try/page?src=fin">Try it first</a>
+  </div>
+  <p class="small">Pokémon · One Piece · Dragon Ball · Made in DFW</p>
+</div></section>
 </main>
+
+<script>
+  // The hero card leans toward a mouse; on a phone it sways by itself (no motion sensor, so no permission popup).
+  // Reduced motion: it stays still.
+  (function () {
+    var c = document.getElementById('hcard'), t = c && c.querySelector('.tilt');
+    if (!t || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+    if (window.matchMedia && matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      c.addEventListener('pointermove', function (e) {
+        var r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+        t.style.setProperty('--ry', (x * 18).toFixed(1) + 'deg'); t.style.setProperty('--rx', (-y * 14).toFixed(1) + 'deg');
+      });
+      c.addEventListener('pointerleave', function () { t.style.setProperty('--ry', '0deg'); t.style.setProperty('--rx', '0deg'); });
+    } else { c.classList.add('sway'); }
+  })();
+  // Each section slides up once as it arrives.
+  (function () {
+    var els = [].slice.call(document.querySelectorAll('.rise'));
+    if (!('IntersectionObserver' in window)) { els.forEach(function (e) { e.classList.add('in'); }); return; }
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {threshold: 0.15});
+    els.forEach(function (e) { io.observe(e); });
+  })();
+</script>
 
 <footer class="site"><div class="wrap">
   <div>
