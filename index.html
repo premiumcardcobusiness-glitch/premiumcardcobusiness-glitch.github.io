@@ -49,6 +49,15 @@
   .tilt img{display:block;width:100%;height:100%;object-fit:cover}
   .sway .tilt{animation:sway 6s ease-in-out infinite}
   @keyframes sway{0%,100%{transform:rotateX(2deg) rotateY(-7deg)}50%{transform:rotateX(-2deg) rotateY(7deg)}}
+  /* the live card (the app's frame): room round the card for its turn, 8 % of the card's width each side, as the frame's
+     page has it (a margin's % is of the width, top too; the height from the card's 63:88 plus that room, at any width);
+     unseen until it says ready, then the poster gives way to it. A phone's touch goes through it to the page (scroll). */
+  .hero3d{position:absolute;left:0;top:0;margin:-8% 0 0 -8%;width:116%;height:auto;aspect-ratio:116/155.68;border:0;
+    padding:0;background:transparent;color-scheme:normal;opacity:0;transition:opacity .5s ease-out}
+  @media(hover:none){.hero3d{pointer-events:none}}
+  .hcard.live .hero3d{opacity:1}
+  .hcard.live .tilt{transform:none;animation:none;background:transparent}
+  .hcard.live .tilt img{opacity:0;transition:opacity .5s ease-out}
 
   /* sections */
   .sec{padding:60px 0;border-top:1px solid var(--line)}
@@ -247,7 +256,7 @@
     </div>
   </div>
   <p class="small">The free trial does not turn into a paid plan by itself: when it ends, your account stays on the Free plan. Paid plans are auto-renewing
-  subscriptions: cancel anytime. Annual billing (2 months free) is available on every plan.
+  subscriptions: cancel anytime. Annual billing (2 months free) is available on every paid plan.
   <b>Taxes may apply and will be calculated at checkout.</b> All prices in USD. Checkout is securely handled by
   Paddle, our authorized reseller and Merchant of Record.</p>
 </div></section>
@@ -305,6 +314,30 @@
       });
       c.addEventListener('pointerleave', function () { t.style.setProperty('--ry', '0deg'); t.style.setProperty('--rx', '0deg'); });
     } else { c.classList.add('sway'); }
+  })();
+  // The live card (Kenny 11/18: "Poster image first, 3D after."): once the page has loaded and the phone is idle, the
+  // app's one-card frame goes over the poster, unseen; it shows when it says "ready". "fail", or no word in 8 s: it goes
+  // and the poster stays. Reduce Motion: the poster only.
+  (function () {
+    var c = document.getElementById('hcard'), APP = 'https://app.beltstra.com', f = null, t = 0;
+    if (!c || (window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches)) return;
+    function gone() { clearTimeout(t); removeEventListener('message', heard); if (f) { f.remove(); f = null; } }
+    function heard(e) {
+      if (e.origin !== APP || !f || e.source !== f.contentWindow) return;
+      if (e.data === 'ready') { clearTimeout(t); removeEventListener('message', heard); c.classList.remove('sway'); c.classList.add('live'); }
+      else if (e.data === 'fail') gone();
+    }
+    function start() {
+      addEventListener('message', heard);
+      f = document.createElement('iframe');
+      f.className = 'hero3d'; f.title = 'Origin Forme Dialga VSTAR, live'; f.tabIndex = -1;
+      f.setAttribute('aria-hidden', 'true'); f.setAttribute('sandbox', 'allow-scripts allow-same-origin');
+      f.src = APP + '/hero/478099';
+      c.appendChild(f);
+      t = setTimeout(gone, 8000);
+    }
+    function idle() { (window.requestIdleCallback || function (fn) { setTimeout(fn, 600); })(start, {timeout: 3000}); }
+    if (document.readyState === 'complete') idle(); else addEventListener('load', idle);
   })();
   // Each section slides up once as it arrives.
   (function () {
