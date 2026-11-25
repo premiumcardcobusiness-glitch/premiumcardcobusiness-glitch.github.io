@@ -16,7 +16,7 @@
 <meta property="og:image:alt" content="Nine Pokémon cards next to the words: What's this card worth?">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#000000">
-<link rel="stylesheet" href="style.css?v=20261101a">
+<link rel="stylesheet" href="style.css?v=20261125a">
 <link rel="preload" as="image" href="img/hero/dialga-gg68.webp" fetchpriority="high">
 <script>document.documentElement.className += ' js';</script>
 <style>
@@ -31,10 +31,10 @@
   .hx .wrap{position:relative;display:grid;grid-template-columns:1fr;gap:22px;padding-top:18px;padding-bottom:40px}
   .hx h1{font-size:clamp(38px,6.6vw,68px);margin:0 0 8px}
   .sub{font-size:clamp(20px,2.6vw,26px);font-weight:700;color:var(--muted);margin:0 0 22px;letter-spacing:-.01em}
-  .ea{display:inline-flex;align-items:center;gap:7px;margin:0 0 14px;padding:5px 12px;border:1px solid var(--line);
+  .ea{position:relative;display:inline-flex;align-items:center;gap:7px;margin:0 0 14px;padding:5px 12px;border:1px solid var(--line);
     border-radius:999px;font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
     text-decoration:none}
-  .ea:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green)}
+  .ea:before{content:"";width:7px;height:7px;border-radius:50%;background:var(--green)} .ea:after{content:"";position:absolute;top:-6px;bottom:-6px;left:0;right:0}
   .cta{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:0 0 10px}
   .btn.big{min-height:56px;padding:14px 28px;font-size:19px;border-radius:999px;background:#4ade80;color:#04110a;font-weight:800}
   .btn.big:hover{background:#6ee7a7}
@@ -85,7 +85,7 @@
   .fc .shot img{display:block;width:78%;max-width:300px;height:auto;align-self:flex-start;margin-top:18px;border-radius:18px 18px 0 0;
     border:6px solid #1f1f1f;border-bottom:0}
   .fc .txt{padding:18px 20px 20px}
-  .fc .more{display:inline-block;margin-top:10px;font-weight:700;text-decoration:none}
+  .fc .more{display:inline-block;margin-top:10px;font-weight:700;text-decoration:none;position:relative} .more:after{content:"";position:absolute;top:-9px;bottom:-9px;left:0;right:0}
 
   .faq details{border:1px solid var(--line);border-radius:14px;background:var(--panel);margin:0 0 10px}
   .faq summary{cursor:pointer;list-style:none;padding:16px 48px 16px 18px;font-weight:700;font-size:18px;position:relative}

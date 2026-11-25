@@ -18,7 +18,7 @@
 <meta name="twitter:title" content="Slab Guard · Beltstra Co">
 <meta name="twitter:description" content="Thick, stackable TPU armor for your PSA slabs.">
 <meta name="twitter:image" content="https://beltstra.com/img/guards/render/r-og.jpg">
-<link rel="stylesheet" href="style.css?v=20261101a">
+<link rel="stylesheet" href="style.css?v=20261125a">
 <style>
   /* This page's rules only, written phone first; style.css stays as the other pages have it. Every photo frame
      carries the same gradient the guards were cut out onto (TOP/BOTTOM in make_guard_images.py), so a
@@ -36,8 +36,8 @@
   .gallery figure{flex:0 0 100%;scroll-snap-align:start}
   .gallery img{display:block;width:100%;aspect-ratio:1/1;object-fit:contain}
   .gallery video{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover}
-  .thumbs{display:flex;gap:10px;margin:12px 0 0}
-  .thumbs button{flex:1;padding:0;cursor:pointer;opacity:.55;max-width:84px}
+  .thumbs{display:grid;grid-template-columns:repeat(auto-fit,minmax(44px,1fr));gap:10px;margin:12px 0 0}
+  .thumbs button{padding:0;cursor:pointer;opacity:.55;max-width:84px}
   .thumbs button.on{opacity:1;border-color:var(--green)}
   .thumbs img{display:block;width:100%;aspect-ratio:1/1;object-fit:contain;border-radius:13px}
 
