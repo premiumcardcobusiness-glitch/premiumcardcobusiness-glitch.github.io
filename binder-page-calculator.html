@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Binder page calculator: how many pages and binders for your cards · Beltstra</title>
+<meta name="description" content="Type how many cards you have and get page sides, sheets and binders for 4, 9, 12 or 16-pocket pages. Free, with a table for common counts and a free planner to lay out each page first.">
+<link rel="canonical" href="https://beltstra.com/binder-page-calculator.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Beltstra">
+<meta property="og:title" content="Binder page calculator: pages, sheets and binders for any card count">
+<meta property="og:description" content="4, 9, 12 or 16 pockets, one side or both. Then plan each page free before you sleeve a card.">
+<meta property="og:url" content="https://beltstra.com/binder-page-calculator.html">
+<meta property="og:image" content="https://beltstra.com/img/dex/pokedex-binder-og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="A nine-pocket binder page planned on the free page builder.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#000000">
+<link rel="stylesheet" href="style.css?v=20261125a">
+<style>
+  .guide h2 { margin-top: 34px; }
+  .guide ul, .guide ol { line-height: 1.6; padding-left: 22px; }
+  .guide li { margin: 8px 0; }
+  .answer { background: #171717; border-radius: 14px; padding: 16px 18px; margin: 18px 0; line-height: 1.55; }
+  .answer b { color: #fff; }
+  details { background: #171717; border-radius: 14px; padding: 14px 18px; margin: 10px 0; }
+  summary { cursor: pointer; font-weight: 700; font-size: 17px; line-height: 1.4; min-height: 44px; display: flex; align-items: center; }
+  details p { margin: 10px 0 0; line-height: 1.5; color: #d4d4d4; }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; margin: 22px 0 8px; }
+  .calc { background: #171717; border-radius: 14px; padding: 16px 18px; margin: 18px 0; }
+  .calc label { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 48px; font-size: 17px; }
+  .calc input[type=number], .calc select { width: 8.5em; min-height: 44px; font-size: 17px; padding: 6px 10px; border-radius: 10px;
+    border: 1px solid #404040; background: #0a0a0a; color: #fff; box-sizing: border-box; }
+  .calc input[type=checkbox] { width: 26px; height: 26px; accent-color: #22c55e; flex: 0 0 auto; }
+  .calc .tick { justify-content: flex-start; }
+  .out { display: block; margin-top: 12px; padding-top: 12px; border-top: 1px solid #262626; line-height: 1.6; font-size: 17px; }
+  .out b { color: #fff; font-size: 20px; }
+  .gens { width: 100%; border-collapse: collapse; font-size: 15px; margin: 14px 0 6px; }
+  .gens th, .gens td { text-align: left; padding: 8px 6px; border-bottom: 1px solid #262626; }
+  .gens th { color: #a3a3a3; font-weight: 600; }
+  .gens td:nth-child(n+2), .gens th:nth-child(n+2) { text-align: right; }
+  .pic { margin: 18px 0 4px; max-width: 300px; }
+  .pic img { display: block; width: 100%; height: auto; border-radius: 12px; }
+  .pic figcaption { font-size: 15px; color: #a3a3a3; margin-top: 6px; }
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Article","headline":"Binder page calculator: how many pages and binders for your cards",
+ "description":"A free calculator for trading card binder pages: page sides, two-sided sheets and binders for 4, 9, 12 and 16-pocket pages, with a table for common card counts.",
+ "image":"https://beltstra.com/img/dex/pokedex-binder-og.jpg","mainEntityOfPage":"https://beltstra.com/binder-page-calculator.html",
+ "author":{"@type":"Organization","name":"Beltstra","url":"https://beltstra.com/"},
+ "publisher":{"@type":"Organization","name":"Beltstra","url":"https://beltstra.com/"},"datePublished":"2026-11-25"}
+</script>
+  <script src="notice.js" defer></script>
+  <script src="landed.js?v=20261112b" defer></script>
+</head>
+<body>
+<header class="site"><div class="wrap">
+  <a class="brand" href="index.html">Beltstra <span>Co</span></a>
+  <nav>
+    <a class="hide-xs" href="pricing.html">Pricing</a>
+    <a href="https://app.beltstra.com/login">Sign in</a>
+    <a class="btn" href="https://app.beltstra.com/login?start=1&amp;src=search">Start free</a>
+  </nav>
+</div></header>
+
+<main><div class="wrap narrow guide">
+  <p class="eyebrow">Binder page calculator</p>
+  <h1>How many binder pages do I need?</h1>
+  <div class="answer">
+    <p><b>Divide your cards by the pockets on one side of a page and round up: that is your page sides. Halve it and
+    round up for two-sided sheets.</b> On nine-pocket pages a sheet holds 18 cards, so 300 cards take 34 sides, or 17
+    sheets.</p>
+  </div>
+
+  <form class="calc" id="calc" onsubmit="return false">
+    <label for="n">Cards you have <input id="n" type="number" inputmode="numeric" min="1" max="100000" value="300"></label>
+    <label for="p">Pockets per side
+      <select id="p"><option value="4">4 pockets</option><option value="9" selected>9 pockets</option>
+      <option value="12">12 pockets</option><option value="16">16 pockets</option></select></label>
+    <label for="s">Sheets in one binder <input id="s" type="number" inputmode="numeric" min="1" max="200" value="20"></label>
+    <label class="tick" for="two"><input id="two" type="checkbox" checked> Use both sides of each sheet</label>
+    <label class="tick" for="room"><input id="room" type="checkbox"> Leave 10% spare for new cards</label>
+    <output class="out" id="out" for="n p s two room" aria-live="polite">300 cards on 9-pocket pages: <b>34 page sides</b>,
+    that is 17 two-sided sheets. 6 pockets stay empty for new cards. Binders: 1 of 20 sheets (360 cards each).</output>
+  </form>
+
+  <p class="lead">The count tells you what to buy. The fun part is what goes on each page, and that is worth trying
+  before a single card goes in a sleeve.</p>
+  <div class="cta">
+    <a class="btn" href="https://app.beltstra.com/build?src=search">Plan a page free</a>
+  </div>
+
+  <h2>Sheets for common card counts</h2>
+  <p>Two-sided sheets, rounded up. Use one side only and you need about twice as many.</p>
+  <table class="gens">
+    <thead><tr><th>Cards</th><th>4-pocket</th><th>9-pocket</th><th>12-pocket</th><th>16-pocket</th></tr></thead>
+    <tbody>
+      <tr><td>100</td><td>13</td><td>6</td><td>5</td><td>4</td></tr>
+      <tr><td>151</td><td>19</td><td>9</td><td>7</td><td>5</td></tr>
+      <tr><td>200</td><td>25</td><td>12</td><td>9</td><td>7</td></tr>
+      <tr><td>300</td><td>38</td><td>17</td><td>13</td><td>10</td></tr>
+      <tr><td>500</td><td>63</td><td>28</td><td>21</td><td>16</td></tr>
+      <tr><td>1,000</td><td>125</td><td>56</td><td>42</td><td>32</td></tr>
+      <tr><td>1,025</td><td>129</td><td>57</td><td>43</td><td>33</td></tr>
+    </tbody>
+  </table>
+
+  <h2>How many cards a binder holds</h2>
+  <p>Pockets per side, times two sides, times the sheets in the binder. A binder with 20 sheets holds 160 cards on
+  4-pocket pages, 360 on 9-pocket pages, 480 on 12-pocket pages and 640 on 16-pocket pages. Check how many sheets
+  your binder takes before you buy pages for it.</p>
+
+  <h2>Count first, then plan the look</h2>
+  <p>A set, a Pokédex or a colour theme only looks right when each page does. Plan the pages before you buy sleeves:</p>
+  <ol>
+    <li>Open the <a href="https://app.beltstra.com/build?src=search">free page builder</a>. No account needed.</li>
+    <li>Type a card name and tap the printing you want in each pocket.</li>
+    <li>Tap See page. Swap cards until the page feels right, then plan the next one.</li>
+    <li>Leave a pocket or two free at the end of a set or a region, so new cards slot in without moving everything.</li>
+  </ol>
+  <figure class="pic">
+    <a href="https://app.beltstra.com/build?src=search"><img src="img/dex/kanto.webp" width="540" height="741" loading="lazy"
+    alt="A nine-pocket page planned on the free page builder: Bulbasaur to Blastoise."></a>
+    <figcaption>One page planned on the free builder: the Kanto starters.</figcaption>
+  </figure>
+
+  <h2>Questions</h2>
+  <details><summary>How many cards fit on a 9-pocket page?</summary>
+    <p>Nine on each side, so 18 on a sheet when you use both sides.</p></details>
+  <details><summary>How many pages for 1,000 cards?</summary>
+    <p>On nine-pocket pages: 112 sides, or 56 two-sided sheets. That is three binders of 20 sheets.</p></details>
+  <details><summary>Should I use both sides of a page?</summary>
+    <p>Most collectors do, since it halves the sheets. One side only keeps the backs visible and the pages lighter.</p></details>
+  <details><summary>Is the page builder free?</summary>
+    <p>Yes. Planning a page needs no account. Keeping it makes a free account, which never asks for payment details.</p></details>
+
+  <div class="cta">
+    <a class="btn" href="https://app.beltstra.com/build?src=search">Plan your first page</a>
+  </div>
+  <p class="small">More guides: <a href="pokemon-pokedex-binder.html">Pokédex binder</a> ·
+  <a href="pokemon-binder-theme-ideas.html">Binder theme ideas</a> ·
+  <a href="binder-page-planner.html">Binder page planner</a> ·
+  <a href="scan-binder-page.html">Scan binder pages</a> ·
+  <a href="free-pokemon-card-scanner.html">Pokémon card scanner</a></p>
+  <p class="small">Pokémon is a trademark of its owners. Beltstra is an independent app and is not affiliated with or
+  endorsed by them.</p>
+</div></main>
+
+<footer class="site"><div class="wrap">
+  <div>
+    <a href="https://app.beltstra.com/price">Card prices</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="refund.html">Refund Policy</a>
+    <a href="terms.html">Terms of Service</a>
+    <a href="privacy.html">Privacy Policy</a>
+  </div>
+  <p class="small">© 2026 Beltstra Co · Aubrey, TX, USA · Contact:
+  <a href="mailto:support@beltstra.com">support@beltstra.com</a></p>
+</div></footer>
+<script>
+(function () {
+  function el(id) { return document.getElementById(id); }
+  function fmt(x) { return x.toLocaleString("en-US"); }
+  function plural(x, one, many) { return fmt(x) + " " + (x === 1 ? one : many); }
+  function run() {
+    var n = Math.floor(Number(el("n").value)), p = Number(el("p").value), per = Math.floor(Number(el("s").value));
+    var two = el("two").checked, room = el("room").checked, out = el("out");
+    if (!(n >= 1) || !(per >= 1)) { out.textContent = "Type how many cards you have and how many sheets your binder takes."; return; }
+    var want = room ? Math.ceil(n * 1.1) : n;
+    var sides = Math.ceil(want / p), sheets = two ? Math.ceil(sides / 2) : sides;
+    var held = per * p * (two ? 2 : 1), binders = Math.ceil(sheets / per);
+    var free = (two ? sheets * 2 : sheets) * p - n;
+    out.innerHTML = fmt(n) + " cards on " + p + "-pocket pages: <b>" + plural(sides, "page side", "page sides") + "</b>, that is " +
+      (two ? plural(sheets, "two-sided sheet", "two-sided sheets") : plural(sheets, "sheet", "sheets") + " used on one side") + ". " +
+      (free > 0 ? plural(free, "pocket stays", "pockets stay") + " empty for new cards. " : "Every pocket is full. ") +
+      "Binders: " + fmt(binders) + " of " + plural(per, "sheet", "sheets") + " (" + fmt(held) + " cards each).";
+  }
+  ["n", "p", "s", "two", "room"].forEach(function (id) { el(id).addEventListener("input", run); el(id).addEventListener("change", run); });
+  run();
+})();
+</script>
+<script src="analytics.js?v=20260918a"></script>
+</body>
+</html>
